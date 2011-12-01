@@ -10,6 +10,8 @@ en:
   profile: "Profile"
   account: "Account"
   privacy: "Privacy"
+  privacy_policy: "Privacy Policy"
+  terms_and_conditions: "Terms and Conditions"
   _services: "Services"
   _applications: "Applications"
   _photos: "photos"
@@ -846,10 +848,12 @@ en:
       following: "Following #%{tag}"
       stop_following: "Stop Following #%{tag}"
       followed_by: 'followed by'
+      none: "The empty tag does not exist!"
   tag_followings:
     create:
       success: "Hooray!  You're now following #%{name}."
       failure: "Failed to follow #%{name}.  Are you already following it?"
+      none: "You cannot follow a blank tag!"
     destroy:
       success: "Alas! You aren't following #%{name} anymore."
       failure: "Failed to stop following #%{name}. Maybe you already stopped following it?"
@@ -865,7 +869,6 @@ en:
       daniels_account: "Daniel's Diaspora account"
       making_the_connection: "Making the Connection"
       connecting_is_simple: "Connecting your Diaspora account is simple!  Just enter your Diaspora ID (<b>%{diaspora_id}</b>) from your cubbies <a href='%{href_link}'>settings page</a> and hit connect."
-      log_in_with_diaspora_is_comming: "Pretty soon, you'll be able to connect to a new application without creating an account separate from your one on Diaspora."
       via: "(via %{link})"
 
   authorizations:
@@ -885,6 +888,10 @@ en:
     mentions:
       title: "@Mentions"
       contacts_title: "People who mentioned you"
+
+    like_stream:
+      title: "Like Stream"
+      contacts_title: "People who Posts you like"
 
     followed_tag:
       title: "#Followed Tags"
