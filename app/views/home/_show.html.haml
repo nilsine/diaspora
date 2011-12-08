@@ -1,15 +1,54 @@
 .content
   .span-24
-    %h1 Bienvenue !
-    %h2 Diaspod.fr est un serveur (pod) du réseau social décentralisé et libre Diaspora.
+    %h1 Diaspod.fr est un pod du réseau social Diaspora*
   
-  .span-12
-    %ul
-      %li Réseau décentralisé permettant un meilleur contrôle de ses données
-      %li La philosophie de Diaspora vous assure la protection de votre vie privée
+  .span-14
+    = image_tag 'apolonisaphrodisia.png', :class => 'left'
+    %h2 Rejoignez le mouvement
+    %p Un mouvement international avec une vision partagée pour un meilleur web, la première caractéristique de DIASPORA* est sa communauté. Rencontrez de nouvelles personnes, connectez-vous avec vos amis, et amusez-vous.
+    .clear 
+    
+    = image_tag 'chat.png', :class => 'right'
+    %h2 Soyez vous même
+    %p L'Internet a créé de nouvelles façons uniques pour nous de nous exprimer. DIASPORA* vous permet d'être vous-même et de partager comme vous le voulez, avec ou sans votre vrai nom.
+    .clear
       
+    = image_tag 'data_icon.png', :class => 'left'
+    %h2 Gardez le contrôle
+    %p De part son architecture décentralisée vous gardez la totale maitrise de vos données. Téléchargez vos données pour les emmener ailleurs, vous nous quittez quand vous voulez ! 
+    .clear 
+          
     .center
-      .large= link_to "S'inscrire", "/users/sign_up"
+      %b.large
+        = link_to "S'inscrire", "/users/sign_up"
+        &nbsp;ou&nbsp;
+        = link_to "se connecter", "/users/sign_in"
   
-  .span-12.last
-    = image_tag 'screenshot.png'
+  .span-10.last
+    = image_tag 'diaspora_collage.png'
+
+:css
+  .content {
+    font-size: 15px;
+  }
+  
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+  }
+
+  .left {
+    float: left;
+    position: static;
+    margin: 0 0.5em 0.5em 0;
+  }
+
+  .right {
+    float: right;
+    position: static;
+    margin-left: 0 0 0.5em 0.5em;
+  }
