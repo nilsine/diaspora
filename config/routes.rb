@@ -199,4 +199,6 @@ Diaspora::Application.routes.draw do
 
   # Startpage
   root :to => 'home#show'
+  
+  get 'faq' => 'home#faq'
 end
