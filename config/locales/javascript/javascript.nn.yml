@@ -35,6 +35,8 @@ nn:
       hey: "Hei, {{name}}!"
       no_tags: "Du har ikkje følgt nokon etikett. Vil du likevel halda fram?"
       preparing_your_stream: "Lagar den tilpassa straumen din …"
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "Ingen fleire meldingar."
     photo_uploader:
@@ -47,6 +49,28 @@ nn:
       duplicate: "Så bra, altså? Men du har allereie delt meldinga :-)"
     search_for: "Leit etter {{name}}"
     show_more: "syn meir"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "Greitt, #{{tagName}} var vel kanskje ikkje så interessant …"
     timeago:
@@ -66,5 +90,3 @@ nn:
     videos:
       unknown: "Ukjend videotype"
       watch: "Sjå denne videoen hos {{provider}}"
-    web_sockets:
-      disconnected: "Nettendepunktet er lukka - meldingane vil ikkje lenger kunna strøymast direkte."

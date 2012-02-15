@@ -7,10 +7,9 @@ require 'spec_helper'
 describe ApplicationHelper do
   before do
     @user = alice
-    @person = Factory.create(:person)
+    @person = Factory(:person)
   end
 
- 
   describe "#contacts_link" do
     before do
       def current_user

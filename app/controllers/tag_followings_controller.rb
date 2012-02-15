@@ -2,20 +2,17 @@
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 #
-require File.join(Rails.root, 'lib', 'stream', 'followed_tag')
 
 class TagFollowingsController < ApplicationController
   before_filter :authenticate_user!
 
-  def index
-    default_stream_action(Stream::FollowedTag)
-  end
+  respond_to :html, :json
 
   # POST /tag_followings
   # POST /tag_followings.xml
   def create
     name_normalized = ActsAsTaggableOn::Tag.normalize(params['name'])
-    
+
     if name_normalized.nil? || name_normalized.empty?
       flash[:error] = I18n.t('tag_followings.create.none')
     else
@@ -66,6 +63,6 @@ class TagFollowingsController < ApplicationController
         @tag_following = current_user.tag_followings.create(:tag_id => @tag.id)
       end
     end
-    redirect_to multi_path
+    redirect_to stream_path
   end
 end

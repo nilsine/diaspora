@@ -22,11 +22,27 @@ class Reshare < Post
   end
 
   after_destroy do
-    self.root.update_reshares_counter
+    self.root.update_reshares_counter if self.root.present?
   end
 
   def root_diaspora_id
     self.root.author.diaspora_handle
+  end
+
+  def o_embed_cache
+    self.root ? root.o_embed_cache : super
+  end
+
+  def raw_message
+    self.root ? root.raw_message : super
+  end
+
+  def mentioned_people
+    self.root ? root.mentioned_people : super
+  end
+
+  def photos
+    self.root ? root.photos : nil
   end
 
   def receive(recipient, sender)

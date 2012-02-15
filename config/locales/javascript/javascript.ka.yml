@@ -35,6 +35,8 @@ ka:
       hey: "ჰეი, {{name}}!"
       no_tags: "ჰეი, თქვენ არ მიყვებით არცერთ ტეგს! მაინც გსურთ გაგრძელება?"
       preparing_your_stream: "თქვენი პერსონალიზებული ნაკადი მზადდება..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "მეტი პოსტი არ არის."
     photo_uploader:
@@ -47,6 +49,28 @@ ka:
       duplicate: "ასეთი მაგარია?  თქვენ უკვე გააზიარეთ ეს პოსტი!"
     search_for: "ძებნა {{name}}"
     show_more: "მეტის ჩვენება"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "კარგი, მე ვფიქრობ რომ #{{tagName}} არც ისე საინტერესო იყო..."
     timeago:
@@ -68,5 +92,3 @@ ka:
     videos:
       unknown: "ვიდეოს ტიპი უცნობია"
       watch: "ვიდეოს ნახვა საიტზე {{provider}}"
-    web_sockets:
-      disconnected: "ვებ-სოკეტი დახურულია; განხადებების ნაკადი აღარ მოედინება პირდაპირ."

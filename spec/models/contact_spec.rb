@@ -46,7 +46,7 @@ describe Contact do
     end
 
     it "validates that the person's account is not closed" do
-      person = Factory.create(:person, :closed_account => true)
+      person = Factory(:person, :closed_account => true)
 
       contact = alice.contacts.new(:person=>person)
 
@@ -93,7 +93,7 @@ describe Contact do
     
     describe "all_contacts_of_person" do
       it 'returns all contacts where the person is the passed in person' do
-        person = Factory.create(:person)
+        person = Factory(:person)
         contact1 = Factory(:contact, :person => person)
         contact2 = Factory(:contact)
         contacts = Contact.all_contacts_of_person(person)
@@ -166,7 +166,7 @@ describe Contact do
   context 'requesting' do
     before do
       @contact = Contact.new
-      @user = Factory.create(:user)
+      @user = Factory(:user)
       @person = Factory(:person)
 
       @contact.user = @user
@@ -191,31 +191,6 @@ describe Contact do
         Postzord::Dispatcher.should_receive(:build).and_return(m)
         @contact.dispatch_request
       end
-    end
-  end
-
-  describe "#repopulate_cache" do
-    before do
-      @contact = bob.contact_for(alice.person)
-    end
-
-    it "repopulates the cache if the cache exists" do
-      cache = stub(:repopulate!)
-      RedisCache.stub(:configured? => true, :new => cache)
-
-      cache.should_receive(:repopulate!)
-      @contact.repopulate_cache!
-    end
-
-    it "does not touch the cache if it is not configured" do
-      RedisCache.stub(:configured?).and_return(false)
-      RedisCache.should_not_receive(:new)
-      @contact.repopulate_cache!
-    end
-
-    it "gets called on destroy" do
-      @contact.should_receive(:repopulate_cache!)
-      @contact.destroy
     end
   end
 

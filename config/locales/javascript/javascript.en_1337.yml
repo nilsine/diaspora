@@ -9,6 +9,9 @@ en_1337:
     aspect_dropdown:
       add_to_aspect: "4DD N00B"
       all_aspects: "4LL 45P3C75"
+      error: "Couldn't start sharing with {{name}}.  Are you ignoring them?"
+      started_sharing_with: "You have started sharing with {{name}}!"
+      stopped_sharing_with: "You have stopped sharing with {{name}}."
       toggle:
         few: "1N {{count}} 45P3C75"
         many: "1N {{count}} 45P3C75"
@@ -27,7 +30,10 @@ en_1337:
     failed_to_like: "F41L3D 2 <3!"
     failed_to_post_message: "F41L3D 2 53ND 5P4M!"
     getting_started:
+      hey: "Hey, {{name}}!"
       preparing_your_stream: "Preparing your personialized stream..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: EOF
     publisher:
@@ -38,6 +44,30 @@ en_1337:
       duplicate: "U H4V3 4LR34DY R35P4MM3D 7HI5!"
     search_for: "S34RCH F0R {{name}}"
     show_more: "5H0W M0R3!"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
+    tags:
+      wasnt_that_interesting: "OK, I suppose #{{tagName}} wasn't all that interesting..."
     timeago:
       day: "4 D4Y"
       days: "%d D4Y5"
@@ -55,5 +85,3 @@ en_1337:
     videos:
       unknown: "UNK0WN V1D30 7YP3"
       watch: "W47CH 7H15 V1D30 0N {{provider}}"
-    web_sockets:
-      disconnected: D15C0NN3C73D!

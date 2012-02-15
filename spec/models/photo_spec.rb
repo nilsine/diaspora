@@ -180,7 +180,7 @@ describe Photo do
 
     it 'should set the remote_photo on marshalling' do
       #security hax
-      user2 = Factory.create(:user)
+      user2 = Factory(:user)
       aspect2 = user2.aspects.create(:name => "foobars")
       connect_users(@user, @aspect, user2, aspect2)
 
@@ -202,7 +202,7 @@ describe Photo do
 
   context "commenting" do
     it "accepts comments if there is no parent status message" do
-      proc{ @user.comment("big willy style", :post => @photo) }.should change(@photo.comments, :count).by(1)
+      proc{ @user.comment!(@photo, "big willy style") }.should change(@photo.comments, :count).by(1)
     end
   end
 

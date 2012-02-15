@@ -9,16 +9,16 @@ es:
     aspect_dropdown:
       add_to_aspect: "Añadir contacto"
       all_aspects: "Todos los aspectos"
-      error: "No podría empezar a compartir con {{name}}.  ¿Vas a ignonarl@?"
+      error: "No podrás compartir con <%= name %>. ¿Vas a ignonarle?"
       select_aspects: "Elige los aspectos"
-      started_sharing_with: "¡Ahora sigues los mensajes públicos de {{name}}!"
-      stopped_sharing_with: "Ya no compartes más con {{name}}."
+      started_sharing_with: "¡Ahora sigues los mensajes públicos de <%= name %>!"
+      stopped_sharing_with: "Ya no compartes más con <%= name %>."
       toggle:
-        few: "En {{count}} aspectos"
-        many: "En {{count}} aspectos"
-        one: "En {{count}} aspecto"
-        other: "En {{count}} aspectos"
-        two: "En {{count}} aspectos"
+        few: "En <%= count %> aspectos"
+        many: "En <%= count %> aspectos"
+        one: "En <%= count %> aspecto"
+        other: "En <%= count %> aspectos"
+        two: "En <%= count %> aspectos"
         zero: "Elige los aspectos"
     aspect_navigation:
       deselect_all: "Desmarcar todos"
@@ -28,13 +28,28 @@ es:
       hide: "ocultar comentarios"
       show: "ver todos los comentarios"
     confirm_dialog: "¿Estás seguro?"
-    failed_to_like: "¡Ha fallado tu aprobación!"
+    delete: Borrar
+    failed_to_like: "¡Ha fallado tu intento de marcar la publicación!"
     failed_to_post_message: "¡Fallo al publicar el mensaje!"
     getting_started:
       alright_ill_wait: "Está bien, esperaré."
-      hey: "¡Hola, {{name}}!"
+      hey: "¡Hola, <%= name %>!"
       no_tags: "¡Eih, aún no sigues ninguna etiqueta! ¿Quieres continuar de todas formas?"
       preparing_your_stream: "Preparando tus novedades personalizadas..."
+    header:
+      admin: Administrar
+      contacts: Contactos
+      home: Inicio
+      log_out: Salir
+      mark_all_as_read: "Marcar todo como leido"
+      messages: Mensajes
+      notifications: Notificaciones
+      profile: Perfil
+      recent_notifications: "Notificaciones recientes"
+      search: "Encuentra gente o #etiquetas"
+      settings: Ajustes
+      view_all: "Ver todo"
+    ignore: Ignorar
     infinite_scroll:
       no_more: "No hay más publicaciones."
     photo_uploader:
@@ -45,10 +60,40 @@ es:
       public: "Público - tu publicación es visible para todos, incluyendo buscadores"
     reshares:
       duplicate: "Que bien, ¿eh? ¡Has compartido esa publicación!"
-    search_for: "Buscar a {{name}}"
+    search_for: "Buscar a <%= name %>"
     show_more: "mostrar más"
+    stream:
+      comment: Comentar
+      hide: Ocultar
+      like: Marcar
+      likes:
+        few: "ha sido marcada por <%= count %> personas"
+        many: "ha sido marcada por <%= count %> personas"
+        one: "ha sido marcada por <%= count %> persona"
+        other: "ha sido marcada por <%= count %> personas"
+        two: "ha sido marcada por <%= count %> personas"
+        zero: "ha sido marcada por <%= count %> personas"
+      limited: Restringido
+      more_comments:
+        few: "Mostrar <%= count %> comentarios más"
+        many: "Mostrar <%= count %> comentarios más"
+        one: "Mostrar <%= count %> comentario"
+        other: "Mostrar <%= count %> comentarios más"
+        two: "Mostrar <%= count %> comentarios más"
+        zero: "Mostrar <%= count %> comentarios más"
+      original_post_deleted: "Publicación original borrada por el autor."
+      public: Público
+      reshare: Compartir
+      reshares:
+        few: "Compartido <%= count %> veces"
+        many: "Compartido <%= count %> veces"
+        one: "Compartido <%= count %> vez"
+        other: "Compartido <%= count %> veces"
+        two: "Compartido <%= count %> veces"
+        zero: "Comparido <%= count %> veces"
+      unlike: Desmarcar
     tags:
-      wasnt_that_interesting: "OK, supongo que #{{tagName}} no era tan interesante..."
+      wasnt_that_interesting: "OK, supongo que #<%= tagName %> no era tan interesante..."
     timeago:
       day: "1 día"
       days: "%d días"
@@ -67,6 +112,4 @@ es:
       years: "%d años"
     videos:
       unknown: "Tipo de video desconocido"
-      watch: "Ver este video con {{provider}}"
-    web_sockets:
-      disconnected: "El canal está cerrado; las publicaciones no serán actualizadas al momento."
+      watch: "Ver este video con <%= provider %>"

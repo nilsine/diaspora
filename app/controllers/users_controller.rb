@@ -48,8 +48,6 @@ class UsersController < ApplicationController
       elsif u[:show_community_spotlight_in_stream] || u[:getting_started]
         if @user.update_attributes(u)
           flash[:notice] = I18n.t 'users.update.settings_updated'
-          redirect_to multi_path
-          return
         else
           flash[:notice] = I18n.t 'users.update.settings_not_updated'
         end
@@ -89,7 +87,7 @@ class UsersController < ApplicationController
     if params[:user] && params[:user][:current_password] && current_user.valid_password?(params[:user][:current_password])
       current_user.close_account!
       sign_out current_user
-      redirect_to(multi_path, :notice => I18n.t('users.destroy.success'))
+      redirect_to(stream_path, :notice => I18n.t('users.destroy.success'))
     else
       if params[:user].present? && params[:user][:current_password].present?
         flash[:error] = t 'users.destroy.wrong_password'
@@ -110,10 +108,10 @@ class UsersController < ApplicationController
           render :xml => director.build(ostatus_builder), :content_type => 'application/atom+xml'
         end
 
-        format.any { redirect_to person_path(user.person.id) }
+        format.any { redirect_to person_path(user.person) }
       end
     else
-      redirect_to multi_path, :error => I18n.t('users.public.does_not_exist', :username => params[:username])
+      redirect_to stream_path, :error => I18n.t('users.public.does_not_exist', :username => params[:username])
     end
   end
 
@@ -129,14 +127,14 @@ class UsersController < ApplicationController
   def logged_out
     @page = :logged_out
     if user_signed_in?
-      redirect_to multi_path
+      redirect_to stream_path
     end
   end
 
   def getting_started_completed
     user = current_user
     user.update_attributes(:getting_started => false)
-    redirect_to multi_path
+    redirect_to stream_path
   end
 
   def export
@@ -152,7 +150,7 @@ class UsersController < ApplicationController
   def user_photo
     username = params[:username].split('@')[0]
     user = User.find_by_username(username)
-    if user.present? 
+    if user.present?
       redirect_to user.profile.image_url
     else
       render :nothing => true, :status => 404

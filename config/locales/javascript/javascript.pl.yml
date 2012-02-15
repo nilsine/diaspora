@@ -9,16 +9,16 @@ pl:
     aspect_dropdown:
       add_to_aspect: "Dodaj kontakt"
       all_aspects: "Wszystkie aspekty"
-      error: "Nie można zacząć dzielić się z {{name}}. Może ich ignorujesz?"
+      error: "Nie można zacząć dzielić się z <%= name %>. Może go/ją ignorujesz?"
       select_aspects: "Wybierz aspekty"
-      started_sharing_with: "Od teraz dzielisz się z {{name}}!"
-      stopped_sharing_with: "Nie dzielisz się już z {{name}}."
+      started_sharing_with: "Od teraz dzielisz się z <%= name %>!"
+      stopped_sharing_with: "Nie dzielisz się już z <%= name %>."
       toggle:
-        few: "W {{count}} aspektach"
-        many: "W {{count}} aspektach"
-        one: "W {{count}} aspekcie"
-        other: "W {{count}} aspektach"
-        two: "W {{count}} aspektach"
+        few: "W <%= count %> aspektach"
+        many: "W <%= count %> aspektach"
+        one: "W <%= count %> aspekcie"
+        other: "W <%= count %> aspektach"
+        two: "W <%= count %> aspektach"
         zero: "Wybierz aspekty"
     aspect_navigation:
       deselect_all: "Odznacz wszystkie"
@@ -28,15 +28,32 @@ pl:
       hide: "ukryj komentarze"
       show: "wyświetl wszystkie komentarze"
     confirm_dialog: "Czy @{m,f:jesteś|n:na}{ pew}{m:ien|f:na|n:no}?"
-    failed_to_like: "Nie udało się polubić!"
+    delete: Usuń
+    failed_to_like: "Nie udało się pulubić!"
     failed_to_post_message: "Nie można wysłać wiadomości!"
     getting_started:
       alright_ill_wait: "Dobrze, poczekam."
-      hey: "Hej, {{name}}!"
+      hey: "Hej, <%= name %>!"
       no_tags: "Hej, nie obserwujesz żadnych znaczników! Kontynuować mimo to?"
       preparing_your_stream: "Przygotowanie spersonalizowanego strumienia..."
+    header:
+      admin: Administrator
+      contacts: Kontakty
+      home: "Strona główna"
+      log_out: Wyloguj
+      mark_all_as_read: "Oznacz wszystkie jako przeczytane"
+      messages: Wiadomości
+      notifications: Powiadomienia
+      profile: Profil
+      recent_notifications: "Ostatnie powiadomienia"
+      search: Szukaj
+      settings: Ustawienia
+      view_all: "Wyświetl wszystko"
+    ignore: Ignoruj
     infinite_scroll:
       no_more: "Nie ma więcej wpisów."
+    my_activity: "Moja aktywność"
+    my_stream: Strumień
     photo_uploader:
       looking_good: "O rety! Świetnie wyglądasz!"
     publisher:
@@ -45,10 +62,42 @@ pl:
       public: "Publiczny - wpis będzie widoczny dla wszystkich i można go znaleźć przez wyszukiwarki"
     reshares:
       duplicate: "Już przekaza@{m:łeś|f:łaś|n:no} dalej ten wpis!"
-    search_for: "Znajdź: {{name}}"
+    search_for: "Znajdź: <%= name %>"
     show_more: "wyświetl więcej"
+    stream:
+      comment: Skomentuj
+      follow: Obserwuj
+      hide: Ukryj
+      like: "Lubię to!"
+      likes:
+        few: "Przypięć: <%= count %>"
+        many: "Przypięć: <%= count %>"
+        one: "<%= count %> przypięcie"
+        other: "<%= count %> przypięć"
+        two: "<%= count %> przypięcia"
+        zero: "<%= count %> przypięć"
+      limited: Ograniczone
+      more_comments:
+        few: "Wyświetl <%= count %> więcej komentarzy"
+        many: "Wyświetl <%= count %> więcej komentarzy"
+        one: "Wyświetl <%= count %> komentarz więcej"
+        other: "Wyświetl <%= count %> więcej komentarzy"
+        two: "Wyświetl <%= count %> komentarze więcej"
+        zero: "Wyświetl <%= count %> komentarzy więcej"
+      original_post_deleted: "Oryginalny wpis został usunięty przez autora."
+      public: Publiczny
+      reshare: "Przekaż dalej"
+      reshares:
+        few: "<%= count %> razy przekazano dalej"
+        many: "<%= count %> razy przekazano dalej"
+        one: "<%= count %> razy przekazano dalej"
+        other: "<%= count %> razy przekazano dalej"
+        two: "<%= count %> razy przekazano dalej"
+        zero: "<%= count %> razy przekazano dalej"
+      unfollow: "Nie obserwuj"
+      unlike: Odepnij
     tags:
-      wasnt_that_interesting: "OK, przypuszczam, że #{{tagName}} nie był, aż tak interesujący..."
+      wasnt_that_interesting: "OK, przypuszczam, że #<%= tagName %> nie był, aż tak interesujący..."
     timeago:
       day: dzień
       days: "%d dni"
@@ -67,6 +116,4 @@ pl:
       years: "%d lat"
     videos:
       unknown: "Nieznany typ wideo"
-      watch: "Zobacz ten film na {{provider}}"
-    web_sockets:
-      disconnected: "Kanał komunikacji jest zamknięty; wpisy nie będą publikowane online."
+      watch: "Zobacz ten film na <%= provider %>"

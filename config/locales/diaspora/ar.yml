@@ -115,7 +115,6 @@ ar:
         content: "يمكنك وصل حساب ديسبورا الخاص بك بالخدمات الآتية:"
         heading: "صل حسابك بالخدمات"
       unfollow_tag: "أَوقِف متابعة #%{tag}"
-      your_aspects: فئاتك
     many: "%{count} فئات"
     move_contact:
       error: "خطأ خلال تحريك عضو: %{inspect}"
@@ -544,6 +543,13 @@ ar:
       destroy: احذف
       not_found: "عفوًا، لم نجد هذه المشاركة."
       permalink: "رابط دائم"
+      photos_by:
+        few: "%{count} photos by %{author}"
+        many: "%{count} photos by %{author}"
+        one: "One photo by %{author}"
+        other: "%{count} photos by %{author}"
+        two: "Two photos by %{author}"
+        zero: "No photos by %{author}"
   previous: السابق
   profile: "الصفحة الشخصية"
   profiles:
@@ -746,6 +752,8 @@ ar:
       two: "Show two more comments"
       zero: "No more comments"
   streams:
+    aspects:
+      title: "Your Aspects"
     mentions:
       title: "Your Mentions"
     tags:
@@ -789,6 +797,8 @@ ar:
       change_email: "عدِّل البريد الإلكتروني"
       change_language: "تغيير اللغة"
       change_password: "تغيير كلمة المرور"
+      close_account:
+        what_we_delete: "We delete all of your posts, profile data, as soon as humanly possible. Your comments will hang around, but be associated with your Diaspora Handle."
       comment_on_post: "...علق أحدهم على رسالتك"
       current_password: "كلمة المرور الحالية"
       download_photos: "تحميل صوري"

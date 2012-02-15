@@ -23,7 +23,7 @@ describe Notifier do
       before do
         @users = []
         5.times do
-          @users << Factory.create(:user)
+          @users << Factory(:user)
         end
       end
       it 'has a body' do
@@ -145,8 +145,8 @@ describe Notifier do
 
   describe ".reshared" do
     before do
-      @sm = Factory.create(:status_message, :author => alice.person, :public => true)
-      @reshare = Factory.create(:reshare, :root => @sm, :author => bob.person)
+      @sm = Factory(:status_message, :author => alice.person, :public => true)
+      @reshare = Factory(:reshare, :root => @sm, :author => bob.person)
       @mail = Notifier.reshared(alice.id, @reshare.author.id, @reshare.id)
     end
 
@@ -215,7 +215,7 @@ describe Notifier do
 
   context "comments" do
     let(:commented_post) {bob.post(:status_message, :text => "It's really sunny outside today, and this is a super long status message!  #notreally", :to => :all)}
-    let(:comment) { eve.comment("Totally is", :post => commented_post)}
+    let(:comment) { eve.comment!(commented_post, "Totally is")}
 
     describe ".comment_on_post" do
       let(:comment_mail) {Notifier.comment_on_post(bob.id, person.id, comment.id).deliver}

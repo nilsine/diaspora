@@ -17,66 +17,97 @@
     %link{:rel => 'shortcut icon', :href => '/favicon.png'}
     %link{:rel => 'apple-touch-icon', :href => '/apple-touch-icon.png'}
 
-    / Social Media Icons are by Paul Robert Lloyd @ http://paulrobertlloyd.com/2009/06/social_media_icons
+    :css
+      @-webkit-keyframes fade-in {
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      @-webkit-keyframes spin {
+        0%   { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @-moz-keyframes fade-in {
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      @-moz-keyframes spin {
+        0%   { -moz-transform: rotate(0deg); }
+        100% { -moz-transform: rotate(360deg); }
+      }
+
+      .loaded {
+        -webkit-animation: fade-in 0.16s linear;
+        -moz-animation: fade-in 0.16s linear;
+      }
+
+      .loader {
+        -webkit-animation: spin 1s infinite ease-in-out,
+                           fade-in 0.2s ease-in;
+        -moz-animation: spin 1s infinite ease-in-out,
+                           fade-in 0.2s ease-in;
+
+      }
 
     / bootstrap/blueprint switch
     - if @aspect == :getting_started || @page == :logged_out
-      = stylesheet_link_tag "bootstrap.min.css"
+      = include_stylesheets :bootstrap
     - else
-      = stylesheet_link_tag "blueprint/screen", :media => 'screen'
-      = stylesheet_link_tag "blueprint/print", :media => 'print'
+      = include_stylesheets :blueprint, :media => 'screen'
 
-    = stylesheet_link_tag "login", :media => 'screen'
+    = include_stylesheets :login, :media => 'screen'
 
     = include_stylesheets :default, :media => 'all'
     - if rtl?
       = include_stylesheets :rtl, :media => 'all'
 
+    :javascript
+      // Support for older browsers
+      if(Array.isArray === undefined) {  
+        Array.isArray = function (arg) {  
+          return Object.prototype.toString.call(arg) == '[object Array]';  
+        };  
+      }
+      if ((window.history) && (window.history.pushState === undefined)) {
+        window.history.pushState = function() { };
+      }
+
     = csrf_meta_tag
     <!--[if IE]>
-    = javascript_include_tag "/javascripts/ie.js"
+    = include_javascripts :ie
     <![endif]-->
 
-    -# %script{:type => "text/javascript", :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'}
-    :javascript
-      !window.jQuery && document.write(unescape("#{escape_javascript(include_javascripts(:jquery))}"))
-
+    = jquery_include_tag
     - unless @landing_page
-      = include_javascripts :main
+      = include_javascripts :main, :templates
+      
       :javascript
         Diaspora.I18n.loadLocale(#{get_javascript_strings_for(I18n.locale).to_json}, "#{I18n.locale}");
         Diaspora.Page = "#{params[:controller].camelcase}#{params[:action].camelcase}";
 
+    :javascript
+      app.baseImageUrl("#{ENV['ASSET_HOST']}")
+
+    - if current_user
+      :javascript
+        app.user(
+          _.extend(#{current_user.person.as_api_response(:backbone).to_json}, {
+            notifications_count : #{notification_count},
+            unread_messages_count : #{unread_message_count},
+            admin : #{current_user.admin?}
+          })
+        );
+
     = yield(:head)
 
-    -unless Rails.env == "production" 
+    -unless Rails.env == "production"
       :css
         .translation_missing {
           color: purple;
           background-color: red;
         }
-    -if AppConfig[:google_a_site]
-      :javascript
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{AppConfig[:google_a_site]}']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-    -if AppConfig[:piwik_id]
-      :javascript
-        var pkBaseURL = (("https:" == document.location.protocol) ? "https://#{AppConfig[:piwik_url]}/" : "http://#{AppConfig[:piwik_url]}/");
-        document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-      :javascript
-        try {
-        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", #{AppConfig[:piwik_id]});
-        piwikTracker.trackPageView();
-        piwikTracker.enableLinkTracking();
-        } catch( err ) {}
 
     - if @person
       %link{:rel => "alternate", :href => "#{@person.public_url}.atom", :type => "application/atom+xml", :title => "#{t('.public_feed', :name => @person.name)}"}
@@ -89,14 +120,11 @@
           .message
             = msg
 
-    - unless @landing_page
-      %a{:id=>"back-to-top", :title=>"Back to top", :href=>"#"}
-        &#8679;
-
       #notifications
 
-    %header{:class=>('landing' unless current_user)}
-      = render 'layouts/header'
+    - unless current_user
+      %header
+        = render 'layouts/header'
 
     .container{:style=> "#{yield(:break_the_mold)}"}
       - if @aspsect == :getting_started || @page == :logged_out
@@ -104,6 +132,10 @@
       - else
         .span-24.last{:style=> "#{yield(:break_the_mold)}"}
           = yield
+
+    - unless @landing_page
+      %a{:id=>"back-to-top", :title=>"#{I18n.t('.back_to_top')}", :href=>"#"}
+        &#8679;
 
     %footer
       .container
@@ -115,19 +147,3 @@
           %li= link_to t('.whats_new'), 'https://github.com/diaspora/diaspora/wiki/Changelog'
           %li= link_to(t('layouts.application.toggle'), toggle_mobile_path)  if is_mobile_device?
         = image_tag 'powered_by_diaspora.png', :height => "11px", :width => "145px"
-
-    -if !@landing_page && request.url.match(/joindiaspora.com/)
-      :javascript
-          var is_ssl = ("https:" == document.location.protocol);
-          var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-          document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-
-      :javascript
-          var feedback_widget_options = {};
-
-          feedback_widget_options.display = "overlay";
-          feedback_widget_options.company = "diaspora";
-          feedback_widget_options.placement = "right";
-          feedback_widget_options.color = "#222";
-          feedback_widget_options.style = "idea";
-          var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);

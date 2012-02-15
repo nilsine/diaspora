@@ -21,12 +21,10 @@ class Contact < ActiveRecord::Base
   validates_presence_of :user
   validates_uniqueness_of :person_id, :scope => :user_id
 
-  before_destroy :destroy_notifications,
-                 :repopulate_cache!
-
+  before_destroy :destroy_notifications
 
   scope :all_contacts_of_person, lambda {|x| where(:person_id => x.id)}
-  
+
     # contact.sharing is true when contact.person is sharing with contact.user
   scope :sharing, lambda {
     where(:sharing => true)
@@ -35,6 +33,11 @@ class Contact < ActiveRecord::Base
   # contact.receiving is true when contact.user is sharing with contact.person
   scope :receiving, lambda {
     where(:receiving => true)
+  }
+
+  scope :for_a_stream, lambda {
+    includes(:aspects, :person => :profile).
+        order('profiles.last_name ASC')
   }
 
   scope :only_sharing, lambda {
@@ -46,13 +49,6 @@ class Contact < ActiveRecord::Base
                        :target_id => person_id,
                        :recipient_id => user_id,
                        :type => "Notifications::StartedSharing").delete_all
-  end
-
-  def repopulate_cache!
-    if RedisCache.configured? && self.user.present?
-      cache = RedisCache.new(self.user)
-      cache.repopulate!
-    end
   end
 
   def dispatch_request
@@ -69,7 +65,6 @@ class Contact < ActiveRecord::Base
 
   def receive_shareable(shareable)
     ShareVisibility.create!(:shareable_id => shareable.id, :shareable_type => shareable.class.base_class.to_s, :contact_id => self.id)
-    Diaspora::Websocket.to(self.user, :aspect_ids => self.aspect_ids).socket(shareable)
   end
 
   def contacts

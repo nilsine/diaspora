@@ -35,6 +35,8 @@ pt-BR:
       hey: "Ei, {{name}}!"
       no_tags: "Ei, você não está seguindo todas as tags! Continuar assim mesmo?"
       preparing_your_stream: "Preparando seu fluxo personalizado..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "Não há mais postagem."
     photo_uploader:
@@ -47,6 +49,28 @@ pt-BR:
       duplicate: "Você já compartilhou essa postagem."
     search_for: "Procurar por {{name}}"
     show_more: "mostrar mais"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "Ok, eu acho que #{{tagName}} não era tão interessante..."
     timeago:
@@ -66,5 +90,3 @@ pt-BR:
     videos:
       unknown: "Tipo de vídeo desconhecido"
       watch: "Assista este vídeo no {{provider}}"
-    web_sockets:
-      disconnected: "A conexão foi encerrada, não é mais possível transmitir novas postagens."

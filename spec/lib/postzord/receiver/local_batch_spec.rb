@@ -1,10 +1,10 @@
-require 'spec_helper' 
+require 'spec_helper'
 require File.join(Rails.root, 'lib','postzord', 'receiver', 'local_batch')
 
 describe Postzord::Receiver::LocalBatch do
   before do
     @object = Factory(:status_message, :author => alice.person)
-    @ids = [bob.id.to_s] 
+    @ids = [bob.id.to_s]
   end
 
   let(:receiver) { Postzord::Receiver::LocalBatch.new(@object, @ids) }
@@ -41,13 +41,6 @@ describe Postzord::Receiver::LocalBatch do
     end
   end
 
-  describe '#socket_to_users' do
-    it 'sockets to users' do
-      Diaspora::Websocket.should_receive(:to).with(receiver.users).and_return(stub.as_null_object)
-      receiver.socket_to_users
-    end
-  end
-
   describe '#notify_mentioned_users' do
     it 'calls notify person for a mentioned person' do
       sm = Factory(:status_message,
@@ -67,14 +60,14 @@ describe Postzord::Receiver::LocalBatch do
 
   describe '#notify_users' do
     it 'calls notify for posts with notification type' do
-      reshare = Factory.create(:reshare)
+      reshare = Factory(:reshare)
       Notification.should_receive(:notify)
       receiver = Postzord::Receiver::LocalBatch.new(reshare, @ids)
       receiver.notify_users
     end
 
     it 'calls notify for posts with notification type' do
-      sm = Factory.create(:status_message, :author => alice.person)
+      sm = Factory(:status_message, :author => alice.person)
       receiver = Postzord::Receiver::LocalBatch.new(sm, @ids)
       Notification.should_not_receive(:notify)
       receiver.notify_users
@@ -96,45 +89,6 @@ describe Postzord::Receiver::LocalBatch do
       receiver.should_not_receive(:notify_mentioned_users)
       receiver.should_not_receive(:create_share_visibilities)
       receiver.perform!
-    end
-  end
-
-  describe '#update_cache!' do
-    before do
-
-    end
-
-    it 'adds to a redis cache for users sharing with author' do
-      users = [bob]
-      @zord = Postzord::Receiver::LocalBatch.new(@object, users.map{|u| u.id})
-
-      sort_order = "created_at"
-
-      cache = mock
-      RedisCache.should_receive(:new).exactly(users.length).times.with(instance_of(User), sort_order).and_return(cache)
-
-      cache.should_receive(:add).exactly(users.length).times.with(@object.created_at.to_i, @object.id)
-
-      @zord.update_cache!
-    end
-
-    it 'does not add to the redis cache of the users not contact with author' do
-      users = [bob, eve]
-      @zord = Postzord::Receiver::LocalBatch.new(@object, users.map{|u| u.id})
-
-      RedisCache.should_receive(:new).once.with(bob, anything()).and_return(stub.as_null_object)
-
-      @zord.update_cache!
-    end
-
-    it 'does not add to the redis cache of users not sharing with the author' do
-      alice.share_with(eve.person, alice.aspects.first)
-      users = [bob, eve]
-      @zord = Postzord::Receiver::LocalBatch.new(@object, users.map{|u| u.id})
-
-      RedisCache.should_receive(:new).once.with(bob, anything()).and_return(stub.as_null_object)
-
-      @zord.update_cache!
     end
   end
 end

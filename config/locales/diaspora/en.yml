@@ -33,6 +33,7 @@ en:
   public: "Public"
   limited: "Limited"
   search: "Search"
+  nsfw: "NSFW"
   find_people: "Find people or #tags"
   _home: "Home"
   more: "More"
@@ -158,10 +159,9 @@ en:
     index:
       donate: "Donate"
       keep_us_running: "Keep %{pod} running fast and buy servers their coffee fix with a monthly donation!"
-      your_aspects: "Your Aspects"
       no_tags: "+ Find a tag to follow"
       unfollow_tag: "Stop following #%{tag}"
-      handle_explanation: "This is your diaspora id. Like an email address, you can give this to people to reach you."
+      handle_explanation: "This is your Diaspora ID. Like an email address, you can give this to people to reach you."
       no_contacts: "No contacts"
       post_a_message: "post a message >>"
       people_sharing_with_you: "People sharing with you"
@@ -184,11 +184,7 @@ en:
         tag_bug: "bug"
         feature_suggestion: "... have a %{link} suggestion?"
         tag_feature: "feature"
-
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Community-powered tutorials, how-to, and news"
-
-
-        satisfaction: "%{link}: Community-powered support"
         email_feedback: "%{link} your feedback, if you prefer"
       cubbies:
         heading: "Connect to Cubbi.es"
@@ -256,7 +252,10 @@ en:
       title: "Contacts"
       your_contacts: "Your Contacts"
       no_contacts: "Looks like you need to add some contacts!"
-      check_out: "Check out"
+      no_contacts_message: "Check out %{community_spotlight}"
+      no_contacts_message_with_aspect: "Check out %{community_spotlight} or %{add_to_aspect_link}"
+      add_to_aspect_link: "add contacts to %{name}"
+      community_spotlight: "Community Spotlight"
       my_contacts: "My Contacts"
       all_contacts: "All Contacts"
       only_sharing_with_me: "Only sharing with me"
@@ -340,6 +339,7 @@ en:
       aspect: "Aspect"
       already_invited: "The following people have not accepted your invitation:"
       resend: "Resend"
+      check_out_diaspora: "Check out Diaspora!"
     check_token:
       not_found: "Invitation token not found"
     edit:
@@ -364,6 +364,7 @@ en:
       toggle: "toggle mobile"
       public_feed: "Public Diaspora Feed for %{name}"
       your_aspects: "your aspects"
+      back_to_top: "Back to top"
 
   likes:
     likes:
@@ -614,6 +615,14 @@ en:
       destroy: "Delete"
       permalink: "permalink"
       not_found: "Sorry, we couldn't find that post."
+      photos_by:
+        zero: "No photos by %{author}"
+        one: "One photo by %{author}"
+        two: "Two photos by %{author}"
+        few: "%{count} photos by %{author}"
+        many: "%{count} photos by %{author}"
+        other: "%{count} photos by %{author}"
+      reshare_by: "Reshare by %{author}"
 
   share_visibilites:
     update:
@@ -639,6 +648,8 @@ en:
       update_profile: "Update Profile"
       allow_search: "Allow for people to search for you within Diaspora"
       edit_profile: "Edit profile"
+      you_are_nsfw: "You have marked yourself not safe for work, your content will not show up in people who have opted out of seeing objectionable content's streams."
+      you_are_safe_for_work: "You have marked yourself as safe for work, this means you agree the content you post will agree with the community guidelines."
     update:
       updated: "Profile updated"
       failed: "Failed to update profile"
@@ -795,6 +806,7 @@ en:
       outside: "Public messages will be available for others outside of Diaspora to see."
       logged_in: "logged in to %{service}"
       manage: "manage connected services"
+      atom_feed: "Atom feed"
     notification:
       new: "New %{type} from %{from}"
     contact_list:
@@ -881,9 +893,6 @@ en:
       no_applications: "You haven't registered any applications yet."
 
   streams:
-    recently: "recently:"
-    commented_on: "commented on"
-    posted: "posted"
     community_spotlight_stream: "Community Spotlight"
     aspects_stream: "Aspects"
     mentioned_stream: "@Mentions"
@@ -921,8 +930,10 @@ en:
       contacts_title: "People in your Stream"
 
     aspects:
-      title: "Your Aspects"
+      title: "My Aspects"
 
+    activity:
+      title: "My Activity"
   users:
     logged_out:
       signed_out: "You've signed out of Diaspora*"
@@ -942,7 +953,7 @@ en:
       current_password: "Current password"
       download_xml: "download my xml"
       download_photos: "download my photos"
-      your_handle: "Your diaspora id"
+      your_handle: "Your Diaspora ID"
       your_email: "Your email"
       edit_account: "Edit account"
       receive_email_notifications: "Receive email notifications when..."
@@ -967,7 +978,7 @@ en:
         dont_go: "Hey, please don't go!"
         make_diaspora_better: "We want you to help us make Diaspora better, so you should help us out instead of leaving. If you do want to leave, we want you to know what happens next."
         mr_wiggles: 'Mr Wiggles will be sad to see you go'
-        what_we_delete: "We delete all of your posts, profile data, as soon as humanly possible. Your comments will hang around, but be associated with your Diaspora Handle."
+        what_we_delete: "We delete all of your posts, profile data, as soon as humanly possible. Your comments will hang around, but be associated with your Diaspora ID."
         locked_out: "You will get signed out and locked out of your account."
         lock_username: "This will lock your username if you decided to sign back up."
         no_turning_back: "Currently, there is no turning back."

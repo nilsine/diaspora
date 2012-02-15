@@ -35,6 +35,8 @@ uk:
       hey: "Привіт, {{name}}!"
       no_tags: "Ви не стежите ні за однією міткою! Все одно продовжити?"
       preparing_your_stream: "Підготовка вашого особистого потоку..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "Повідомлень більше немає."
     photo_uploader:
@@ -47,6 +49,28 @@ uk:
       duplicate: "Настільки круто, так? Ви вже поділилися цим записом!"
     search_for: "Шукати {{name}}"
     show_more: "показати більше"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "OK, мабуть, стежити за міткою #{{tagName}} було не так вже цікаво..."
     timeago:
@@ -68,5 +92,3 @@ uk:
     videos:
       unknown: "Невідомий відеоформат"
       watch: "Дивитися це відео на {{provider}}"
-    web_sockets:
-      disconnected: "WebSocket закритий; повідомлення більше не транслюватимуться в прямому ефірі."

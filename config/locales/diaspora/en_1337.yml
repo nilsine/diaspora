@@ -101,7 +101,6 @@ en_1337:
         have_a_question: "... H4V3 4 %{link}?"
         here_to_help: "45K PR0G4M3R5!"
         need_help: "N33D H3LP?"
-        satisfaction: "%{link}: C0MMUN17Y-P0W3R3D 5UPP0R7!"
         tag_bug: "#bug"
         tag_feature: "#feature"
         tag_question: "#question"
@@ -114,7 +113,6 @@ en_1337:
         content: "U C4N C0NN3C7 7H3 F0LL0W1NG 53RV1C35 2 D*:"
         heading: "C0NN3C7 53RV1C35"
       unfollow_tag: "570P F0LL0W1NG #%{tag}"
-      your_aspects: "Y0UR 45P3C75"
     many: "%{count} 45P3C75"
     move_contact:
       error: "3RR0R M0V1NG N00B: %{inspect}"
@@ -176,7 +174,6 @@ en_1337:
       add_a_new_aspect: "4DD 4 N3W 45P3C7!"
       add_to_aspect: "4DD N00B5 2: %{name}"
       all_contacts: "4LL N00B5"
-      check_out: "CH3CK 0U7"
       many_people_are_you_sure: "R34LLY W4NN4 5P4M %{suggested_limit} N00B5? 5P4MM1NG 7H31R 45P3C7 M4Y B3 M0R3 1N73LL1G3N7!"
       my_contacts: "Y0UR N00B5"
       no_contacts: "L00K5 L1K3 U N33D 70 PWN M0R3 N00B5!"
@@ -537,6 +534,13 @@ en_1337:
       destroy: D3L373
       not_found: "50RRY, W3 C0ULDN7 F1ND 7H47 5P4M!"
       permalink: P3RM4L1NK
+      photos_by:
+        few: "%{count} photos by %{author}"
+        many: "%{count} photos by %{author}"
+        one: "One photo by %{author}"
+        other: "%{count} photos by %{author}"
+        two: "Two photos by %{author}"
+        zero: "No photos by %{author}"
   previous: PR3V10U5
   profile: PR0F1L3
   profiles:
@@ -740,6 +744,8 @@ en_1337:
       two: "Show two more comments"
       zero: "No more comments"
   streams:
+    aspects:
+      title: "Your Aspects"
     mentions:
       contacts_title: "N00B5 WH0 M3N710N3D U"
       title: "Y0UR M3N710N5"
@@ -781,10 +787,13 @@ en_1337:
       email_not_confirmed: "M41L C0ULD N07 B3 4C71V473D, WR0NG L1NK?"
     edit:
       also_commented: "...50M30N3 4L50 5P4M5 0N 4 N00B5 5P4M?"
+      auto_follow_back: "Automatically follow back if a someone follows you"
       change: CH4NG3
       change_email: "CH4NG3 M41L"
       change_language: "CH4NG3 L4NGU4G3"
       change_password: "CH4NG3 *****"
+      close_account:
+        what_we_delete: "We delete all of your posts, profile data, as soon as humanly possible. Your comments will hang around, but be associated with your Diaspora Handle."
       comment_on_post: "...50M30N3 5P4M5 Y0UR 5P4M?"
       current_password: "CURR3N7 *****"
       download_photos: "D0WNL04D MY PR0N"

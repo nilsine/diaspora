@@ -35,6 +35,8 @@ es-AR:
       hey: "Che, {{name}}!"
       no_tags: "¡Che, no estás siguiendo ningún tag! ¿Continuar de todos modos?"
       preparing_your_stream: "Preparando tu stream personalizado..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "No hay más publicaciones."
     photo_uploader:
@@ -47,6 +49,28 @@ es-AR:
       duplicate: "¿Te gustó eh? ¡Ya habías compartido esa publicación!"
     search_for: "Buscar a {{name}}"
     show_more: "mostrar más"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "OK, supongamos que #{{tagName}} no era tan interesante..."
     timeago:
@@ -68,5 +92,3 @@ es-AR:
     videos:
       unknown: "Tipo de video desconocido"
       watch: "Ver este video en {{provider}}"
-    web_sockets:
-      disconnected: "La conexión WebSocket está cerrada; las publicaciones ya no serán transmitidas en vivo."

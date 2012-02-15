@@ -4,28 +4,39 @@
 
 Diaspora::Application.routes.draw do
 
-
   # Posting and Reading
 
   resources :reshares
-
-  resources :aspects do
-    put :toggle_contact_visibility
-  end
 
   resources :status_messages, :only => [:new, :create]
 
   resources :posts, :only => [:show, :destroy] do
     resources :likes, :only => [:create, :destroy, :index]
+    resources :participations, :only => [:create, :destroy, :index]
     resources :comments, :only => [:new, :create, :destroy, :index]
   end
   get 'p/:id' => 'posts#show', :as => 'short_post'
-  get 'public_stream' => 'posts#index', :as => 'public_stream'
   # roll up likes into a nested resource above
   resources :comments, :only => [:create, :destroy] do
     resources :likes, :only => [:create, :destroy, :index]
   end
 
+  # Streams
+  get "participate" => "streams#activity", :as => "activity_stream" # legacy
+  get "explore" => "streams#multi", :as => "stream"                 # legacy
+
+  get "activity" => "streams#activity", :as => "activity_stream"
+  get "stream" => "streams#multi", :as => "stream"
+  get "public" => "streams#public", :as => "public_stream"
+  get "followed_tags" => "streams#followed_tags", :as => "followed_tags_stream"
+  get "mentions" => "streams#mentioned", :as => "mentioned_stream"
+  get "liked" => "streams#liked", :as => "liked_stream"
+  get "commented" => "streams#commented", :as => "commented_stream"
+  get "aspects" => "streams#aspects", :as => "aspects_stream"
+
+  resources :aspects do
+    put :toggle_contact_visibility
+  end
 
   get 'bookmarklet' => 'status_messages#bookmarklet'
 
@@ -43,33 +54,26 @@ Diaspora::Application.routes.draw do
     delete 'visibility' => 'conversation_visibilities#destroy'
   end
 
+  get 'notifications/read_all' => 'notifications#read_all'
   resources :notifications, :only => [:index, :update] do
-    get :read_all, :on => :collection
   end
 
   resources :tags, :only => [:index]
   scope "tags/:name" do
     post   "tag_followings" => "tag_followings#create", :as => 'tag_tag_followings'
-    delete "tag_followings" => "tag_followings#destroy"
+    delete "tag_followings" => "tag_followings#destroy", :as => 'tag_tag_followings'
   end
 
   post   "multiple_tag_followings" => "tag_followings#create_multiple", :as => 'multiple_tag_followings'
-
-  get "tag_followings" => "tag_followings#index", :as => 'tag_followings'
-  resources :mentions, :only => [:index]
   resources "tag_followings", :only => [:create]
-
-  get 'comment_stream' => 'comment_stream#index', :as => 'comment_stream'
-
-  get 'like_stream' => 'like_stream#index', :as => 'like_stream'
 
   get 'tags/:name' => 'tags#show', :as => 'tag'
 
   resources :apps, :only => [:show]
 
   #Cubbies info page
-  resource :token, :only => :show
 
+  resource :token, :only => :show
 
   # Users and people
 
@@ -114,15 +118,11 @@ Diaspora::Application.routes.draw do
   resources :contacts,           :except => [:update, :create] do
     get :sharing, :on => :collection
   end
-  resources :aspect_memberships, :only  => [:destroy, :create, :update]
+  resources :aspect_memberships, :only  => [:destroy, :create]
   resources :share_visibilities,  :only => [:update]
   resources :blocks, :only => [:create, :destroy]
 
-  get 'spotlight' => 'community_spotlight#index', :as => 'spotlight'
-
   get 'community_spotlight' => "contacts#spotlight", :as => 'community_spotlight'
-
-  get 'stream' => "multis#index", :as => 'multi'
 
   resources :people, :except => [:edit, :update] do
     resources :status_messages

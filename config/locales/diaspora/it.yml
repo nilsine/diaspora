@@ -109,7 +109,6 @@ it:
         have_a_question: "...fare una %{link}?"
         here_to_help: "La comunità di Diaspora è qui!"
         need_help: "Hai bisogno di aiuto?"
-        satisfaction: "%{link}: Per avere supporto dalla comunità"
         tag_bug: problema
         tag_feature: idea
         tag_question: domanda
@@ -122,14 +121,13 @@ it:
         title: "Saluta i nuovi arrivati"
       no_contacts: "Nessun contatto"
       no_tags: "+ Cerca tag da seguire"
-      people_sharing_with_you: "Persone in condivisione con te"
+      people_sharing_with_you: "Persone che condividono con te"
       post_a_message: "invia un messaggio >>"
       services:
         content: "Puoi collegare i seguenti servizi a Diaspora:"
         heading: "Servizi connessi"
       unfollow_tag: "Smetti di seguire #%{tag}"
       welcome_to_diaspora: "Diaspora ti dà il benvenuto, %{name}!"
-      your_aspects: "I tuoi aspetti"
     many: "%{count} aspetti"
     move_contact:
       error: "Errore nello spostare il contatto: %{inspect}"
@@ -199,10 +197,14 @@ it:
     index:
       add_a_new_aspect: "Aggiungi un aspetto"
       add_to_aspect: "aggiungi i contatti a %{name}"
+      add_to_aspect_link: "aggiungi contatti a %{name}"
       all_contacts: "Tutti i contatti"
+      community_spotlight: "in evidenza"
       many_people_are_you_sure: "Stai inviando un messaggio privato a più di %{suggested_limit} contatti. Vuoi farlo davvero? Forse potrebbe essere più opportuno pubblicarlo su un aspetto!"
       my_contacts: "I miei contatti"
       no_contacts: "Probabilmente devi aggiungere qualche contatto!"
+      no_contacts_message: "Guarda gli utenti %{community_spotlight}"
+      no_contacts_message_with_aspect: "Guarda gli utenti %{community_spotlight} oppure %{add_to_aspect_link}"
       only_sharing_with_me: "Condividono con me"
       remove_person_from_aspect: "Rimuovi %{person_name} da \"%{aspect_name}\""
       start_a_conversation: "Inizia una conversazione"
@@ -294,6 +296,7 @@ it:
     new:
       already_invited: "Le seguenti persone non hanno accettato il tuo invito:"
       aspect: Aspetto
+      check_out_diaspora: "Prova Diaspora!"
       comma_seperated_plz: "Puoi inserire più indirizzi email separati da virgole."
       if_they_accept_info: "se accettano, saranno aggiunti all'aspetto in cui li hai invitati."
       invite_someone_to_join: "Invita qualcuno ad entrare in Diaspora!"
@@ -305,6 +308,7 @@ it:
       to: A
   layouts:
     application:
+      back_to_top: "Torna all'inizio"
       powered_by: "CREATO CON DIASPORA*"
       public_feed: "Feed pubblici Diaspora di %{name}"
       toggle: "attiva/disattiva versione mobile"
@@ -328,12 +332,12 @@ it:
         two: "%{count} non mi piace"
         zero: "0 Non mi piace"
       people_like_this:
-        few: "%{count} Mi piace"
-        many: "%{count} Mi piace"
-        one: "%{count} Mi piace"
-        other: "%{count} Mi piace"
+        few: "%{count} mi piace"
+        many: "%{count} mi piace"
+        one: "%{count} mi piace"
+        other: "%{count} mi piace"
         two: "%{count} mi piace"
-        zero: "0 Mi piace"
+        zero: "0 mi piace"
       people_like_this_comment:
         few: "%{count} mi piace"
         many: "%{count} mi piace"
@@ -394,12 +398,12 @@ it:
       two: "A %{actors} piace il tuo %{post_link}."
       zero: "A %{actors} piace il tuo %{post_link}."
     liked_post_deleted:
-      few: "A %{actors} piaceva il messaggio che hai eliminato."
-      many: "A %{actors} piaceva il messaggio che hai eliminato."
-      one: "A %{actors} piaceva il messaggio che hai eliminato."
-      other: "A %{actors} piaceva il messaggio che hai eliminato."
+      few: "A %{actors} piaceva il post che hai eliminato."
+      many: "A %{actors} piaceva il post che hai eliminato."
+      one: "A %{actors} piaceva il post che hai eliminato."
+      other: "A %{actors} piaceva il post che hai eliminato."
       two: "A %{actors} piaceva il post che hai eliminato."
-      zero: "A %{actors} piaceva il messaggio che hai eliminato."
+      zero: "A %{actors} piaceva il post che hai eliminato."
     mentioned:
       few: "%{actors} ti hanno menzionato in un %{post_link}."
       many: "%{actors} ti hanno menzionato in un %{post_link}."
@@ -472,6 +476,7 @@ it:
       view_profile: "Guarda il profilo di %{name}"
     thanks: "Grazie,"
     to_change_your_notification_settings: "per cambiare le opzioni delle notifiche"
+  nsfw: "NSFW (non adatto ad un luogo di lavoro)"
   or: o
   password_confirmation: "Conferma password"
   people:
@@ -566,6 +571,14 @@ it:
     show:
       destroy: Elimina
       not_found: "Ci scusiamo, non possiamo trovare il post."
+      photos_by:
+        few: "%{count} foto di %{author}"
+        many: "%{count} foto di %{author}"
+        one: "Una foto di %{author}"
+        other: "%{count} foto di %{author}"
+        two: "Due foto di %{author}"
+        zero: "Nessuna foto di %{author}"
+      reshare_by: "Condiviso da %{author}"
   previous: precedente
   privacy_policy: "Norme sulla privacy"
   profile: Profilo
@@ -576,6 +589,8 @@ it:
       first_name: Nome
       last_name: Cognome
       update_profile: "Aggiorna Profilo"
+      you_are_nsfw: "Hai impostato tutti i tuoi messaggi come non adatti ad un luogo di lavoro (NSFW), i tuoi contenuti non compariranno alle persone che non vogliono ricevere materiale sconveniente."
+      you_are_safe_for_work: "Hai impostato il tuo utente come \"sicuro\", cioè i contenuti che invierai rispetteranno le linee guida della comunità."
       your_bio: "La tua biografia"
       your_birthday: "Il tuo compleanno"
       your_gender: Sesso
@@ -757,10 +772,10 @@ it:
       ignore_user: "Ignora %{name}"
       ignore_user_description: "Vuoi ignorare questo utente e rimuoverlo da tutti gli aspetti?"
       like: "Mi piace"
-      nsfw: "Questo post è stato marcato dall'autore come non adatto a un luogo di lavoro (NSFW). %{link}"
+      nsfw: "Questo post è stato dichiarato dal suo autore non adatto a un luogo di lavoro (NSFW). %{link}"
       shared_with: "Condiviso con: %{aspect_names}"
       show: mostra
-      unlike: Annulla
+      unlike: "Non mi piace più"
       viewable_to_anyone: "Questo post è visibile a tutti sul web"
   status_messages:
     create:
@@ -789,12 +804,11 @@ it:
       zero: "Nessun altro commento"
   streams:
     aspects:
-      title: "I tuoi aspetti"
+      title: Aspetti
     aspects_stream: Aspetti
     comment_stream:
       contacts_title: "Persone a cui hai commentato i post"
       title: "Post commentati"
-    commented_on: commenti
     community_spotlight_stream: "In evidenza dalla comunità"
     followed_tag:
       add_a_tag: "Aggiungi un tag"
@@ -803,19 +817,17 @@ it:
       title: "#Tag che segui"
     followed_tags_stream: "#Tag che segui"
     like_stream:
-      contacts_title: "Persone di cui ti piacciono i post"
-      title: "Post preferiti"
+      contacts_title: "Autori dei post che ti piacciono"
+      title: "Post che ti piacciono"
     mentioned_stream: "@Menzioni"
     mentions:
       contacts_title: "Persone che ti hanno menzionato"
       title: "@Menzioni"
     multi:
-      contacts_title: "Persone nel tuo stream"
-    posted: post
+      contacts_title: Persone
     public:
       contacts_title: "Chi ha postato di recente"
       title: "Attività pubblica"
-    recently: "ordina per:"
     tags:
       contacts_title: "Persone con questo tag"
       tag_prefill_text: "A proposito di %{tag_name} ..."
@@ -862,6 +874,8 @@ it:
       wrong_password: "Hai inserito una password che non corrisponde a quella attuale."
     edit:
       also_commented: "...qualcuno commenta un post dopo di te?"
+      auto_follow_aspect: "Aspetto per gli utenti seguiti in automatico:"
+      auto_follow_back: "Segui automaticamente tutti coloro che iniziano a seguirti"
       change: Cambia
       change_email: "Cambia email"
       change_language: "Cambia lingua"
@@ -874,7 +888,7 @@ it:
         make_diaspora_better: "Vorremmo che tu ci aiutassi a migliorare Diaspora, considera che puoi darci una mano invece di lasciare il servizio. Se sei davvero convinto, vogliamo che tu sappia come funzionerà la rimozione del tuo account."
         mr_wiggles: "Il Fantasma Formaggino ti perseguiterà perché te ne vai!"
         no_turning_back: "Al momento, non è possibile tornare indietro."
-        what_we_delete: "Cancelleremo tutti i tuoi post e i dati del profilo nel tempo più breve possibile. I commenti che hai lasciato rimarranno abbinati al tuo identificativo Diaspora."
+        what_we_delete: "Cancelleremo tutti i tuoi post e i dati del profilo nel tempo più breve possibile. I commenti che hai lasciato rimarranno abbinati al tuo ID Diaspora."
       close_account_text: "Chiudi l'account"
       comment_on_post: "...qualcuno commenta un tuo post?"
       current_password: "Password attuale"
@@ -883,6 +897,7 @@ it:
       edit_account: "Modifica account"
       email_awaiting_confirmation: "È stato spedito su %{unconfirmed_email} un link di attivazione. Continueremo ad usare la tua email originale %{email} finché non cliccherai sul link e attiverai il nuovo indirizzo."
       export_data: "Esporta Dati"
+      following: "Impostazioni dei contatti"
       getting_started: "Preferenze nuovo utente"
       liked: "...a qualcuno piace un tuo post?"
       mentioned: "...sei menzionato in un post?"
@@ -923,6 +938,8 @@ it:
       does_not_exist: "L'utente %{username} non esiste!"
     update:
       email_notifications_changed: "Notifiche email modificate con successo"
+      follow_settings_changed: "Le impostazioni dei contatti sono state cambiate"
+      follow_settings_not_changed: "Le impostazioni dei contatti non sono state cambiate a causa di un errore."
       language_changed: "Lingua cambiata"
       language_not_changed: "Impossibile cambiare lingua"
       password_changed: "Password cambiata. Ora puoi effettuare l'accesso con la tua nuova password."

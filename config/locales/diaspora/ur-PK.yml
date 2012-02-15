@@ -111,7 +111,6 @@ ur-PK:
         content: "آپ ڈایسپورا کے لئے مندرجہ ذیل خدمات شامل کر سکتے ہیں :"
         heading: "خدمات کو جوڑیے"
       unfollow_tag: "پیروی بند کیجیے #%{tag}"
-      your_aspects: "آپکے پہلو"
     many: "%{count} پہلو"
     move_contact:
       error: "رابطہ منتقلی میں خرابی: %{inspect}"
@@ -312,6 +311,15 @@ ur-PK:
     other: "%{count} people"
     two: "%{count} people"
     zero: "no people"
+  posts:
+    show:
+      photos_by:
+        few: "%{count} photos by %{author}"
+        many: "%{count} photos by %{author}"
+        one: "One photo by %{author}"
+        other: "%{count} photos by %{author}"
+        two: "Two photos by %{author}"
+        zero: "No photos by %{author}"
   reactions:
     few: "%{count} reactions"
     many: "%{count} reactions"
@@ -376,6 +384,8 @@ ur-PK:
       two: "Show two more comments"
       zero: "No more comments"
   streams:
+    aspects:
+      title: "Your Aspects"
     mentions:
       title: "Your Mentions"
     tags:
@@ -388,5 +398,10 @@ ur-PK:
       failure: "Failed to stop following: #%{name}"
       success: "Successfully stopped following: #%{name}"
   users:
+    edit:
+      auto_follow_back: "Automatically follow back if a someone follows you"
+      close_account:
+        what_we_delete: "We delete all of your posts, profile data, as soon as humanly possible. Your comments will hang around, but be associated with your Diaspora Handle."
+      your_handle: "Your diaspora id"
     getting_started:
       what_facebook_does: "to Diaspora. This will pull your name and photo, and enable cross-positng."

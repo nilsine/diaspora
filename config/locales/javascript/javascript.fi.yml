@@ -9,16 +9,16 @@ fi:
     aspect_dropdown:
       add_to_aspect: "Lisää kontakti"
       all_aspects: "Kaikki näkymät"
-      error: "Ei voitu aloittaa jakamaan käyttäjän {{name}} kanssa. Oletko sivuuttanut hänet?"
+      error: "Ei voitu aloittaa jakamaan käyttäjän <%= name %> kanssa. Oletko sivuuttanut hänet?"
       select_aspects: "Valitse näkymät"
-      started_sharing_with: "Olet alkanut jakaa käyttäjän {{name}} kanssa!"
-      stopped_sharing_with: "Olet lopettanut jakamisen käyttäjän {{name}} kanssa."
+      started_sharing_with: "Olet alkanut jakaa käyttäjän <%= name %> kanssa!"
+      stopped_sharing_with: "Olet lopettanut jakamisen käyttäjän <%= name %> kanssa."
       toggle:
-        few: "{{count}} näkymässä"
-        many: "{{count}} näkymässä"
-        one: "{{count}} näkymässä"
-        other: "{{count}} näkymässä"
-        two: "{{count}} näkymässä"
+        few: "<%= count %> näkymässä"
+        many: "<%= count %> näkymässä"
+        one: "<%= count %> näkymässä"
+        other: "<%= count %> näkymässä"
+        two: "<%= count %> näkymässä"
         zero: "Valitse näkymät"
     aspect_navigation:
       deselect_all: "Poista valinnat"
@@ -28,13 +28,28 @@ fi:
       hide: "piilota kommentit"
       show: "näytä kaikki kommentit"
     confirm_dialog: "Oletko varma?"
+    delete: Poista
     failed_to_like: "Tykkääminen epäonnistui!"
     failed_to_post_message: "Viestin lähetys epäonnistui!"
     getting_started:
       alright_ill_wait: "Okei, minä odotan."
-      hey: "Hei {{name}}!"
+      hey: "Hei <%= name %>!"
       no_tags: "Hei, et seuraa yhtäkään tagia!  Jatketaanko silti?"
       preparing_your_stream: "Yksilöllistä virtaasi valmistellaan..."
+    header:
+      admin: Ylläpitäjä
+      contacts: Kontaktit
+      home: Koti
+      log_out: "Kirjaudu ulos"
+      mark_all_as_read: "Merkitse kaikki luetuiksi"
+      messages: Viestit
+      notifications: Ilmoitukset
+      profile: Profiili
+      recent_notifications: "Tuoreet ilmoitukset"
+      search: "Etsi ihmisiä tai #tageja"
+      settings: Asetukset
+      view_all: "Näytä kaikki"
+    ignore: Sivuuta
     infinite_scroll:
       no_more: "Ei enempää viestejä."
     photo_uploader:
@@ -45,10 +60,39 @@ fi:
       public: "Julkinen - viestisi näkyvät kaikille mukaan lukien hakukoneet ja niiden tulokset"
     reshares:
       duplicate: "Olet jo uudelleenjakanut viesti!"
-    search_for: "Etsi nimellä {{name}}"
+    search_for: "Etsi nimellä <%= name %>"
     show_more: "näytä lisää"
+    stream:
+      comment: Kommentoi
+      hide: Piilota
+      like: Tykkää
+      likes:
+        few: "<%= count %> tykkäystä"
+        many: "<%= count %> tykkäystä"
+        one: "<%= count %> tykkäys"
+        other: "<%= count %> tykkäystä"
+        two: "<%= count %> tykkäystä"
+        zero: "<%= count %> tykkäystä"
+      limited: Rajoitettu
+      more_comments:
+        few: "Näytä <%= count %> muuta kommenttia"
+        many: "Näytä <%= count %> muuta kommenttia"
+        one: "Näytä <%= count %> muu kommentti"
+        other: "Näytä <%= count %> muuta kommenttia"
+        two: "Näytä <%= count %> muuta kommenttia"
+        zero: "Näytä <%= count %> muuta kommenttia"
+      original_post_deleted: "Lähettäjä on poistanut alkuperäisen viestin."
+      public: Julkinen
+      reshare: "Jaa uudelleen"
+      reshares:
+        few: "<%= count %> uudelleenjakoa"
+        many: "<%= count %> uudelleenjakoa"
+        one: "<%= count %> uudelleenjako"
+        other: "<%= count %> uudelleenjakoa"
+        two: "<%= count %> uudelleenjakoa"
+        zero: "<%= count %> uudelleenjakoa"
     tags:
-      wasnt_that_interesting: "OK, #{{tagName}} ei tainnut ollakaan kovin kiinnostava aihe..."
+      wasnt_that_interesting: "OK, #<%= tagName %> ei tainnut ollakaan kovin kiinnostava aihe..."
     timeago:
       day: päivä
       days: "%d päivää"
@@ -65,6 +109,4 @@ fi:
       years: "%d vuotta"
     videos:
       unknown: "Tuntematon videomuoto"
-      watch: "Katso video {{provider}} :ssa"
-    web_sockets:
-      disconnected: "Yhteys on suljettu; viestejä ei enää esitetä reaaliaikaisesti."
+      watch: "Katso video palvelussa <%= provider %>"

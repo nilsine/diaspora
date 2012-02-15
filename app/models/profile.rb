@@ -25,21 +25,22 @@ class Profile < ActiveRecord::Base
   xml_attr :bio
   xml_attr :location
   xml_attr :searchable
+  xml_attr :nsfw
   xml_attr :tag_string
 
   before_save :strip_names
   after_validation :strip_names
-  
+
   validates :first_name, :length => { :maximum => 32 }
   validates :last_name, :length => { :maximum => 32 }
-  
+
   validates_format_of :first_name, :with => /\A[^;]+\z/, :allow_blank => true
   validates_format_of :last_name, :with => /\A[^;]+\z/, :allow_blank => true
   validate :max_tags
   validate :valid_birthday
 
   attr_accessible :first_name, :last_name, :image_url, :image_url_medium,
-    :image_url_small, :birthday, :gender, :bio, :location, :searchable, :date, :tag_string
+    :image_url_small, :birthday, :gender, :bio, :location, :searchable, :date, :tag_string, :nsfw
 
   belongs_to :person
   before_validation do

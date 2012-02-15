@@ -10,21 +10,22 @@
       });
 
       self.button.click(self.backToTop);
-      self.window.debounce("scroll", self.toggleVisibility, 250);
+
+      var throttledScroll = _.throttle($.proxy(self.throttledScroll, self), 250);
+      self.window.scroll(throttledScroll);
     });
 
     this.backToTop = function(evt) {
       evt.preventDefault();
-
       self.body.animate({scrollTop: 0});
     };
 
     this.toggleVisibility = function() {
-      self.button.animate({
-        opacity: (self.body.scrollTop() > 1000)
-          ? 0.5
-          : 0
-      });
+      self.button[
+        (self.body.scrollTop() > 1000) ?
+          'addClass' :
+          'removeClass'
+      ]('visible')
     };
   };
 

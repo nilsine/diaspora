@@ -78,7 +78,7 @@ describe ConversationsController do
       end
 
       it 'sets the author to the current_user' do
-        @hash[:author] = Factory.create(:user)
+        @hash[:author] = Factory(:user)
         post :create, @hash
         Message.first.author.should == alice.person
         Conversation.first.author.should == alice.person
@@ -136,13 +136,19 @@ describe ConversationsController do
       }
       @conversation = Conversation.create(hash)
     end
-
+    
     it 'succeeds' do
-      get :show, :id => @conversation.id
+      get :show, :id => @conversation.id, :format => :js
       response.should be_success
       assigns[:conversation].should == @conversation
     end
 
+    it 'redirects to index' do
+      get :show, :id => @conversation.id
+      response.should redirect_to(conversations_path(:conversation_id => @conversation.id))
+      assigns[:conversation].should == @conversation
+    end
+    
     it 'does not let you access conversations where you are not a recipient' do
       sign_in :user, eve
 

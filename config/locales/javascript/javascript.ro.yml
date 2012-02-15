@@ -35,6 +35,8 @@ ro:
       hey: "Salutare, {{name}}!"
       no_tags: "Hopa, nu urmati nicio eticheta! Continuati si asa ?"
       preparing_your_stream: "Se pregateste fluxul personalizat pentru dvs..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "Nu mai sunt posturi."
     photo_uploader:
@@ -46,6 +48,28 @@ ro:
       duplicate: "E chiar asa de tare, hmm?  Ati mai raspandit o data aceasta publicatie!"
     search_for: "Caută {{name}}"
     show_more: "arată mai mult"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "Bine, presupun ca #{{tagName}} nu a fost chiar atat de interesant..."
     timeago:
@@ -61,11 +85,9 @@ ro:
       prefixFromNow: "in timp de"
       seconds: "mai putin de un minut"
       suffixAgo: ""
-      suffixFromNow: ""
+      suffixFromNow: "in urma"
       year: "un an"
       years: "%d ani"
     videos:
       unknown: "Format de video necunoscut"
       watch: "Vizualizează acest video pe {{provider}}"
-    web_sockets:
-      disconnected: "Websocket-ul e închis; posturile nu vor mai fi transmise în direct."

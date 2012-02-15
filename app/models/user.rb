@@ -2,14 +2,16 @@
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-require File.join(Rails.root, 'lib/diaspora/user')
 require File.join(Rails.root, 'lib/salmon/salmon')
 require File.join(Rails.root, 'lib/postzord/dispatcher')
 require 'rest-client'
 
 class User < ActiveRecord::Base
-  include Diaspora::UserModules
   include Encryptor::Private
+
+  include Connecting
+  include Querying
+  include SocialActions
 
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -30,21 +32,30 @@ class User < ActiveRecord::Base
   validates_associated :person
   validate :no_person_with_same_username
 
+  serialize :hidden_shareables, Hash
+
   has_one :person, :foreign_key => :owner_id
-  delegate :public_key, :posts, :photos, :owns?, :diaspora_handle, :name, :public_url, :profile, :first_name, :last_name, :to => :person
+  delegate :public_key, :posts, :photos, :owns?, :diaspora_handle, :name, :public_url, :profile, :first_name, :last_name, :participations, :to => :person
 
   has_many :invitations_from_me, :class_name => 'Invitation', :foreign_key => :sender_id
   has_many :invitations_to_me, :class_name => 'Invitation', :foreign_key => :recipient_id
   has_many :aspects, :order => 'order_id ASC'
   belongs_to  :auto_follow_back_aspect, :class_name => 'Aspect'
   has_many :aspect_memberships, :through => :aspects
+
   has_many :contacts
   has_many :contact_people, :through => :contacts, :source => :person
+
   has_many :services
+
   has_many :user_preferences
+
   has_many :tag_followings
   has_many :followed_tags, :through => :tag_followings, :source => :tag, :order => 'tags.name'
+
   has_many :blocks
+  has_many :ignored_people, :through => :blocks, :source => :person
+
   has_many :notifications, :foreign_key => :recipient_id
 
   has_many :authorizations, :class_name => 'OAuth2::Provider::Models::ActiveRecord::Authorization', :foreign_key => :resource_owner_id
@@ -71,18 +82,34 @@ class User < ActiveRecord::Base
     User.joins(:contacts).where(:contacts => {:person_id => person.id})
   end
 
+  def self.monthly_actives(start_day = Time.now)
+    logged_in_since(start_day - 1.month)
+  end
+
+  def self.yearly_actives(start_day = Time.now)
+    logged_in_since(start_day - 1.year)
+  end
+
+  def self.daily_actives(start_day = Time.now)
+    logged_in_since(start_day - 1.day)
+  end
+
+  def self.logged_in_since(time)
+    where('last_sign_in_at > ?', time)
+  end
+
   # @return [User]
   def self.find_by_invitation(invitation)
     service = invitation.service
     identifier = invitation.identifier
 
     if service == 'email'
-      existing_user = User.where(:email => identifier).first 
+      existing_user = User.where(:email => identifier).first
     else
       existing_user = User.joins(:services).where(:services => {:type => "Services::#{service.titleize}", :uid => identifier}).first
     end
-   
-   if existing_user.nil? 
+
+   if existing_user.nil?
     i = Invitation.where(:service => service, :identifier => identifier).first
     existing_user = i.recipient if i
    end
@@ -99,6 +126,55 @@ class User < ActiveRecord::Base
     end
   end
 
+  def hidden_shareables
+    self[:hidden_shareables] ||= {}
+  end
+
+  def add_hidden_shareable(key, share_id, opts={})
+    if self.hidden_shareables.has_key?(key)
+      self.hidden_shareables[key] << share_id
+    else
+      self.hidden_shareables[key] = [share_id]
+    end
+    self.save unless opts[:batch]
+    self.hidden_shareables
+  end
+
+  def remove_hidden_shareable(key, share_id)
+    if self.hidden_shareables.has_key?(key)
+      self.hidden_shareables[key].delete(share_id)
+    end
+  end
+
+  def is_shareable_hidden?(shareable)
+    shareable_type = shareable.class.base_class.name
+    if self.hidden_shareables.has_key?(shareable_type)
+      self.hidden_shareables[shareable_type].include?(shareable.id.to_s)
+    else
+      false
+    end
+  end
+
+  def toggle_hidden_shareable(share)
+    share_id = share.id.to_s
+    key = share.class.base_class.to_s
+    if self.hidden_shareables.has_key?(key) && self.hidden_shareables[key].include?(share_id)
+      self.remove_hidden_shareable(key, share_id)
+      self.save
+      false
+    else
+      self.add_hidden_shareable(key, share_id)
+      self.save
+      true
+    end
+  end
+
+  def has_hidden_shareables_of_type?(t = Post)
+    share_type = t.base_class.to_s
+    self.hidden_shareables[share_type].present?
+  end
+
+
   def self.create_from_invitation!(invitation)
     user = User.new
     user.generate_keys
@@ -113,7 +189,6 @@ class User < ActiveRecord::Base
     generate_reset_password_token! if should_generate_token?
     Resque.enqueue(Jobs::ResetPassword, self.id)
   end
-
 
   def update_user_preferences(pref_hash)
     if self.disable_mail
@@ -139,6 +214,10 @@ class User < ActiveRecord::Base
       username.strip!
       username.downcase!
     end
+  end
+
+  def disable_getting_started
+    self.update_attribute(:getting_started, false) if self.getting_started?
   end
 
   def set_current_language
@@ -172,24 +251,13 @@ class User < ActiveRecord::Base
   end
 
   ######### Aspects ######################
-
-  def move_contact(person, to_aspect, from_aspect)
-    return true if to_aspect == from_aspect
-    contact = contact_for(person)
-
-    add_contact_to_aspect(contact, to_aspect)
-
-    membership = contact ? AspectMembership.where(:contact_id => contact.id, :aspect_id => from_aspect.id).first : nil
-    return(membership && membership.destroy)
-  end
-
   def add_contact_to_aspect(contact, aspect)
     return true if AspectMembership.exists?(:contact_id => contact.id, :aspect_id => aspect.id)
     contact.aspect_memberships.create!(:aspect => aspect)
   end
 
   ######## Posting ########
-  def build_post(class_name, opts = {})
+  def build_post(class_name, opts={})
     opts[:author] = self.person
     opts[:diaspora_handle] = opts[:author].diaspora_handle
 
@@ -197,16 +265,14 @@ class User < ActiveRecord::Base
     model_class.diaspora_initialize(opts)
   end
 
-  def dispatch_post(post, opts = {})
-    additional_people = opts.delete(:additional_subscribers)
-    mailman = Postzord::Dispatcher.build(self, post, :additional_subscribers => additional_people)
-    mailman.post(opts)
+  def dispatch_post(post, opts={})
+    Postzord::Dispatcher.defer_build_and_post(self, post, opts)
   end
 
-  def update_post(post, post_hash = {})
+  def update_post(post, post_hash={})
     if self.owns? post
       post.update_attributes(post_hash)
-      Postzord::Dispatcher.build(self, post).post
+      self.dispatch_post(post)
     end
   end
 
@@ -218,8 +284,6 @@ class User < ActiveRecord::Base
 
   def add_to_streams(post, aspects_to_insert)
     inserted_aspect_ids = aspects_to_insert.map{|x| x.id}
-
-    Diaspora::Websocket.to(self, :aspect_ids => inserted_aspect_ids ).socket(post)
 
     aspects_to_insert.each do |aspect|
       aspect << post
@@ -236,23 +300,6 @@ class User < ActiveRecord::Base
 
   def salmon(post)
     Salmon::EncryptedSlap.create_by_user_and_activity(self, post.to_diaspora_xml)
-  end
-
-  def build_relayable(model, options = {})
-    r = model.new(options.merge(:author_id => self.person.id))
-    r.set_guid
-    r.initialize_signatures
-    r
-  end
-
-  ######## Commenting  ########
-  def build_comment(options = {})
-    build_relayable(Comment, options)
-  end
-
-  ######## Liking  ########
-  def build_like(options = {})
-    build_relayable(Like, options)
   end
 
   # Check whether the user has liked a post.
@@ -348,7 +395,7 @@ class User < ActiveRecord::Base
       self.invitation_token = nil
       self.password              = opts[:password]
       self.password_confirmation = opts[:password_confirmation]
-      
+
       self.save
       return unless self.errors.empty?
 
@@ -390,8 +437,12 @@ class User < ActiveRecord::Base
 
   def set_person(person)
     person.url = AppConfig[:pod_url]
-    person.diaspora_handle = "#{self.username}@#{AppConfig[:pod_uri].authority}"
+    person.diaspora_handle = "#{self.username}#{User.diaspora_id_host}"
     self.person = person
+  end
+
+  def self.diaspora_id_host
+    "@#{AppConfig.bare_pod_uri}"
   end
 
   def seed_aspects
@@ -407,39 +458,12 @@ class User < ActiveRecord::Base
     aq
   end
 
-
   def encryption_key
     OpenSSL::PKey::RSA.new(serialized_private_key)
   end
 
   def admin?
     AppConfig[:admins].present? && AppConfig[:admins].include?(self.username)
-  end
-
-  def remove_all_traces
-    disconnect_everyone
-    remove_mentions
-    remove_person
-  end
-
-  def remove_person
-    self.person.destroy
-  end
-
-  def disconnect_everyone
-    self.contacts.each do |contact|
-      if contact.person.remote?
-        self.disconnect(contact)
-      else
-        contact.person.owner.disconnected_by(self.person)
-        remove_contact(contact, :force => true)
-      end
-    end
-    self.aspects.destroy_all
-  end
-
-  def remove_mentions
-    Mention.where( :person_id => self.person.id).delete_all
   end
 
   def guard_unconfirmed_email
@@ -457,7 +481,6 @@ class User < ActiveRecord::Base
       i += 1
     end
   end
-
 
   # Generate public/private keys for User and associated Person
   def generate_keys
@@ -489,7 +512,7 @@ class User < ActiveRecord::Base
   end
 
   def no_person_with_same_username
-    diaspora_id = "#{self.username}@#{AppConfig[:pod_uri].host}"
+    diaspora_id = "#{self.username}#{User.diaspora_id_host}"
     if self.username_changed? && Person.exists?(:diaspora_handle => diaspora_id)
       errors[:base] << 'That username has already been taken'
     end

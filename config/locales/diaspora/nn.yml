@@ -106,7 +106,6 @@ nn:
         content: "Du kan kopla desse tenestene til Diaspora:"
         heading: "Kopla tenester"
       unfollow_tag: "Slutt å følgja #%{tag}"
-      your_aspects: "Aspekta dine"
     many: "%{count} aspekt"
     move_contact:
       error: "Klarte ikkje å flytta kontakten: %{inspect}"
@@ -513,6 +512,13 @@ nn:
       destroy: Sletta
       not_found: "Vi klarte dessverre ikkje å finna innlegget."
       permalink: permlenkje
+      photos_by:
+        few: "%{count} photos by %{author}"
+        many: "%{count} photos by %{author}"
+        one: "One photo by %{author}"
+        other: "%{count} photos by %{author}"
+        two: "Two photos by %{author}"
+        zero: "No photos by %{author}"
   previous: førre
   profile: Profil
   profiles:
@@ -710,6 +716,8 @@ nn:
       two: "Show two more comments"
       zero: "No more comments"
   streams:
+    aspects:
+      title: "Your Aspects"
     mentions:
       title: "@Nemningar"
     tags:
@@ -748,10 +756,13 @@ nn:
       email_not_confirmed: "Klarte ikkje å slå på bruk av e-post. Feil lenkje?"
     edit:
       also_commented: "… nokon òg kommenterer kontakten din sitt innlegg?"
+      auto_follow_back: "Automatically follow back if a someone follows you"
       change: Endra
       change_email: "Endra e-posten"
       change_language: "Endra språket"
       change_password: "Skift passord"
+      close_account:
+        what_we_delete: "We delete all of your posts, profile data, as soon as humanly possible. Your comments will hang around, but be associated with your Diaspora Handle."
       comment_on_post: "… nokon kommenterer innlegget ditt?"
       current_password: "Gjeldande passord"
       download_photos: "last ned bileta mine"

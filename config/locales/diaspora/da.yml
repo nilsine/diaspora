@@ -101,7 +101,7 @@ da:
         content_1: "Dit Diaspora ID er:"
         content_2: "Giv det til hvem som helst og de vil kunne finde dig på Diaspora."
       donate: Donér
-      handle_explanation: "Dette er din Diaspora ID. Som med en e-mail-adresse, kan du give denne til folk, så de kan kontakte dig."
+      handle_explanation: "Dette er dit Diaspora ID. Som med en e-mail-adresse, kan du give denne til folk, så de kan kontakte dig."
       help:
         do_you: "Har du:"
         email_feedback: "%{link} din tilbagemelding, hvis du foretrækker det"
@@ -110,7 +110,6 @@ da:
         have_a_question: "... har du et %{link}?"
         here_to_help: "Diaspora samfundet er her!"
         need_help: "Brug for hjælp?"
-        satisfaction: "%{link}: Samfunds-drevet support"
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Samfundsdrevne selvinstruktioner, vejledninger og nyheder"
       introduce_yourself: "Dette er din strøm. Hop ud i det og introducér dig selv."
       keep_us_running: "Hold %{pod} kørende hurtigt og køb serverne deres kaffe fix med en månedlig donation!"
@@ -127,7 +126,6 @@ da:
         heading: "Tilslut tjenester"
       unfollow_tag: "Hold op med at følge #%{tag}"
       welcome_to_diaspora: "Velkommen til Diaspora %{name}!"
-      your_aspects: "Dine aspekter"
     many: "%{count} aspekter"
     move_contact:
       error: "Kunne ikke flytte kontaktperson: %{inspect}"
@@ -197,8 +195,8 @@ da:
     index:
       add_a_new_aspect: "Tilføj nyt aspekt"
       add_to_aspect: "Tilføj kontaktpersoner til %{name}"
+      add_to_aspect_link: "tilføj kontakter til %{name}"
       all_contacts: "Alle kontakter"
-      check_out: Tjek
       many_people_are_you_sure: "Er du sikker på du vil starte en privat samtale med mere end %{suggested_limit} kontakter? Et indlæg til dette aspekt kan være en bedre måde at kontakte dem."
       my_contacts: "Mine kontakter"
       no_contacts: "Det ser ud til at du bliver nødt til at tilføje nogle kontakter!"
@@ -293,6 +291,7 @@ da:
     new:
       already_invited: "Følgende personer har ikke accepteret din invitation:"
       aspect: Aspekt
+      check_out_diaspora: "Check Diaspora ud!"
       comma_seperated_plz: "Du kan indtaste flere e-mailadresser adskilt med komma."
       if_they_accept_info: "hvis de accepterer, vil de blive tilføjet til det aspekt du inviterede dem til."
       invite_someone_to_join: "Invitér en person til Diaspora!"
@@ -303,6 +302,7 @@ da:
       to: Til
   layouts:
     application:
+      back_to_top: "Tilbage til toppen"
       public_feed: "Offentligt Diaspora nyheds feed for  %{name}"
       toggle: "skift mobil side"
       whats_new: "Hvad er nyt?"
@@ -325,12 +325,12 @@ da:
         two: "%{count} synes ikke om"
         zero: "ingen synes ikke om"
       people_like_this:
-        few: "%{count} synes om"
-        many: "%{count} synes om"
-        one: "Én synes om"
-        other: "%{count} synes om"
-        two: "%{count} synes om"
-        zero: "ingen synes om"
+        few: "%{count} likes"
+        many: "%{count} likes"
+        one: "%{count} like"
+        other: "%{count} likes"
+        two: "%{count} likes"
+        zero: "no likes"
       people_like_this_comment:
         few: "%{count} synes om"
         many: "%{count} synes om"
@@ -565,6 +565,14 @@ da:
     show:
       destroy: Slet
       not_found: "Vi kunne desværre ikke finde dette indlæg."
+      photos_by:
+        few: "%{count} billeder af %{author}"
+        many: "%{count} billeder af %{author}"
+        one: "Et billede af %{author}"
+        other: "%{count} billeder af %{author}"
+        two: "To billeder af %{author}"
+        zero: "Ingen billeder af %{author}"
+      reshare_by: "Videredelt af %{author}"
   previous: Forrige
   privacy: Privatindstillinger
   privacy_policy: "Behandling af personlige oplysninger"
@@ -755,11 +763,9 @@ da:
       hide_and_mute: "Skjul indlægget og dets kommentarer"
       ignore_user: "Ignorer %{name}"
       ignore_user_description: "Ignorer og fjern bruger fra alle aspekter?"
-      like: "Synes om"
       nsfw: "Dette indlæg er markeret af forfatteren som 'uegnet til arbejdsvisning'. %{link}"
       shared_with: "Delt med: %{aspect_names}"
       show: vis
-      unlike: "Synes ikke om"
       viewable_to_anyone: "Dette indlæg er synlig for alle på internettet"
   status_messages:
     create:
@@ -793,7 +799,6 @@ da:
     comment_stream:
       contacts_title: "Brugere, hvis indlæg du har kommenteret"
       title: "Kommenterede indlæg"
-    commented_on: kommenteret
     community_spotlight_stream: "Kreative medlemmer"
     followed_tag:
       add_a_tag: "Tilføj et tag"
@@ -809,13 +814,11 @@ da:
       contacts_title: "Personer der har nævnt dig"
       title: "Dine omtaler"
     multi:
-      contacts_title: "Personer i din Strøm"
-      title: Strøm
-    posted: indsendt
+      contacts_title: "Personer i din Udforskningsstrøm"
+      title: Udforsk
     public:
       contacts_title: "Seneste indlæg"
       title: "Offentlig Aktivitet"
-    recently: "for nylig:"
     tags:
       contacts_title: "Folk der følger disse tags"
       tag_prefill_text: "Jeg synes at %{tag_name} er... "
@@ -862,6 +865,8 @@ da:
       wrong_password: "Det indtastede kodeord stemmer ikke overens med dit nuværende kodeord."
     edit:
       also_commented: "...nogen har kommenteret på en af dine kontakters indlæg?"
+      auto_follow_aspect: "Aspekt for brugere du automatisk følger:"
+      auto_follow_back: "Følg automatisk brugere der følger dig"
       change: Skift
       change_email: "Skift e-mail"
       change_language: "Skift sprog"
@@ -871,7 +876,7 @@ da:
         if_you_want_this: "Hvis du virkelig ønsker dette, indtast da dit kodeord og klik på 'Luk konto'"
         lock_username: "Dette vil låse dit brugernavn til hvis du beslutter at oprettes igen."
         locked_out: "Du vil blive logget ud og låst ude af din konto."
-        what_we_delete: "Vi sletter alle dine indlæg og profildata, så hurtigt som overhovedet muligt. Dine kommentarer vil forblive, men være forbundet til dit Diaspora handle."
+        what_we_delete: "Vi sletter alle dine indlæg og profildata, så hurtigt som overhovedet muligt. Dine kommentarer vil forblive, men være forbundet til dit Diaspora ID."
       close_account_text: "Luk konto"
       comment_on_post: "...nogen har kommenteret dit indlæg?"
       current_password: "Nuværende adgangskode"
