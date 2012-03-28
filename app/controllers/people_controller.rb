@@ -5,7 +5,7 @@
 require File.join(Rails.root, "lib", 'stream', "person")
 
 class PeopleController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!, :except => [:show, :last_post]
   before_filter :redirect_if_tag_search, :only => [:index]
 
   respond_to :html, :except => [:tag_index]
@@ -34,13 +34,30 @@ class PeopleController < ApplicationController
         #only do it if it is an email address
         if diaspora_id?(search_query)
           @people =  Person.where(:diaspora_handle => search_query.downcase)
-          Webfinger.in_background(search_query) if @people.empty?
+          if @people.empty?
+            Webfinger.in_background(search_query) 
+            @background_query = search_query.downcase
+          end
         end
         @people = @people.paginate(:page => params[:page], :per_page => 15)
         @hashes = hashes_for_people(@people, @aspects)
       end
     end
   end
+
+  def refresh_search
+    @aspect = :search
+    @people =  Person.where(:diaspora_handle => search_query.downcase)
+    @answer_html = ""
+    unless @people.empty?
+      @hashes = hashes_for_people(@people, @aspects)
+
+      self.formats = self.formats + [:html]
+      @answer_html = render_to_string :partial => 'people/person', :locals => @hashes.first
+    end
+    render :json => { :search_count => @people.count, :search_html => @answer_html }.to_json
+  end
+
 
   def tag_index
     profiles = Profile.tagged_with(params[:name]).where(:searchable => true).select('profiles.id, profiles.person_id')
@@ -106,6 +123,12 @@ class PeopleController < ApplicationController
       format.all { respond_with @person, :locals => {:post_type => :all} }
       format.json{ render_for_api :backbone, :json => @stream.stream_posts, :root => :posts }
     end
+  end
+
+  def last_post
+    @person = Person.find_from_guid_or_username(params)
+    last_post = Post.visible_from_author(@person, current_user).order('posts.created_at DESC').first
+    redirect_to post_path(last_post)
   end
 
   def retrieve_remote

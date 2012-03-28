@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -70,10 +70,10 @@ en_shaw:
       minutes: "%d 𐑥𐑦𐑯𐑩𐑑𐑕"
       month: "𐑩𐑚𐑬𐑑 𐑩 𐑥𐑳𐑯𐑔"
       months: "%d 𐑥𐑳𐑯𐑔𐑕"
-      prefixAgo: 𐑩𐑜𐑴
+      prefixAgo: "𐑩𐑜𐑴"
       prefixFromNow: "𐑓𐑮𐑪𐑥 𐑯𐑬"
       seconds: "𐑤𐑧𐑕 𐑞𐑨𐑯 𐑩 𐑥𐑦𐑯𐑩𐑑"
-      suffixAgo: 𐑩𐑜𐑴
+      suffixAgo: "𐑩𐑜𐑴"
       suffixFromNow: "𐑓𐑮𐑪𐑥 𐑯𐑬"
       year: "𐑩𐑚𐑬𐑑 𐑩 𐑘𐑽"
       years: "%d 𐑘𐑽𐑟"

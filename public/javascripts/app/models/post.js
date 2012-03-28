@@ -1,9 +1,15 @@
 app.models.Post = Backbone.Model.extend({
   urlRoot : "/posts",
+
   initialize : function() {
-    this.comments = new app.collections.Comments(this.get("last_three_comments"), {post : this});
-    this.likes = new app.collections.Likes([], {post : this}); // load in the user like initially
-    this.participations = new app.collections.Participations([], {post : this}); // load in the user like initially
+    this.setupCollections();
+    this.bind("change", this.setupCollections, this)
+  },
+
+  setupCollections: function() {
+    this.comments = new app.collections.Comments(this.get("comments") || this.get("last_three_comments"), {post : this});
+    this.likes = this.likes || new app.collections.Likes([], {post : this}); // load in the user like initially
+    this.participations = this.participations || new app.collections.Participations([], {post : this}); // load in the user like initially
   },
 
   createdAt : function() {
@@ -15,7 +21,7 @@ app.models.Post = Backbone.Model.extend({
   },
 
   timeOf: function(field) {
-    return new Date(this.get(field)) /1000;
+    return app.helpers.dateFormatter.parse(this.get(field)) / 1000;
   },
 
   createReshareUrl : "/reshares",
@@ -38,15 +44,22 @@ app.models.Post = Backbone.Model.extend({
   },
 
   follow : function() {
-    this.set({ user_participation : this.participations.create() });
+    var self = this;
+    this.participations.create({}, {success : function(resp){
+      self.set(resp)
+      self.trigger('interacted', self)
+    }});
   },
 
   unfollow : function() {
+    var self = this;
     var participationModel = new app.models.Participation(this.get("user_participation"));
     participationModel.url = this.participations.url + "/" + participationModel.id;
 
-    participationModel.destroy();
-    this.set({ user_participation : null });
+    participationModel.destroy({success : function(model, resp){
+      self.set(resp);
+      self.trigger('interacted', this)
+    }});
   },
 
   toggleLike : function() {
@@ -59,14 +72,37 @@ app.models.Post = Backbone.Model.extend({
   },
 
   like : function() {
-    this.set({ user_like : this.likes.create() });
+    var self = this;
+    this.likes.create({}, {success : function(resp){
+      self.set(resp)
+      self.trigger('interacted', self)
+    }});
+
   },
 
   unlike : function() {
+    var self = this;
     var likeModel = new app.models.Like(this.get("user_like"));
     likeModel.url = this.likes.url + "/" + likeModel.id;
 
-    likeModel.destroy();
-    this.set({ user_like : null });
+    likeModel.destroy({success : function(model, resp) {
+      self.set(resp);
+      self.trigger('interacted', this)
+    }});
   }
+}, {
+
+  frameMoods : [
+    "Day"
+  ],
+
+  legacyTemplateNames : [
+    "status-with-photo-backdrop",
+    "note",
+    "rich-media",
+    "multi-photo",
+    "photo-backdrop",
+    "activity-streams-photo",
+    "status"
+  ]
 });

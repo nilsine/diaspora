@@ -16,15 +16,18 @@ app.views.Stream = Backbone.View.extend({
 
   setupEvents : function(){
     this.stream.bind("fetched", this.removeLoader, this)
+    this.stream.bind("fetched", this.postRender, this)
     this.stream.bind("allPostsLoaded", this.unbindInfScroll, this)
     this.collection.bind("add", this.addPost, this);
-    app.user().bind("nsfwChanged", function() {
-        _.map(this.postViews, function(view){ view.render() })
-      }, this)
+    if(window.app.user()) {
+      app.user().bind("nsfwChanged", function() {
+          _.map(this.postViews, function(view){ view.render() })
+        }, this)
+    }
   },
 
   addPost : function(post) {
-    var postView = new app.views.Post({ model: post });
+    var postView = new app.views.StreamPost({ model: post });
 
     $(this.el)[
       (this.collection.at(0).id == post.id)
@@ -51,6 +54,35 @@ app.views.Stream = Backbone.View.extend({
     return this;
   },
 
+  postRender : function() {
+    // collapse long posts
+    var collHeight = 420,
+        collElem = $(this.el).find(".collapsible");
+
+    _.each(collElem, function(elem) {
+      var elem = $(elem),
+          oembed = elem.find(".oembed"),
+          addHeight = 0;
+
+      if( $.trim(oembed.html()) != "" ) {
+        addHeight = oembed.height();
+      }
+
+      // only collapse if height exceeds collHeight+20%
+      if( elem.height() > ((collHeight*1.2)+addHeight) && !elem.is(".opened") ) {
+        elem.data("orig-height", elem.height() );
+        elem
+          .height( Math.max(collHeight, addHeight) )
+          .addClass("collapsed")
+          .append(
+            $('<div />')
+              .addClass('expander')
+              .text( Diaspora.I18n.t("show_more") )
+          );
+      }
+    });
+  },
+  
   appendLoader: function(){
     $("#paginate").html($("<img>", {
       src : "/images/static-loader.png",

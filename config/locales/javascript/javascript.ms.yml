@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -74,7 +74,7 @@ ms:
     tags:
       wasnt_that_interesting: "OK, saya mengandaikan # {{tagName}} tidak semua yang menarik..."
     timeago:
-      day: sehari
+      day: "sehari"
       days: "%d hari"
       hour: "kira-kira sejam"
       hours: "kira-kira %d jam"
@@ -85,7 +85,7 @@ ms:
       prefixAgo: "javascripts:timeago:prefixAgo"
       prefixFromNow: "javascripts:timeago:prefixFromNow"
       seconds: "kurang daripada satu minit"
-      suffixAgo: lalu
+      suffixAgo: "lalu"
       suffixFromNow: "dari sekarang"
       year: "kira-kira setahun"
       years: "%d tahun"

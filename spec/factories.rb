@@ -7,7 +7,7 @@
 # http://railscasts.com/episodes/158-factories-not-fixtures
 
 def r_str
-  ActiveSupport::SecureRandom.hex(3)
+  SecureRandom.hex(3)
 end
 
 FactoryGirl.define do
@@ -100,7 +100,7 @@ FactoryGirl.define do
   end
 
   factory(:photo) do
-    sequence(:random_string) {|n| ActiveSupport::SecureRandom.hex(10) }
+    sequence(:random_string) {|n| SecureRandom.hex(10) }
     association :author, :factory => :person
     after_build do |p|
       p.unprocessed_image.store! File.open(File.join(File.dirname(__FILE__), 'fixtures', 'button.png'))
@@ -128,6 +128,12 @@ FactoryGirl.define do
     after_build do |i|
       i.aspect = i.sender.aspects.first
     end
+  end
+
+  factory :invitation_code do
+    sequence(:token){|n| "sdfsdsf#{n}"}
+    association :user
+    count 0
   end
 
   factory :service do |service|
@@ -197,6 +203,11 @@ FactoryGirl.define do
     name "partytimeexcellent"
   end
 
+  factory(:o_embed_cache) do
+    url "http://youtube.com/kittens"
+    data {{'data' => 'foo'}}
+  end
+
   factory(:tag_following) do
     association(:tag, :factory => :tag)
     association(:user, :factory => :user)
@@ -211,4 +222,27 @@ FactoryGirl.define do
     association(:person, :factory => :person)
     association(:post, :factory => :status_message)
   end
+
+  #templates
+  factory(:multi_photo, :parent => :status_message_with_photo) do
+    after_build do |sm|
+      2.times{ Factory(:photo, :author => sm.author, :status_message => sm, :pending => false, :public => public)}
+    end
+  end
+
+  factory(:status_with_photo_backdrop, :parent => :status_message_with_photo)
+
+  factory(:photo_backdrop, :parent => :status_message_with_photo) do
+    text ""
+  end
+
+  factory(:note, :parent => :status_message) do
+    text SecureRandom.hex(1000)
+  end
+
+  factory(:rich_media, :parent => :status_message) do
+    association(:o_embed_cache)
+  end
+
+  factory(:status, :parent => :status_message)
 end

@@ -29,81 +29,12 @@ describe("app.views.Stream", function() {
   describe("#render", function() {
     beforeEach(function() {
       this.statusMessage = this.stream.posts.models[0];
-      this.reshare = this.stream.posts.models[1];
-      this.statusElement = $(this.view.$("#" + this.statusMessage.get("guid")));
-      this.reshareElement = $(this.view.$("#" + this.reshare.get("guid")));
+      this.statusElement = $(this.view.$(".stream_element")[0]);
     });
 
     context("when rendering a status message", function() {
       it("shows the message in the content area", function() {
         expect(this.statusElement.find(".post-content p").text()).toContain("LONG POST"); //markdown'ed
-      });
-    });
-  });
-
-  describe('clicking read more', function() {
-    var readMoreLink;
-
-    beforeEach(function() {
-      this.statusMessage = this.stream.posts.models[0];
-      this.statusElement = $(this.view.$("#" + this.statusMessage.get("guid")));
-      readMoreLink = this.statusElement.find('.read-more a');
-      readMoreLink.text("read more");
-    });
-
-    it('expands the post', function() {
-      expect(this.statusElement.find('.collapsible .details').attr('style')).toContain('display: none;');
-      readMoreLink.click();
-      expect(this.statusElement.find('.collapsible .details').attr('style')).not.toContain('display: none;');
-    });
-
-    describe('differences between firefox and webkit/IE', function() {
-      // Firefox creates 2 divs - one with the summary and one with the whole post.
-      //   It hides the summary and shows the whole post when you click show more. Works great!
-      // Webkit and IE also create 2 divs, but they split the post - the 1st has the summary and the 2nd has the rest
-      //   of the post. When you click read more, it just shows the 2nd div. This leaves whitespace in odd places.
-      //   So there's a callback that this is testing, that fixes the whitespace on webkit & IE.
-      var weAreOnFirefox;
-
-      beforeEach(function() {
-        weAreOnFirefox = this.statusElement.find('.collapsible .summary').length > 0;
-      });
-
-      it('removes the read-more div on webkit/IE but leaves it on firefox', function() {
-        expect(this.statusElement.find('.read-more').length).toEqual(1);
-        readMoreLink.click();
-        if (weAreOnFirefox === true) {
-          expect(this.statusElement.find('.read-more').length).toEqual(1);
-        } else {
-          expect(this.statusElement.find('.read-more').length).toEqual(0);
-        }
-      });
-
-      it('collapses p elements on webkit/IE but leaves them alone on firefox', function() {
-        expect(this.statusElement.find('.collapsible p').length).toEqual(2);
-        readMoreLink.click();
-        if (weAreOnFirefox === true) {
-          expect(this.statusElement.find('.collapsible p').length).toEqual(2);
-        } else {
-          expect(this.statusElement.find('.collapsible p').length).toEqual(1);
-        }
-      });
-
-      it('collapses li elements on webkit/IE but leaves them alone on firefox', function() {
-        this.statusMessage = this.stream.posts.models[3];
-        this.statusElement = $(this.view.$("#" + this.statusMessage.get("guid")));
-        readMoreLink = this.statusElement.find('.read-more a');
-        readMoreLink.text("read more");
-
-        if (weAreOnFirefox === true) {
-          expect(this.statusElement.find('.collapsible li').length).toEqual(12);
-          readMoreLink.click();
-          expect(this.statusElement.find('.collapsible li').length).toEqual(12);
-        } else {
-          expect(this.statusElement.find('.collapsible li').length).toEqual(9);
-          readMoreLink.click();
-          expect(this.statusElement.find('.collapsible li').length).toEqual(8);
-        }
       });
     });
   });

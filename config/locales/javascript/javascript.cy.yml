@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -70,14 +70,16 @@ cy:
     tags:
       wasnt_that_interesting: "OK, mae'n debyg nid yw #{{tagName}} yn ddiddorol iawn..."
     timeago:
-      day: diwrnod
+      day: "diwrnod"
       days: "%d diwrnod"
-      hour: awr
+      hour: "awr"
       hours: "%d awr"
       minute: "tua funud"
       minutes: "%d munud"
-      month: mis
+      month: "mis"
       months: "%d mis"
+      prefixAgo: ""
+      prefixFromNow: ""
       seconds: "rhai na munud"
       suffixAgo: "yn ôl"
       suffixFromNow: "o hŷd"

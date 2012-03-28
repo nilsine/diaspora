@@ -15,12 +15,16 @@ var Publisher = {
     return Publisher.cachedInput = Publisher.cachedInput || Publisher.form().find('#status_message_fake_text');
   },
 
+  wrapper: function(){
+    return Publisher.cachedWrapper = Publisher.cachedWrapper || Publisher.form().find('#publisher_textarea_wrapper');
+  },
+
   hiddenInput: function(){
     return Publisher.cachedHiddenInput= Publisher.cachedHiddenInput || Publisher.form().find('#status_message_text');
   },
 
   submit: function(){
-    return Publisher.cachedSubmit = Publisher.cachedSubmit || Publisher.form().find('#status_message_submit');
+    return Publisher.cachedSubmit = Publisher.cachedSubmit || Publisher.form().find("input[type='submit']");
   },
 
   determineSubmitAvailability: function(){
@@ -28,8 +32,8 @@ var Publisher = {
         isSubmitDisabled = Publisher.submit().attr('disabled'),
         isPhotoAttached = ($("#photodropzone").children().length > 0);
 
-    if ((onlyWhitespaces &&  !isPhotoAttached) && !isSubmitDisabled) {
-      Publisher.submit().attr('disabled', true);
+    if ((onlyWhitespaces && !isPhotoAttached) && !isSubmitDisabled) {
+      Publisher.submit().attr('disabled', 'disabled');
     } else if ((!onlyWhitespaces || isPhotoAttached) && isSubmitDisabled) {
       Publisher.submit().removeAttr('disabled');
     }
@@ -37,10 +41,10 @@ var Publisher = {
 
   clear: function(){
     $("#photodropzone").find('li').remove();
-    Publisher.input()
-      .removeClass("with_attachments")
-      .css('paddingBottom', '')
-      .mentionsInput("reset");
+    Publisher.input().mentionsInput("reset");
+    Publisher.wrapper().removeClass("with_attachments");
+    Publisher.hiddenInput().val('');
+    Publisher.determineSubmitAvailability()
   },
 
   bindServiceIcons: function(){
@@ -195,14 +199,6 @@ var Publisher = {
 
     Publisher.bindServiceIcons();
     Publisher.bindAspectToggles();
-
-    /* close text area */
-    Publisher.form().delegate("#hide_publisher", "click", function(){
-      $.each(Publisher.form().find("textarea"), function(idx, element){
-        $(element).val("");
-      });
-      Publisher.close();
-    });
 
     Mentions.initialize(Publisher.input());
 

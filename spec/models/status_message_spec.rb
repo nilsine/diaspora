@@ -199,6 +199,14 @@ STR
         @sm.create_mentions
         @sm.mentions(true).map{|m| m.person}.to_set.should == @people.to_set
       end
+
+      it 'does not barf if it gets called twice' do
+        @sm.create_mentions
+
+        expect{
+          @sm.create_mentions
+        }.should_not raise_error
+      end
     end
     describe '#mentioned_people' do
       it 'calls create_mentions if there are no mentions in the db' do
@@ -287,13 +295,6 @@ STR
         @marshalled.diaspora_handle.should == @message.diaspora_handle
       end
     end
-
-
-    describe '#to_activity' do
-      it 'should render a string' do
-        @message.to_activity.should_not be_blank
-      end
-    end
   end
 
   describe '#after_dispatch' do
@@ -319,19 +320,24 @@ STR
     end
   end
 
-  describe '#contains_url_in_text?' do
-    it 'returns an array of all urls found in the raw message' do
-      sm = Factory(:status_message, :text => 'http://youtube.com is so cool.  so is https://joindiaspora.com')
-      sm.contains_oembed_url_in_text?.should_not be_nil
-      sm.oembed_url.should == 'http://youtube.com'
-    end
-  end
-
   describe 'oembed' do
+    before do
+      @youtube_url = "https://www.youtube.com/watch?v=3PtFwlKfvHI"
+      @message_text = "#{@youtube_url} is so cool. so is this link -> https://joindiaspora.com"
+    end
+
     it 'should queue a GatherOembedData if it includes a link' do
-      sm = Factory.build(:status_message, :text => 'http://youtube.com is so cool.  so is https://joindiaspora.com')
+      sm = Factory.build(:status_message, :text => @message_text)
       Resque.should_receive(:enqueue).with(Jobs::GatherOEmbedData, instance_of(Fixnum), instance_of(String))
       sm.save
+    end
+
+    describe '#contains_oembed_url_in_text?' do
+      it 'returns the oembed urls found in the raw message' do
+        sm = Factory(:status_message, :text => @message_text)
+        sm.contains_oembed_url_in_text?.should_not be_nil
+        sm.oembed_url.should == @youtube_url
+      end
     end
   end
 end

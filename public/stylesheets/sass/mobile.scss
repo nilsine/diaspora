@@ -105,6 +105,15 @@ body {
     top: 1px solid #ccc; };
 }
 
+.login_error,
+.login_alert {
+  color: rgb(208, 49, 43);
+  text-shadow: 1px 1px 20px rgb(208, 49, 43); }
+
+.login_notice {
+  color: rgb(10, 150, 10);
+  text-shadow: 1px 1px 20px rgb(126, 240, 77); }
+
 #login_form {
   padding: 0;
 
@@ -275,6 +284,38 @@ body {
     bottom: 1px solid #222;
   }
 }
+
+#nav_badges {
+  display: inline-block;
+  margin-top: 2px; }
+  #nav_badges a:hover {
+    text-decoration: none; }
+  #nav_badges .badge {
+    position: relative;
+    top: -12px;
+    display: inline;
+    margin: 0 2px;
+    padding: 8px 3px;
+      padding-bottom: 9px;
+    font-weight: bold;
+    font-size: smaller;
+    width: 28px; }
+    #nav_badges .badge:hover .badge_count {
+      background-color: #bd0902; }
+
+.badge_count {
+  -moz-border-radius: 2px 2px 2px 2px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
+  z-index: 3;
+  position: absolute;
+  top: -2px;
+  left: 13px;
+  padding: 0 2px;
+    padding-bottom: 1px;
+  background-color: #a40802;
+  line-height: 12px;
+  color: white; }
 
 #header_title {
   position: relative;
@@ -569,9 +610,41 @@ select {
 
 .navbar-fixed-top {
   position: fixed !important;
-
   max-height: 45px !important;
   min-height: 45px !important;
   height: 45px !important;
   overflow: hidden;
 }
+
+.notifications {
+  list-style: none;
+}
+
+.notification_day_header {
+  margin-bottom: 5px;
+}
+
+#header-nav {
+    font-weight: bold;
+    height: 100%;
+    margin-right: 5px;
+    margin-top: 3px;
+display: inline-block;	
+}
+
+#header-nav a {
+    padding: 0 10px;
+    width: 100%;
+    color: #939393;
+}
+
+#header-nav > div {
+  display: inline;
+    font-weight: bold;
+    margin: 0 2px;
+    padding: 8px 3px 9px;
+    position: relative;
+    top: -15px;
+    width: 28px;
+}
+

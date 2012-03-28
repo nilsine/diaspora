@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -11,8 +11,8 @@ hu:
       all_aspects: "Összes csoport"
       error: "Nem indult el a megosztás vele: <%= name %>. Visszavonod?"
       select_aspects: "Csoportok kiválasztása"
-      started_sharing_with: "Mostantól megosztassz vele: <%= name %>!"
-      stopped_sharing_with: "Nem osztassz meg többé vele: <%= name %>."
+      started_sharing_with: "Mostantól megosztasz vele: <%= name %>!"
+      stopped_sharing_with: "Nem osztasz meg többé vele: <%= name %>."
       toggle:
         few: "<%= count %> csoportban"
         many: "<%= count %> csoportban"
@@ -28,8 +28,8 @@ hu:
       hide: "hozzászólások elrejtése"
       show: "összes hozzászólás"
     confirm_dialog: "Biztos vagy benne?"
-    delete: Töröl
-    failed_to_like: Hiba
+    delete: "Töröl"
+    failed_to_like: "Hiba"
     failed_to_post_message: "Üzenet elküldése sikertelen!"
     getting_started:
       alright_ill_wait: "Rendben, várok!"
@@ -37,20 +37,25 @@ hu:
       no_tags: "Hékás, nem követtél egy #címkét sem! Így is folytatod?"
       preparing_your_stream: "Személyre szabott hírfolyamod előkészítése..."
     header:
-      contacts: Ismerősök
-      home: Kezdőlap
-      log_out: Kijelentkezés
+      admin: "Adminisztráció"
+      contacts: "Ismerősök"
+      home: "Kezdőlap"
+      log_out: "Kijelentkezés"
       mark_all_as_read: "Összes olvasottnak jelölése"
-      messages: Üzenetek
-      notifications: Értesítések
-      profile: Profil
+      messages: "Üzenetek"
+      notifications: "Értesítések"
+      profile: "Profil"
       recent_notifications: "Friss értesítések"
-      search: "Ismerős vagy #címke keresése"
-      settings: Beállítások
-      view_all: Összes
-    ignore: Elutasít
+      search: "Keresés"
+      settings: "Beállítások"
+      view_all: "Összes"
+    ignore: "Elutasít"
     infinite_scroll:
       no_more: "Nincs több bejegyzés."
+    my_activity: "Tevékenységeim"
+    my_stream: "Hírfolyam"
+    people:
+      not_found: "és nem találni senkit..."
     photo_uploader:
       looking_good: "Azta! Remekül nézek ki!"
     publisher:
@@ -60,11 +65,13 @@ hu:
     reshares:
       duplicate: "Jó mi? De már egyszer megosztottad ezt a bejegyzést!"
     search_for: "<%= name %> keresése."
-    show_more: tovább
+    show_more: "tovább"
     stream:
-      comment: Hozzászólás
-      hide: Elrejt
-      like: Tetszik
+      comment: "Hozzászólás"
+      follow: "Követem"
+      hide: "Elrejt"
+      hide_nsfw_posts: "#nsfw bejegyzések rejtése"
+      like: "Tetszik"
       likes:
         few: "<%= count %> kedveli"
         many: "<%= count %> kedveli"
@@ -72,7 +79,7 @@ hu:
         other: "<%= count %> kedveli"
         two: "<%= count %> kedveli"
         zero: "<%= count %> kedveli"
-      limited: Korlátozott
+      limited: "Korlátozott"
       more_comments:
         few: "Mutasd a többi <%= count %> hozzászólást"
         many: "Mutasd a további <%= count %> hozzászólást"
@@ -81,8 +88,8 @@ hu:
         two: "Mutasd a többi <%= count %> hozzászólást"
         zero: "Mutasd a többi <%= count %> hozzászólást"
       original_post_deleted: "Eredeti bejegyzés törölve a szerzője által."
-      public: Publikus
-      reshare: Megosztás
+      public: "Publikus"
+      reshare: "Megosztás"
       reshares:
         few: "<%= count %> megosztás"
         many: "<%= count %> megosztás"
@@ -90,6 +97,9 @@ hu:
         other: "<%= count %> megosztás"
         two: "<%= count %> megosztás"
         zero: "<%= count %> megosztás"
+      show_nsfw_post: "Bejegyzés megjelenítése"
+      show_nsfw_posts: "Összes megjelenítése"
+      unfollow: "Nem követem"
       unlike: "Nem tetszik"
     tags:
       wasnt_that_interesting: "Oké, azt hiszem a #<%= tagName %> nem volt annyira érdekes."
@@ -102,11 +112,21 @@ hu:
       minutes: "%d perccel"
       month: "körülbelül egy hónappal"
       months: "%d hónappal"
+      prefixAgo: ""
+      prefixFromNow: ""
       seconds: "kevesebb mint egy perccel"
-      suffixAgo: ezelőtt
-      suffixFromNow: mostantól
+      suffixAgo: "ezelőtt"
+      suffixFromNow: "mostantól"
       year: "körülbelül egy évvel"
       years: "%d évvel"
     videos:
       unknown: "Ismeretlen videó tipus"
       watch: "Videó megtekintése itt: <%= provider %>"
+    viewer:
+      comment: "Hozzászólás"
+      follow_post: "Követem"
+      like: "Tetszik"
+      reshare: "Megosztás"
+      reshared: "Megosztva"
+      stop_following_post: "Nem követem többé"
+      unlike: "Nem tetszik"

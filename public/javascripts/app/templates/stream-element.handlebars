@@ -2,7 +2,7 @@
 
   {{#if current_user}}
     <div class="controls">
-      {{#if authorIsCurrentUser}}
+      {{#unless authorIsCurrentUser}}
         <a href="#" rel=nofollow>
           <img src="{{imageUrl "/images/icons/ignoreuser.png"}}"" alt="Ignoreuser" class="block_user control_icon" title="{{t "ignore"}}" />
         </a>
@@ -13,13 +13,13 @@
         <a href="#" rel=nofollow>
           <img src="{{imageUrl "/images/deletelabel.png"}}" class="delete control_icon remove_post" title="{{t "delete"}}" />
         </a>
-      {{/if}}
+      {{/unless}}
     </div>
   {{/if}}
 
   {{#with author}}
     <a href="/people/{{guid}}" class="img">
-      <img src="{{avatar.small}}" class="avatar" />
+      {{{personImage this}}}
     </a>
   {{/with}}
 

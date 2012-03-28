@@ -343,12 +343,17 @@ ul.as-selections
       :bottom 1px solid #ddd
 
     p
-      :padding-bottom 0
-      :margin-bottom 0
+      &:last-child
+        :padding-bottom 0
+        :margin-bottom 0
 
     &:first-child
       :border
         :top none
+
+    ul
+      li
+        :list-style disc
 
     .youtube-player, .vimeo-player
       :border none
@@ -529,7 +534,7 @@ ul.as-selections
   :border none
 
 .comment
-  .media
+  &.media
     :margin
       :left 0
       :right 0
@@ -679,7 +684,7 @@ form p.checkbox_select
 *:-moz-placeholder
   @include placeholder_styles
 
-#file-upload
+#file-upload 
   input
     :height 100%
     :width 100%
@@ -765,38 +770,37 @@ form p.checkbox_select
       :top 1em
 
   #file-upload
-    :position absolute !important
     :bottom 1px !important
-    :right 6px
-    :z-index 10
-    :margin 0
-
     :display inline-block
-
-    :padding 0.3em
+    :margin 0
+    :padding .3em .3em 3px
+    :position absolute !important
+    :right 6px
     :cursor pointer
+    
+
+    input[type='file']
+      :cursor pointer
+      :right initial !important
+      :height 100%
+      :width 100%
 
     img
       @include opacity(0.4)
 
-      :display inline-block
-      :margin 0
-      :padding 0
-      :margin
-        :bottom -3px
+      :vertical-align bottom
 
     &:hover
-      :background
-        :color none
+      :color #666
       :cursor pointer
 
-      :color #666
       img
         @include opacity(0.8)
 
     &:active
-      :text-shadow 0 1px 0 #fafafa
       :color #444
+      :text-shadow 0 1px 0 #fafafa
+
       img
         @include opacity(1)
 
@@ -835,9 +839,8 @@ form p.checkbox_select
       :outline 0
       :background transparent
 
-    &.with_attachments
-      :padding
-        :bottom 70px
+  &.with_attachments
+    :padding-bottom 38px
 
   #photodropzone
     :z-index 3
@@ -852,6 +855,7 @@ form p.checkbox_select
       :margin-right 4px
       img
         :width 50px
+        :max-height 55px
       .circle
         @include border-radius(20px)
 
@@ -937,7 +941,11 @@ img.scaled_full
   :margin
     :right 10px
 
+  :position relative
+
   form
+    :position absolute
+    :right 0
     input
       @include box-shadow(0,1px,1px,#444)
       @include border-radius(15px)
@@ -1737,6 +1745,9 @@ ul#press_logos
     :top 14px
     :padding
       :bottom 5px
+    :text-overflow ellipsis
+    :overflow hidden
+    :white-space nowrap
 
     a
       :color inherit
@@ -1816,11 +1827,49 @@ ul#press_logos
       :size 12px
     :color #777
 
+  .collapsible
+    :overflow hidden
+    :position relative
+
+    .expander
+      :position absolute
+      :bottom 0
+      :left 0
+      :right 0
+      :height 30px
+      :text-align center
+      :line-height 48px
+      :font-size .8em
+      :color $grey
+      :text-shadow 0 0 7px #FFF
+      :cursor pointer
+      :border-bottom 2px solid #DDD
+      @include border-radius(0, 0, 3px, 3px)
+      @include linear-gradient(rgba(255,255,255,0) , #EEE, 0%, 95%)
+      :background-color transparent
+
+    .oembed
+      :background url('/images/ajax-loader2.gif') no-repeat center center
+      :display inline-block
+      :max-width 100%
+
+      .thumb
+        :position relative
+        :cursor pointer
+
+        .video-overlay
+          :background url('/images/video-overlay.png') no-repeat center center
+          :position absolute
+          :top 0
+          :left 0
+          :right 0
+          :bottom 0
+
 .conversation_participants
   :z-index 3
   :background
     :color $background
-  :position fixed
+  :position relative
   :margin
     :bottom 10px
 
@@ -1846,6 +1895,10 @@ ul#press_logos
   :line
     :height 0
 
+  a img
+    :margin
+      :bottom 4px
+
   .conversation_controls
     a
       :margin
@@ -1856,7 +1909,7 @@ ul#press_logos
 
   :border
     :bottom 1px solid #ddd
-  :padding 15px
+  :padding 10px
     :top 101px
     :bottom 10px
   :width 560px
@@ -1905,8 +1958,8 @@ ul#press_logos
       :weight normal
 
   .timestamp
-    :position absolute
-    :right 10px
+    :position relative
+    :float right
     :font
       :weight normal
     :color $blue
@@ -2725,6 +2778,9 @@ a.toggle_selector
     :bottom 10px
   h1,h3
     :color #fff
+    :text-overflow ellipsis
+    :overflow hidden
+    :white-space nowrap
   :background orange
   &:hover
     #gs-skip-x
@@ -2821,3 +2877,5 @@ a.toggle_selector
   :color #999
   a
     :color #666
+    :color #666
+

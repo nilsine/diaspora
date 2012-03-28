@@ -1,6 +1,16 @@
 describe("app.views.CommentStream", function(){
   beforeEach(function(){
     this.view = new app.views.CommentStream({model : factory.post()})
+    loginAs({})
+  })
+
+  describe("binds", function() {
+    it("re-renders on a commentsExpanded trigger", function(){
+      spyOn(this.view, "render");
+      this.view.setupBindings();
+      this.view.model.trigger("commentsExpanded");
+      expect(this.view.render).toHaveBeenCalled();
+    })
   })
 
   describe("postRenderTemplate", function(){

@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -28,7 +28,7 @@ sv:
       hide: "dölj kommentarer"
       show: "visa alla kommentarer"
     confirm_dialog: "Är du säker?"
-    delete: Radera
+    delete: "Radera"
     failed_to_like: "Misslyckades med att gilla!"
     failed_to_post_message: "Misslyckades att posta meddelande!"
     getting_started:
@@ -37,20 +37,25 @@ sv:
       no_tags: "Du, du följer ju inte några taggar! Vill du fortsätta ändå?"
       preparing_your_stream: "Förbereder din personliga ström..."
     header:
-      contacts: Kontakter
-      home: Hem
+      admin: "Administratör"
+      contacts: "Kontakter"
+      home: "Hem"
       log_out: "Logga ut"
       mark_all_as_read: "Markera alla som lästa"
-      messages: Meddelanden
-      notifications: Notiser
-      profile: Profil
+      messages: "Meddelanden"
+      notifications: "Notiser"
+      profile: "Profil"
       recent_notifications: "Tidigare notiser"
       search: "Hitta användare eller #taggar"
-      settings: Inställningar
+      settings: "Inställningar"
       view_all: "Visa alla"
-    ignore: Ignorera
+    ignore: "Ignorera"
     infinite_scroll:
       no_more: "Inga fler inlägg."
+    my_activity: "Min aktivitet"
+    my_stream: "Ström"
+    people:
+      not_found: "och ingen hittades..."
     photo_uploader:
       looking_good: "OMG, du ser grym ut!"
     publisher:
@@ -62,9 +67,11 @@ sv:
     search_for: "Sök efter <%= name %>"
     show_more: "visa mer"
     stream:
-      comment: Kommentar
-      hide: Göm
-      like: Gilla
+      comment: "Kommentar"
+      follow: "Följ"
+      hide: "Göm"
+      hide_nsfw_posts: "Dölj #nsfw-inlägg"
+      like: "Gilla"
       likes:
         few: "<%= count %> gillar"
         many: "<%= count %> gillar"
@@ -72,7 +79,7 @@ sv:
         other: "<%= count %> gillar"
         two: "<%= count %> gillar"
         zero: "<%= count %> gillar"
-      limited: Begränsad
+      limited: "Begränsad"
       more_comments:
         few: "Visa <%= count %> till kommentarer"
         many: "Visa <%= count %> till kommentarer"
@@ -81,7 +88,7 @@ sv:
         two: "Visa <%= count %> till kommentarer"
         zero: "Visa <%= count %> till kommentarer"
       original_post_deleted: "Original inlägget är raderat av författaren."
-      public: Publik
+      public: "Publik"
       reshare: "Sprid vidare"
       reshares:
         few: "<%= count %> sprider vidare"
@@ -90,7 +97,10 @@ sv:
         other: "<%= count %> sprider vidare"
         two: "<%= count %> sprider vidare"
         zero: "Ingen sprider vidare"
-      unlike: Ogillar
+      show_nsfw_post: "Visa inlägg"
+      show_nsfw_posts: "Visa alla"
+      unfollow: "Sluta följ"
+      unlike: "Ogillar"
     tags:
       wasnt_that_interesting: "OK, jag antar att #<%= tagName %> inte var så intressant..."
     timeago:
@@ -102,13 +112,21 @@ sv:
       minutes: "%d minuter"
       month: "ungefär en månad"
       months: "%d månader"
-      prefixAgo: För
-      prefixFromNow: om
+      prefixAgo: "För"
+      prefixFromNow: "om"
       seconds: "mindre än en minut"
-      suffixAgo: sedan
-      suffixFromNow: ""
+      suffixAgo: "sedan"
+      suffixFromNow: "från nu"
       year: "ungefär ett år"
       years: "%d år"
     videos:
       unknown: "Okänd videotyp"
       watch: "Se den här videon på <%= provider %>"
+    viewer:
+      comment: "Kommentar"
+      follow_post: "Följ inlägg"
+      like: "Gilla"
+      reshare: "Återdela"
+      reshared: "Återdelad"
+      stop_following_post: "Sluta att följa inlägg"
+      unlike: "Sluta gilla"

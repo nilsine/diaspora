@@ -1,6 +1,7 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
+
 
 
 ml:
@@ -67,6 +68,7 @@ ml:
       comment: "Comment"
       follow: "Follow"
       hide: "Hide"
+      hide_nsfw_posts: "Hide #nsfw posts"
       like: "Like"
       likes:
         few: "<%= count %> Likes"
@@ -93,7 +95,8 @@ ml:
         other: "<%= count %> Reshares"
         two: "<%= count %> Reshares"
         zero: "<%= count %> Reshares"
-      show_post: "Show post"
+      show_nsfw_post: "Show post"
+      show_nsfw_posts: "Show all"
       unfollow: "Unfollow"
       unlike: "Unlike"
     tags:
@@ -110,8 +113,8 @@ ml:
       prefixAgo: ""
       prefixFromNow: "ഇപ്പോള്‍ മുതല്‍"
       seconds: "ഏതാനും നിമിഷങ്ങള്‍"
-      suffixAgo: മുന്‍പ്
-      suffixFromNow: വരെ
+      suffixAgo: "മുന്‍പ്"
+      suffixFromNow: "വരെ"
       year: "ഉദ്ദേശം ഒരു വര്‍ഷം"
       years: "%d വര്‍ഷങ്ങള്‍ക്ക്"
     videos:

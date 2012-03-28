@@ -13,9 +13,7 @@ class ApplicationController < ActionController::Base
 
   inflection_method :grammatical_gender => :gender
 
-  helper_method :notification_count,
-                :unread_message_count,
-                :all_aspects,
+  helper_method :all_aspects,
                 :all_contacts_count,
                 :my_contacts_count,
                 :only_sharing_count,
@@ -37,15 +35,6 @@ class ApplicationController < ActionController::Base
       logged_out_path
     end
   end
-
-  ##helpers
-  def notification_count
-    @notification_count ||= Notification.for(current_user, :unread =>true).size
-  end
-
-  def unread_message_count
-    @unread_message_count ||= ConversationVisibility.sum(:unread, :conditions => "person_id = #{current_user.person.id}")
-  end 
 
   def all_aspects
     @all_aspects ||= current_user.aspects
@@ -82,6 +71,7 @@ class ApplicationController < ActionController::Base
     else
       locale = request.preferred_language_from AVAILABLE_LANGUAGE_CODES
       locale ||= request.compatible_language_from AVAILABLE_LANGUAGE_CODES
+      locale ||= DEFAULT_LANGUAGE
       I18n.locale = locale
     end
   end

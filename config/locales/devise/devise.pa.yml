@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -36,8 +36,8 @@ pa:
       updated: "ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਠੀਕ ਤਹ੍ਹਾਂ ਬਦਲਿਆ ਗਿਆ ਹੈ। ਹੁਣ ਤੁਸੀਂ ਸਾਈਨ ਇਨ ਕਰ ਸਕਦੇ ਹੋ।"
     sessions:
       new:
-        login: ਲਾਗਇਨ
-        password: ਪਾਸਵਰਡ
+        login: "ਲਾਗਇਨ"
+        password: "ਪਾਸਵਰਡ"
     shared:
       links:
         forgot_your_password: "ਆਪਣਾ ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?"

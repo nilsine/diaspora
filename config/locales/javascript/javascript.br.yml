@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -62,9 +62,11 @@ br:
       minutes: "%d a vunutennoù"
       month: "war-dro ur mizvezhiad"
       months: "%d a vizioù"
+      prefixAgo: ""
+      prefixFromNow: ""
       seconds: "dindan ur vunutenn"
-      suffixAgo: zo
-      suffixFromNow: diwar-vremañ
+      suffixAgo: "zo"
+      suffixFromNow: "diwar-vremañ"
       year: "war-dro ur bloavezh"
       years: "%d a vloavezhioù"
     videos:

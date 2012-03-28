@@ -1,5 +1,8 @@
+require 'uri'
+
 class Services::Twitter < Service
   MAX_CHARACTERS = 140
+  SHORTENED_URL_LENGTH = 21
 
   def provider
     "twitter"
@@ -11,15 +14,17 @@ class Services::Twitter < Service
 
     configure_twitter
 
-    begin
-      Twitter.update(message)
-    rescue Exception => e
-      Rails.logger.info e.message
-    end
+    Twitter.update(message)
   end
 
+
   def public_message(post, url)
-    super(post, MAX_CHARACTERS,  url)
+    buffer_amt = 0
+    URI.extract( post.text(:plain_text => true), ['http','https'] ) do |a_url|
+      buffer_amt += (a_url.length - SHORTENED_URL_LENGTH)
+    end
+
+    super(post, MAX_CHARACTERS + buffer_amt,  url)
   end
 
   def profile_photo_url

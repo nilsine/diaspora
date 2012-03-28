@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -64,7 +64,7 @@ ga:
         bugs_and_feedback_mobile: "Cuimhnigh, tá tú chun fabhtanna a fheiceáil. Molaimid duit tuaraisc a chur ar fáil faoin aon fadhbhanna! Beidhmid ag obair chomh tapa is gur féidir lin aon fadbhanna a réitiú."
         login: "Logáil isteach"
         modern_browsers: "ní ach tugaimid tacaíocht do brabhsálaí nua-aimseartha"
-        password: Pasfhocal
+        password: "Pasfhocal"
         remember_me: "Cuimhnigh orm"
         sign_in: "Síniú isteach"
         username: "Ainm úsáideora"

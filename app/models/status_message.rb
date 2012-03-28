@@ -21,7 +21,7 @@ class StatusMessage < Post
   # therefore, we put the validation in a before_destory callback instead of a validation
   before_destroy :presence_of_content
 
-  attr_accessible :text, :provider_display_name
+  attr_accessible :text, :provider_display_name, :frame_name
   attr_accessor :oembed_url
 
   after_create :create_mentions
@@ -106,7 +106,7 @@ class StatusMessage < Post
 
   def create_mentions
     mentioned_people_from_string.each do |person|
-      self.mentions.create(:person => person)
+      self.mentions.find_or_create_by_person_id(person.id)
     end
   end
 
@@ -123,22 +123,6 @@ class StatusMessage < Post
       match.last
     end
     identifiers.empty? ? [] : Person.where(:diaspora_handle => identifiers)
-  end
-
-  def to_activity(opts={})
-    author = opts[:author] || self.author #Use an already loaded author if passed in.
-    <<-XML
-  <entry>
-    <title>#{x(self.formatted_message(:plain_text => true))}</title>
-    <content>#{x(self.formatted_message(:plain_text => true))}</content>
-    <link rel="alternate" type="text/html" href="#{author.url}p/#{self.id}"/>
-    <id>#{author.url}p/#{self.id}</id>
-    <published>#{self.created_at.xmlschema}</published>
-    <updated>#{self.updated_at.xmlschema}</updated>
-    <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
-    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
-  </entry>
-    XML
   end
 
   def after_dispatch(sender)
@@ -173,7 +157,7 @@ class StatusMessage < Post
   def contains_oembed_url_in_text?
     require 'uri'
     urls = URI.extract(self.raw_message, ['http', 'https'])
-    self.oembed_url = urls.find{|url| ENDPOINT_HOSTS_STRING.match(URI.parse(url).host)}
+    self.oembed_url = urls.find{ |url| !TRUSTED_OEMBED_PROVIDERS.find(url).nil? }
   end
 
   protected

@@ -19,6 +19,11 @@ class ConversationsController < ApplicationController
 
     @conversation = Conversation.joins(:conversation_visibilities).where(
       :conversation_visibilities => {:person_id => current_user.person.id, :conversation_id => params[:conversation_id]}).first
+
+    respond_with do |format|
+      format.html
+      format.json { render :json => @conversations, :status => 200 }
+    end
   end
 
   def create
@@ -56,6 +61,7 @@ class ConversationsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to conversations_path(:conversation_id => @conversation.id) }
         format.js
+        format.json { render :json => @conversation, :status => 200 }
       end
     else
       redirect_to conversations_path
@@ -64,7 +70,7 @@ class ConversationsController < ApplicationController
 
   def new
     all_contacts_and_ids = Contact.connection.select_rows(
-      current_user.contacts.joins(:person => :profile).
+      current_user.contacts.where(:sharing => true).joins(:person => :profile).
         select("contacts.id, profiles.first_name, profiles.last_name, people.diaspora_handle").to_sql
     ).map{|r| {:value => r[0], :name => Person.name_from_attrs(r[1], r[2], r[3]).gsub(/(")/, "'")} }
 

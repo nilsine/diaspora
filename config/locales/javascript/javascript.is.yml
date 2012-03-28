@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -60,8 +60,11 @@ is:
       minutes: "%d mínútur"
       month: "um það bil mánuð"
       months: "%d mánuðir"
+      prefixAgo: ""
+      prefixFromNow: ""
       seconds: "minna en mínútu"
-      suffixAgo: síðan
+      suffixAgo: "síðan"
+      suffixFromNow: ""
       year: "um það bil ár"
       years: "%d ára"
     videos:

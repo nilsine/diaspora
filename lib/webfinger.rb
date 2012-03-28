@@ -9,7 +9,6 @@ class Webfinger
   def initialize(account)
     self.account = account 
     self.ssl = true
-    Rails.logger.info("event=webfinger status=initialized target=#{account}")
   end
 
 
@@ -31,7 +30,7 @@ class Webfinger
     Rails.logger.info("Getting: #{url} for #{account}")
     begin 
       Faraday.get(url).body
-    rescue Exception => e
+    rescue => e
       Rails.logger.info("Failed to fetch: #{url} for #{account}; #{e.message}")
       raise e
     end
@@ -46,12 +45,13 @@ class Webfinger
   end
 
   def create_or_update_person_from_webfinger_profile!
+    FEDERATION_LOGGER.info("webfingering #{account}, it is not known or needs updating")
     if person #update my profile please
       person.assign_new_profile_from_hcard(self.hcard)
     else
       person = make_person_from_webfinger
     end
-    Rails.logger.info("event=webfinger status=success route=remote target=#{@account}")
+    FEDERATION_LOGGER.info("successfully webfingered#{@account}")
     person
   end
 
@@ -59,7 +59,7 @@ class Webfinger
   def host_meta_xrd
     begin
       get(host_meta_url)
-    rescue Exception => e
+    rescue => e
       if self.ssl
         self.ssl = false
         retry
