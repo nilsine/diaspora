@@ -127,7 +127,8 @@ hu:
         tag_question: "kérdés"
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Közösségi leckék, módszerek, hírek"
       introduce_yourself: "Ez a te Hírfolyamod. Kezdd is el gyorsan egy bemutatkozással!"
-      keep_us_running: "Hogy közös örömünkre gyors maradjon ez a kiszolgáló (%{pod}), adományozz havonta némi kávéra valót a szervereknek ;)"
+      keep_diaspora_running: "Támogasd a Diaspora gyorsabb fejlesztését havi adományoddal!"
+      keep_pod_running: "Hogy gyors maradhasson ez a kiszolgáló (%{pod}), adományozz havonta egy kis kávéra valót a szervereknek ;)"
       new_here:
         follow: "Kövesd az %{link} címkét és üdvözöld az új Diaspora* felhasználókat!"
         learn_more: "Tudj meg többet"
@@ -179,6 +180,10 @@ hu:
     index:
       no_applications: "Még nem regisztráltál egyetlen alkalmazást sem."
       revoke_access: "Hozzáférés visszavonása"
+    new:
+      autorize: "engedélyezés"
+      cubbies_will: "A Cubbies jogosult fotókat küldeni a nevedben"
+      nope: "nem"
   back: "Vissza"
   blocks:
     create:
@@ -283,16 +288,16 @@ hu:
   home:
     show:
       already_account: "már van fiókod?"
-      choice: "Csoportok"
-      choice_explanation: "A Diaspora* közösségi oldalon különböző szempontok alapján Csoportokba rendezheted a kapcsolataidat. Ezek segítségével mindig a megfelelő emberekkel oszthatod meg a történeteidet, vicceidet, képeidet."
-      learn_about_host: "Így indíthatod el saját Diaspora* szervered."
+      choice: "Szabadság"
+      choice_explanation: "A Diaspora* lehetővé teszi, hogy tetszőleges szempontok alapján Csoportokba rendezd a kapcsolataidat. Így mindig a megfelelő emberekkel oszthatod meg a történeteidet, vicceidet, képeidet."
+      learn_about_host: "Így indíthatsz el saját Diaspora* szervert."
       login_here: "Jelentkezz be"
-      ownership: "Sajátod"
+      ownership: "Biztonság"
       ownership_explanation: "A képeid a sajátjaid, és ezt nem kell feladnod, hogy megoszthasd őket másokkal. Minden megosztás felett teljes irányításod van a Diaspora* közösségi oldalon."
-      share_what_you_want: "Oszd meg... akivel akarod!"
+      share_what_you_want: "Ossz meg bármit... akivel szeretnél!"
       simplicity: "Egyszerűség"
-      simplicity_explanation: "A Diaspora könnyűvé és érthetővé teszi a megosztást - és ez a biztonságra is vonatkozik. Nem kell hosszú beállító oldalakon átvergődnöd, hogy biztonságban tudd a profilodat."
-      tagline_first_half: "Oszd meg..."
+      simplicity_explanation: "A Diaspora megkönnyíti és átláthatóvá teszi a megosztást - és ez a személyes dolgaidra is vonatkozik. Nem kell hosszú beállító oldalakon átvergődnöd, hogy biztonságban tudd a profilodat."
+      tagline_first_half: "Ossz meg bármit..."
       tagline_second_half: "akivel akarod!"
   invitation_codes:
     excited: "%{name} alig várja, hogy üdvözölhessen nálunk."
@@ -491,7 +496,6 @@ hu:
           Kattints erre a linkre a kezdéshez:
 
           %{invite_url}
-          <%= invite_code_url(@invitation_code)%>
 
 
           üdv:
@@ -645,11 +649,11 @@ hu:
       you_are_nsfw: "Jelenleg a \"munkahelyen nem illő\" (NSFW) beállítással jelölted magadat. A megosztott tartalmaid nem fognak közvetlenül megjelenni azon felhasználóknál, akik kikapcsolták a kifogásolható tartalmak megtekintését."
       you_are_safe_for_work: "Jelenleg a \"munkahelyen illő\" tartalmi beállítással jelölted magadat. Ezáltal elfogadod, hogy mindaz, amit megosztasz - míg nem adod meg másképpen - megfelel a közösségi irányelveknek."
       your_bio: "Rólam"
-      your_birthday: "Szülinapom"
+      your_birthday: "Szülinapod"
       your_gender: "Nem"
       your_location: "Helység"
       your_name: "Nevem"
-      your_photo: "Fényképem"
+      your_photo: "Fényképed"
       your_private_profile: "Személyes profilod"
       your_public_profile: "Nyilvános profilod"
       your_tags: "5 tulajdonság (#címke) rólad:"
@@ -835,6 +839,7 @@ hu:
       show: "megmutat"
       unlike: "Nem tetszik"
       via: "ezen keresztül: %{link}"
+      via_mobile: "mobilon keresztül"
       viewable_to_anyone: "Ez a bejegyzés bárki számára megtekinthető az interneten."
   status_messages:
     create:
@@ -964,16 +969,16 @@ hu:
       export_data: "Adatok exportálása"
       following: "Követési beállítások"
       getting_started: "Új felhasználó beállítások"
-      liked: "... valakinek tetszik a bejegyzésed?"
-      mentioned: "...meg vagy említve egy bejegyzésben?"
+      liked: "...valakinek tetszik a bejegyzésed?"
+      mentioned: "...megemlítettek téged egy bejegyzésben?"
       new_password: "Új jelszó"
       photo_export_unavailable: "Fénykép exportálás jelenleg felfüggesztve"
       private_message: "...privát üzenetet kaptál?"
-      receive_email_notifications: "Email értesítést kérek amikor..."
+      receive_email_notifications: "Szeretnél email értesítést kapni, ha..."
       reshared: "...valaki újraosztotta a bejegyzésedet?"
       show_community_spotlight: "Mutassa a Reflektorfényben szereplő dolgokat a Hírfolyamodban?"
       show_getting_started: "\"Kezdő lépések\" újra engedélyezése"
-      started_sharing: "...valaki megoszt veled?"
+      started_sharing: "...valaki elkezd megosztani veled?"
       stream_preferences: "Hírfolyam tulajdonságai"
       your_email: "E-mail címed"
       your_handle: "Diaspora azonosítód"
@@ -991,9 +996,9 @@ hu:
       who_are_you: "Ki is vagy?"
     logged_out:
       go_mobile: "Maradj kapcsolatban."
-      on_your_mobile_device: "a mobiltelefonodon, hogy hozzáférj a Diaspora* mobil verzióhoz."
+      on_your_mobile_device: "címet a telefonodon és próbáld ki a Diaspora* mobil változatát."
       signed_out: "Kijelentkeztél a Diaspora* rendszerből"
-      simply_visit: "Tekintsd meg"
+      simply_visit: "Keresd fel a"
       works_on_modern: "Az összes modern okostelefonon működik"
     privacy_settings:
       ignored_users: "Mellőzött felhasználók"

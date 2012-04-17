@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120322223517) do
+ActiveRecord::Schema.define(:version => 20120414005431) do
 
   create_table "account_deletions", :force => true do |t|
     t.string  "diaspora_handle"
@@ -261,6 +261,9 @@ ActiveRecord::Schema.define(:version => 20120322223517) do
     t.datetime "updated_at"
   end
 
+  add_index "participations", ["guid"], :name => "index_participations_on_guid"
+  add_index "participations", ["target_id", "target_type", "author_id"], :name => "index_participations_on_target_id_and_target_type_and_author_id"
+
   create_table "people", :force => true do |t|
     t.string   "guid",                                     :null => false
     t.text     "url",                                      :null => false
@@ -339,6 +342,7 @@ ActiveRecord::Schema.define(:version => 20120322223517) do
   add_index "posts", ["author_id", "root_guid"], :name => "index_posts_on_author_id_and_root_guid", :unique => true
   add_index "posts", ["author_id"], :name => "index_posts_on_person_id"
   add_index "posts", ["guid"], :name => "index_posts_on_guid", :unique => true
+  add_index "posts", ["id", "type", "created_at"], :name => "index_posts_on_id_and_type_and_created_at"
   add_index "posts", ["root_guid"], :name => "index_posts_on_root_guid"
   add_index "posts", ["status_message_guid", "pending"], :name => "index_posts_on_status_message_guid_and_pending"
   add_index "posts", ["status_message_guid"], :name => "index_posts_on_status_message_guid"
@@ -366,6 +370,19 @@ ActiveRecord::Schema.define(:version => 20120322223517) do
   add_index "profiles", ["full_name", "searchable"], :name => "index_profiles_on_full_name_and_searchable"
   add_index "profiles", ["full_name"], :name => "index_profiles_on_full_name"
   add_index "profiles", ["person_id"], :name => "index_profiles_on_person_id"
+
+  create_table "rails_admin_histories", :force => true do |t|
+    t.text     "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "service_users", :force => true do |t|
     t.string   "uid",                          :null => false
