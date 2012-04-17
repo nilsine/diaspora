@@ -71,3 +71,5 @@
           %li= link_to t('.whats_new'), 'https://github.com/diaspora/diaspora/wiki/Changelog'
           %li= link_to(t('layouts.application.toggle'), toggle_mobile_path)  if is_mobile_device?
         = image_tag 'branding/powered_by_diaspora.png', :height => "11px", :width => "145px"
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hebergé et maintenu par
+        = link_to image_tag ('branding/nilsine.png', :style => 'vertical-align: middle;'), 'http://nilsine.fr/', :target => '_blank'
