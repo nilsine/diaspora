@@ -1,4 +1,4 @@
-## Welcome to the Diaspora Project!
+Diaspora*
 
 Diaspora is a privacy-aware, personally-controlled, do-it-all open source social network. Check out our [project site](http://diasporaproject.org).
 
@@ -12,43 +12,54 @@ If you want to do something big, reach out on IRC or the mailing list first, so 
 
 With Diaspora you can:
 
-- Run and host your own pod and have control over your own social experience.
-- Own your own data.
-- Make friends across other pods seamlessly.
+- Make cool stuff
+- Share it across the web
+- Own your own data
 
-Documentation is available on our [wiki](https://github.com/diaspora/diaspora/wiki)
 
 ## Quick Start:
 
-Here's how you can get a development environment up and running. You can check out system-specific guides [here](https://github.com/diaspora/diaspora/wiki/Installation-Guides).
+Here's how you can get a **[development](http://guides.rubyonrails.org/getting_started.html)** environment up and running.  This is where any new pod runner should start, as well as people
+looking to contribute to D*.  This script assumes you have [a basic Rails setup installed](http://railsapps.github.com/installing-rails-3-1.html).
 
-### Step 1: Clone the repo 
-```git clone git@github.com:diaspora/diaspora.git
+### Step 1: Run the script and follow the on screen instructions.
+```
+  bash <(curl https://raw.github.com/diaspora/diaspora/master/script/install.sh)
 ```
 
-### Step 2: Navigate to your cloned repository
-```cd ../diaspora
+
+### Step 2: Run the development server
+```
+  rails s
 ```
 
-### Step 3: Install Bundler and gems (depending on [OS Vendor](https://github.com/diaspora/diaspora/wiki/Installation-Guides))
-```sudo gem install bundler && sudo bundle install
+then visit 'http://localhost:3000' in your browser.
+
+### Step 3 (for developers): Run tests
+```
+  rake
 ```
 
-### Step 4: Edit database.yml, and rename application.yml.example to just application.yml 
+### Step 4 (for everyone): Party.
 
-### Step 5: Create and migrate the database
-```rake db:create && rake db:migrate
-```
 
-### Step 6: Start the test server
-```rails s
-```
+### Want a production setup? Having trouble with install script? Want to install D* the slow way?
+  Look to more specific install guides [here](https://github.com/diaspora/diaspora/wiki/Installation-Guides).
 
-## Resources:
+## Contributing
+We love community contributions, and we work extra hard to make sure every code contribution is looked at and given feedback. 
+To help everyone involved, please review our [Pull Request Guidelines](https://github.com/diaspora/diaspora/wiki/Pull-Request-Guidelines)
+to make sure all contributions are submitted smoothly.
+
+Documentation is available on our [wiki](https://github.com/diaspora/diaspora/wiki)
+
+Before submitting code, please sign our [Contributor License Agreement](https://github.com/diaspora/diaspora/wiki/New-CLA--12-13-10) [Sign Here](https://spreadsheets.google.com/a/joindiaspora.com/spreadsheet/viewform?formkey=dFdRTnY0TGtfaklKQXZNUndsMlJ2eGc6MQ)
+
+## More Resources:
 
 - [Wiki](https://github.com/diaspora/diaspora/wiki)
 - [Podmin Resources](https://github.com/diaspora/diaspora/wiki/Podmin-Resources)
 - [Contributing](https://github.com/diaspora/diaspora/wiki/Getting-Started-With-Contributing)
 - [Dev List](https://groups.google.com/forum/?fromgroups#!forum/diaspora-dev)
 - [Discuss List](https://groups.google.com/forum/?fromgroups#!forum/diaspora-discuss)
-- [IRC](http://webchat.freenode.net?channels=diaspora-dev)
+- [IRC](https://github.com/diaspora/diaspora/wiki/How-we-use-IRC)

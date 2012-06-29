@@ -11,12 +11,16 @@
 
     %meta{:name => "description", :content => "Diaspora*"}
     %meta{:name => "author", :content => "Diaspora, Inc."}
+    = og_site_name
 
     %link{:rel => 'shortcut icon', :href => "#{image_path('favicon.png')}" }
     %link{:rel => 'apple-touch-icon', :href => "#{image_path('apple-touch-icon.png')}"}
 
     %title
       = page_title yield(:page_title)
+
+    = chartbeat_head_block
+    = include_mixpanel
 
     = include_base_css_framework
     = stylesheet_link_tag 'login', 'application', 'default'
@@ -51,7 +55,7 @@
         = render 'layouts/header'
 
     .container
-      - if @aspect == :getting_started || @page == :logged_out
+      - if @aspect == :getting_started
         = yield
       - else
         .span-24.last
@@ -73,3 +77,6 @@
         = image_tag 'branding/powered_by_diaspora.png', :height => "11px", :width => "145px"
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hebergé et maintenu par
         = link_to image_tag ('branding/nilsine.png', :style => 'vertical-align: middle;'), 'http://nilsine.fr/', :target => '_blank'
+
+    = include_chartbeat
+    = include_mixpanel_guid

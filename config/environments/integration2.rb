@@ -15,7 +15,6 @@ Diaspora::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_view.debug_rjs             = true
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
@@ -33,7 +32,7 @@ Diaspora::Application.configure do
         "<#{self.class.name} - tooooo long>"
       end
     end
-    [ActionController::Base, ActionDispatch::RemoteIp::RemoteIpGetter, OmniAuth::Strategy, Warden::Proxy].each do |klazz|
+    [ActionController::Base, OmniAuth::Strategy, Warden::Proxy].each do |klazz|
       klazz.send(:include, SmallInspect)
     end
   end

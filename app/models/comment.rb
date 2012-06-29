@@ -16,16 +16,6 @@ class Comment < ActiveRecord::Base
   extract_tags_from :text
   before_create :build_tags
 
-  # NOTE API V1 to be extracted
-  acts_as_api
-  api_accessible :backbone do |t|
-    t.add :id
-    t.add :guid
-    t.add :text
-    t.add :author
-    t.add :created_at
-  end
-
   xml_attr :text
   xml_attr :diaspora_handle
 
@@ -83,6 +73,10 @@ class Comment < ActiveRecord::Base
 
   def parent= parent
     self.post = parent
+  end
+
+  def text= text
+     self[:text] = text.to_s.strip #to_s if for nil, for whatever reason
   end
 
   class Generator < Federated::Generator

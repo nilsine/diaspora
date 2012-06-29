@@ -6,10 +6,10 @@ if !AppConfig.single_process_mode?
   if redis_to_go = ENV["REDISTOGO_URL"]
     uri = URI.parse(redis_to_go)
     Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-  elsif AppConfig[:redis_url]
-    Resque.redis = Redis.new(:host => AppConfig[:redis_url], :port => 6379)
   elsif ENV['RAILS_ENV']== 'integration2'
     Resque.redis = Redis.new(:host => 'localhost', :port => 6380)
+  elsif AppConfig[:redis_url]
+    Resque.redis = Redis.new(:host => AppConfig[:redis_url], :port => 6379)
   end
 end
 
@@ -36,6 +36,6 @@ end
 
 if AppConfig[:mount_resque_web]
   require 'resque/server'
-  require File.join(Rails.root, 'lib/admin_rack')
+  require Rails.root.join('lib', 'admin_rack')
   Resque::Server.use AdminRack
 end

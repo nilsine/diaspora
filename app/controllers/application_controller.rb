@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :set_git_header if (AppConfig[:git_update] && AppConfig[:git_revision])
   before_filter :set_grammatical_gender
+  before_filter :tablet_device_fallback
 
   inflection_method :grammatical_gender => :gender
 
@@ -32,7 +33,7 @@ class ApplicationController < ActionController::Base
     if request.env['HTTP_USER_AGENT'].match(/mobile/i)
       root_path
     else
-      logged_out_path
+      new_user_session_path
     end
   end
 
@@ -105,11 +106,27 @@ class ApplicationController < ActionController::Base
     @grammatical_gender || nil
   end
 
+  def tablet_device_fallback
+    # we currently don't have any special tablet views...
+    request.format = :html if is_tablet_device?
+  end
+
   def after_sign_in_path_for(resource)
-    stored_location_for(:user) || (current_user.getting_started? ? getting_started_path : stream_path)
+    stored_location_for(:user) || current_user_redirect_path
   end
 
   def max_time
     params[:max_time] ? Time.at(params[:max_time].to_i) : Time.now + 1
+  end
+
+  def flag
+    @flag ||= FeatureFlagger.new(current_user)
+  end
+
+  private
+
+  def current_user_redirect_path
+    return person_path(current_user.person) if current_user.beta?
+    current_user.getting_started? ? getting_started_path : root_path
   end
 end

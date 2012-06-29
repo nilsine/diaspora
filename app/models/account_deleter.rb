@@ -42,7 +42,7 @@ class AccountDeleter
 
   #user deletions
   def normal_ar_user_associates_to_delete
-    [:tag_followings, :authorizations, :invitations_to_me, :services, :aspects, :user_preferences, :notifications, :blocks]
+    [:tag_followings, :invitations_to_me, :services, :aspects, :user_preferences, :notifications, :blocks]
   end
 
   def special_ar_user_associations
@@ -50,7 +50,7 @@ class AccountDeleter
   end
 
   def ignored_ar_user_associations
-    [:followed_tags, :invited_by, :contact_people, :applications, :aspect_memberships, :ignored_people]
+    [:followed_tags, :invited_by, :contact_people, :aspect_memberships, :ignored_people]
   end
 
   def delete_standard_user_associations
@@ -103,7 +103,7 @@ class AccountDeleter
   end
   
   def normal_ar_person_associates_to_delete
-    [:posts, :photos, :mentions, :participations]
+    [:posts, :photos, :mentions, :participations, :roles]
   end
 
   def ignored_or_special_ar_person_associations

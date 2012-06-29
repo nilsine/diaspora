@@ -61,7 +61,7 @@ $night-text-color : #999;
 
 @mixin dark-hatched-bg() {
   background-color: #444;
-  background-image: image-url("hatched-bg-dark.png");
+  background-image: image-url("texture/hatched-dark.png");
 }
 
 @mixin photo-shadow() {
@@ -69,12 +69,8 @@ $night-text-color : #999;
 }
 
 @mixin media-text() {
-  font: {
-    weight: bold;
-    size: 2em;
-  }
-
-  line-height: 2em;
+  font-size: 2em; 
+  line-height: 1.2em;
   padding-bottom: 0;
   margin-bottom: 0;
 }

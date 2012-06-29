@@ -55,9 +55,10 @@ describe PostsController do
         response.should be_success
       end
 
-      it 'redirects if the post is missing' do
-        get :show, :id => 1234567
-        response.should be_redirect
+      it '404 if the post is missing' do
+        expect {
+          get :show, :id => 1234567
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
@@ -87,7 +88,7 @@ describe PostsController do
       it 'does not show a private post' do
         status = alice.post(:status_message, :text => "hello", :public => false, :to => 'all')
         get :show, :id => status.id
-        response.status = 302
+        response.status.should == 404
       end
 
       # We want to be using guids from now on for this post route, but do not want to break
@@ -99,17 +100,43 @@ describe PostsController do
         end
 
         it 'assumes guids less than 8 chars are ids and not guids' do
-          Post.should_receive(:where).with(hash_including(:id => @status.id.to_s)).and_return(Post)
+          p = Post.where(:id => @status.id.to_s)
+          Post.should_receive(:where)
+              .with(hash_including(:id => @status.id.to_s))
+              .and_return(p)
           get :show, :id => @status.id
           response.should be_success
         end
 
         it 'assumes guids more than (or equal to) 8 chars are actually guids' do
-          Post.should_receive(:where).with(hash_including(:guid => @status.guid)).and_return(Post)
+          p = Post.where(:guid => @status.guid)
+          Post.should_receive(:where)
+              .with(hash_including(:guid => @status.guid))
+              .and_return(p)
           get :show, :id => @status.guid
           response.should be_success
         end
       end
+    end
+  end
+
+  describe 'iframe' do
+    it 'contains an iframe' do
+      get :iframe, :id => @message.id
+      response.body.should match /iframe/
+    end
+  end
+
+  describe 'oembed' do
+    it 'works when you can see it' do
+      sign_in alice
+      get :oembed, :url => "/posts/#{@message.id}"
+      response.body.should match /iframe/
+    end
+
+    it 'returns a 404 response when the post is not found' do
+      get :oembed, :url => "/posts/#{@message.id}"
+      response.status.should == 404
     end
   end
 
@@ -135,16 +162,68 @@ describe PostsController do
 
     it 'will not let you destroy posts visible to you' do
       message = bob.post(:status_message, :text => "hey", :to => bob.aspects.first.id)
-      delete :destroy, :format => :js, :id => message.id
-      response.should_not be_success
+      expect { delete :destroy, :format => :js, :id => message.id }.to raise_error(ActiveRecord::RecordNotFound)
       StatusMessage.exists?(message.id).should be_true
     end
 
     it 'will not let you destory posts you do not own' do
       message = eve.post(:status_message, :text => "hey", :to => eve.aspects.first.id)
-      delete :destroy, :format => :js, :id => message.id
-      response.should_not be_success
+      expect { delete :destroy, :format => :js, :id => message.id }.to raise_error(ActiveRecord::RecordNotFound)
       StatusMessage.exists?(message.id).should be_true
+    end
+  end
+
+  describe "#next" do
+    before do
+      sign_in alice
+      Post.stub(:find_by_guid_or_id_with_user).and_return(mock_model(Post, :author => 4))
+      Post.stub_chain(:visible_from_author, :newer).and_return(next_post)
+    end
+
+    let(:next_post){ mock_model(StatusMessage, :id => 34)}
+
+    context "GET .json" do
+      let(:mock_presenter) { mock(:as_json => {:title => "the unbearable lightness of being"}) }
+
+      it "should return a show presenter the next post" do
+        PostPresenter.should_receive(:new).with(next_post, alice).and_return(mock_presenter)
+        get :next, :id => 14, :format => :json
+        response.body.should == {:title => "the unbearable lightness of being"}.to_json
+      end
+    end
+
+    context "GET .html" do
+      it "should redirect to the next post" do
+        get :next, :id => 14
+        response.should redirect_to(post_path(next_post))
+      end
+    end
+  end
+
+  describe "previous" do
+    before do
+      sign_in alice
+      Post.stub(:find_by_guid_or_id_with_user).and_return(mock_model(Post, :author => 4))
+      Post.stub_chain(:visible_from_author, :older).and_return(previous_post)
+    end
+
+    let(:previous_post){ mock_model(StatusMessage, :id => 11)}
+
+    context "GET .json" do
+      let(:mock_presenter) { mock(:as_json => {:title => "existential crises"})}
+
+      it "should return a show presenter the next post" do
+        PostPresenter.should_receive(:new).with(previous_post, alice).and_return(mock_presenter)
+        get :previous, :id => 14, :format => :json
+        response.body.should == {:title => "existential crises"}.to_json
+      end
+    end
+
+    context "GET .html" do
+      it "should redirect to the next post" do
+        get :previous, :id => 14
+        response.should redirect_to(post_path(previous_post))
+      end
     end
   end
 end

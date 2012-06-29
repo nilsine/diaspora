@@ -5,7 +5,7 @@ describe("app.forms.Picture", function(){
       "content" : "supersecrettokenlol"
     }).prependTo("head")
 
-    this.form = new app.forms.Picture().render()
+    this.form = new app.forms.Picture({model: factory.statusMessage()}).render()
   });
 
   it("sets the authenticity token from the meta tag", function(){
@@ -37,9 +37,9 @@ describe("app.forms.Picture", function(){
     })
 
     it("adds a new model to the photos", function(){
-      expect(this.form.$(".photos div").length).toBe(0);
+      expect(this.form.$(".photos .photo").length).toBe(0);
       this.respond()
-      expect(this.form.$(".photos div").length).toBeGreaterThan(0);
+      expect(this.form.$(".photos .photo").length).toBeGreaterThan(0);
     })
   })
 

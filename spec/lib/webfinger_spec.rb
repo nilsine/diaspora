@@ -5,9 +5,9 @@
 require 'spec_helper'
 
 describe Webfinger do
-  let(:host_meta_xrd) { File.open(File.join(Rails.root, 'spec', 'fixtures', 'host-meta.fixture.html')).read }
-  let(:webfinger_xrd) { File.open(File.join(Rails.root, 'spec', 'fixtures', 'webfinger.fixture.html')).read }
-  let(:hcard_xml) { File.open(File.join(Rails.root, 'spec', 'fixtures', 'hcard.fixture.html')).read }
+  let(:host_meta_xrd) { File.open(Rails.root.join('spec', 'fixtures', 'host-meta.fixture.html')).read }
+  let(:webfinger_xrd) { File.open(Rails.root.join('spec', 'fixtures', 'webfinger.fixture.html')).read }
+  let(:hcard_xml) { File.open(Rails.root.join('spec', 'fixtures', 'hcard.fixture.html')).read }
   let(:account){'foo@bar.com'}
   let(:account_in_fixtures){"alice@localhost:9887"}
   let(:finger){Webfinger.new(account)}
@@ -71,6 +71,15 @@ describe Webfinger do
       finger.host_meta_xrd
 
       a_request(:get, redirect_url).should have_been_made
+    end
+    
+    it 'returns false on 404' do
+      url ="https://bar.com/.well-known/host-meta"
+      stub_request(:get, url).
+        to_return(:status => 404, :body => nil)
+
+      finger.get(url).should_not == nil
+      finger.get(url).should == false
     end
   end
 
@@ -176,8 +185,15 @@ describe Webfinger do
   describe '#make_person_from_webfinger' do
     it 'with an hcard and a webfinger_profile, it calls Person.create_from_webfinger' do
       finger.stub(:hcard).and_return("hcard")
+      finger.stub(:webfinger_profile_xrd).and_return("webfinger_profile_xrd")
       finger.stub(:webfinger_profile).and_return("webfinger_profile")
       Person.should_receive(:create_from_webfinger).with("webfinger_profile", "hcard")
+      finger.make_person_from_webfinger
+    end
+    
+    it 'with an false xrd it does not call Person.create_from_webfinger' do
+      finger.stub(:webfinger_profile_xrd).and_return(false)
+      Person.should_not_receive(:create_from_webfinger)
       finger.make_person_from_webfinger
     end
   end

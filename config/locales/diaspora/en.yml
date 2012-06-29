@@ -79,6 +79,8 @@ en:
     helper:
       invalid_fields: "Invalid Fields"
       correct_the_following_errors_and_try_again: "Correct the following errors and try again."
+    post_not_public: "The post you are trying to view is not public!"
+    login_try_again: "Please <a href='%{login_link}'>login</a> and try again."
 
   admins:
     admin_bar:
@@ -90,6 +92,47 @@ en:
       resque_overview: "Resque Overview"
     correlations:
       correlations_count: "Correlations with Sign In Count:"
+    user_search:
+      you_currently: "you currently have %{user_invitation} invites left %{link}"
+      add_invites: "add invites"
+      email_to: "Email to Invite"
+      users: 
+        zero: "%{count} users found"
+        one: "%{count} user found"
+        other: "%{count} users found"
+    weekly_user_stats:
+      current_server: "Current server date is %{date}"
+      amount_of:
+        zero: "amount of new users this week: none"
+        one: "amount of new users this week: %{count}"
+        other: "amount of new users this week: %{count}"
+    stats:
+      week: "Week"
+      2weeks: "2 Week"
+      month: "Month"
+      daily: "Daily"
+      usage_statistic: "Usage Statistics"
+      go: "go"
+      display_results: "Displaying results from the <b>%{segment}</b> segment"
+      posts:
+        zero: "%{count} posts"
+        one: "%{count} post"
+        other: "%{count} posts"
+      comments:
+        zero: "%{count} comments"
+        one: "%{count} comment"
+        other: "%{count} comments"
+      shares:
+        zero: "%{count} shares"
+        one: "%{count} share"
+        other: "%{count} shares"
+      users:
+        zero: "%{count} users"
+        one: "%{count} user"
+        other: "%{count} users"
+      current_segment: "The current segment is averaging <b>%{post_yest}</b> posts per user, from <b>%{post_day}</b>"
+      50_most: "50 Most Popular Tags"
+      tag_name: "Tag Name: <b>%{name_tag}</b> Count: <b>%{count_tag}</b>"
   application:
     helper:
       unknown_person: "unknown person"
@@ -196,6 +239,7 @@ en:
         tag_feature: "feature"
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Community-powered tutorials, how-to, and news"
         email_feedback: "%{link} your feedback, if you prefer"
+        email_link: "Email"
       cubbies:
         heading: "Connect to Cubbi.es"
         explanation: "Cubbi.es is the first Diaspora application under development."
@@ -211,6 +255,7 @@ en:
     aspect_stream:
       stay_updated: "Stay Updated"
       stay_updated_explanation: "Your main stream is populated with all of your contacts, tags you follow, and posts from some creative members of the community."
+      make_something: "Make something"
 
   aspect_memberships:
     destroy:
@@ -221,9 +266,8 @@ en:
   bookmarklet:
     heading: "Bookmarklet"
     post_success: "Posted! Closing!"
-    post_something: "Post something to Diaspora"
-    explanation: "Post to Diaspora from anywhere by bookmarking %{link}."
-    explanation_link_text: "this link"
+    post_something: "Post to Diaspora"
+    explanation: "Post to Diaspora from anywhere by bookmarking this link => %{link}."
 
   comments:
     zero: "no comments"
@@ -239,9 +283,6 @@ en:
   reactions:
     zero: "0 reactions"
     one: "1 reaction"
-    two: "%{count} reactions"
-    few: "%{count} reactions"
-    many: "%{count} reactions"
     other: "%{count} reactions"
 
   contacts:
@@ -296,9 +337,6 @@ en:
       new_messages:
         zero: "No new messages"
         one: "1 new messages"
-        two: "%{count} new messages"
-        few: "%{count} new messages"
-        many: "%{count} new messages"
         other: "%{count} new messages"
     create:
       sent: "Message sent"
@@ -313,21 +351,6 @@ en:
       fullmonth_day: "%B %d"
       birthday: "%B %d"
       birthday_with_year: "%B %d %Y"
-
-  home:
-    show:
-      share_what_you_want: "Share what you want, with whom you want."
-      tagline_first_half: "Share what you want,"
-      tagline_second_half: "with whom you want."
-      already_account: "already have an account?"
-      login_here: "log in here"
-      choice: "Choice"
-      choice_explanation: "Diaspora lets you sort your connections into groups called aspects. Unique to Diaspora, aspects ensure that your photos, stories and jokes are shared only with the people you intend."
-      ownership: "Ownership"
-      ownership_explanation: "You own your pictures, and you shouldn’t have to give that up just to share them. You maintain ownership of everything you share on Diaspora, giving you full control over how it's distributed."
-      simplicity: "Simplicity"
-      simplicity_explanation: "Diaspora makes sharing clean and easy – and this goes for privacy too. Inherently private, Diaspora doesn’t make you wade through pages of settings and options just to keep your profile secure."
-      learn_about_host: "Learn about how to host your own Diaspora server."
 
   invitation_codes:
     excited: "%{name} is excited to see you here."
@@ -353,9 +376,6 @@ en:
       codes_left:
         zero:  "No invites left on this code"
         one:  "One invite left on this code"
-        two:  "%{count} invites left on this code"
-        few:  "%{count} invites left on this code"
-        many:  "%{count} invites left on this code"
         other:  "%{count} invites left on this code"
       aspect: "Aspect"
       already_invited: "The following people have not accepted your invitation:"
@@ -392,103 +412,61 @@ en:
       people_like_this:
         zero: "no likes"
         one: "%{count} like"
-        two: "%{count} likes"
-        few: "%{count} likes"
-        many: "%{count} likes"
         other: "%{count} likes"
       people_like_this_comment:
         zero: "no likes"
         one: "%{count} like"
-        two: "%{count} likes"
-        few: "%{count} likes"
-        many: "%{count} likes"
         other: "%{count} likes"
       people_dislike_this:
         zero: "no dislikes"
         one: "%{count} dislike"
-        two: "%{count} dislikes"
-        few: "%{count} dislikes"
-        many: "%{count} dislikes"
         other: "%{count} dislikes"
 
   notifications:
     started_sharing:
       zero: "%{actors} started sharing with you."
       one: "%{actors} started sharing with you."
-      two: "%{actors} started sharing with you."
-      few: "%{actors} started sharing with you."
-      many: "%{actors} started sharing with you."
       other: "%{actors} started sharing with you."
     private_message:
       zero: "%{actors} sent you a message."
       one: "%{actors} sent you a message."
-      two: "%{actors} sent you a message."
-      few: "%{actors} sent you a message."
-      many: "%{actors} sent you a message."
       other: "%{actors} sent you a message."
     comment_on_post:
       zero: "%{actors} commented on your %{post_link}."
       one: "%{actors} commented on your %{post_link}."
-      two: "%{actors} commented on your %{post_link}."
-      few: "%{actors} commented on your %{post_link}."
-      many: "%{actors} commented on your %{post_link}."
       other: "%{actors} commented on your %{post_link}."
     also_commented:
       zero: "%{actors} also commented on %{post_author}'s %{post_link}."
       one: "%{actors} also commented on %{post_author}'s %{post_link}."
-      two: "%{actors} also commented on %{post_author}'s %{post_link}."
-      few: "%{actors} also commented on %{post_author}'s %{post_link}."
-      many: "%{actors} also commented on %{post_author}'s %{post_link}."
       other: "%{actors} also commented on %{post_author}'s %{post_link}."
     mentioned:
       zero: "%{actors} have mentioned you in a %{post_link}."
       one: "%{actors} has mentioned you in a %{post_link}."
-      two: "%{actors} have mentioned you in a %{post_link}."
-      few: "%{actors} have mentioned you in a %{post_link}."
-      many: "%{actors} have mentioned you in a %{post_link}."
       other: "%{actors} have mentioned you in a %{post_link}."
     liked:
       zero: "%{actors} have liked your %{post_link}."
       one: "%{actors} has liked your %{post_link}."
-      two: "%{actors} have liked your %{post_link}."
-      few: "%{actors} have liked your %{post_link}."
-      many: "%{actors} have liked your %{post_link}."
       other: "%{actors} have liked your %{post_link}."
     reshared:
       zero: "%{actors} have reshared your %{post_link}."
       one: "%{actors} has reshared your %{post_link}."
-      two: "%{actors} have reshared your %{post_link}."
-      few: "%{actors} have reshared your %{post_link}."
-      many: "%{actors} have reshared your %{post_link}."
       other: "%{actors} have reshared your %{post_link}."
     post: "post"
     also_commented_deleted:
       zero: "%{actors} commented on a deleted post."
       one: "%{actors} commented on a deleted post."
-      two: "%{actors} commented on a deleted post."
-      few: "%{actors} commented on a deleted post."
-      many: "%{actors} commented on a deleted post."
       other: "%{actors} commented on a deleted post."
     liked_post_deleted:
       zero: "%{actors} liked your deleted post."
       one: "%{actors} liked your deleted post."
-      two: "%{actors} liked your deleted post."
-      few: "%{actors} liked your deleted post."
-      many: "%{actors} liked your deleted post."
       other: "%{actors} liked your deleted post."
     reshared_post_deleted:
       zero: "%{actors} reshared your deleted post."
       one: "%{actors} reshared your deleted post."
-      two: "%{actors} reshared your deleted post."
-      few: "%{actors} reshared your deleted post."
-      many: "%{actors} reshared your deleted post."
       other: "%{actors} reshared your deleted post."
     mentioned_deleted:
       zero: "%{actors} mentioned you in a deleted post."
       one: "%{actors} mentioned you in a deleted post."
-      two: "%{actors} mentioned you in a deleted post."
-      few: "%{actors} mentioned you in a deleted post."
-      many: "%{actors} mentioned you in a deleted post."
       other: "%{actors} mentioned you in a deleted post."
     index:
       notifications: "Notifications"
@@ -497,23 +475,17 @@ en:
       and_others:
         zero: "and nobody else"
         one: "and one more"
-        two: "and %{count} others"
-        few: "and %{count} others"
-        many: "and %{count} others"
         other: "and %{count} others"
       and: 'and'
     helper:
       new_notifications:
         zero: "No new notifications"
         one: "1 new notification"
-        two: "%{count} new notifications"
-        few: "%{count} new notifications"
-        many: "%{count} new notifications"
         other: "%{count} new notifications"
 
   notifier:
     a_post_you_shared: "a post."
-    email_sent_by_diaspora: "This email was sent by Diaspora.  If you'd like to stop getting emails like this,"
+    email_sent_by_diaspora: "This email was sent by %{pod_name}. If you'd like to stop getting emails like this,"
     click_here: "click here"
     hello: "Hello %{name}!"
     thanks: "Thanks,"
@@ -551,13 +523,14 @@ en:
         
         Click this link to get started
         
-        %{invite_url}
+        [%{invite_url}][1]
         
         
         Love,
         
         The Diaspora* email robot!
-  
+        
+        [1]: %{invite_url}
   people:
     zero: "no people"
     one: "1 person"
@@ -663,9 +636,6 @@ en:
       photos_by:
         zero: "No photos by %{author}"
         one: "One photo by %{author}"
-        two: "Two photos by %{author}"
-        few: "%{count} photos by %{author}"
-        many: "%{count} photos by %{author}"
         other: "%{count} photos by %{author}"
       reshare_by: "Reshare by %{author}"
 
@@ -708,8 +678,15 @@ en:
 
       enter_email: "Enter an email"
       enter_username: "Pick a username (only letters, numbers, and underscores)"
-      enter_password: "Enter a password"
+      enter_password: "Enter a password (six character minimum)"
       enter_password_again: "Enter the same password as before"
+      hey_make: "HEY,<br/>MAKE<br/>SOMETHING."
+      diaspora: "<3 Diaspora*"
+      sign_up: "SIGN UP"
+      email: "EMAIL"
+      username: "USERNAME"
+      password: "PASSWORD"
+      continue: "Continue"
     create:
       success: "You've joined Diaspora!"
     edit:
@@ -739,9 +716,6 @@ en:
       new_requests:
         zero: "no new requests"
         one: "new request!"
-        two: "%{count} new requests!"
-        few: "%{count} new requests!"
-        many: "%{count} new requests!"
         other: "%{count} new requests!"
   reshares:
     reshare:
@@ -750,9 +724,6 @@ en:
       reshare:
         zero: "Reshare"
         one: "1 reshare"
-        two: "%{count} reshares"
-        few: "%{count} reshares"
-        many: "%{count} reshares"
         other: "%{count} reshares"
       show_original: "Show original"
       reshare_confirmation: "Reshare %{author}'s post?"
@@ -782,7 +753,7 @@ en:
       join_me_on_diaspora: "Join me on DIASPORA*"
       click_link_to_accept_invitation: "Follow this link to accept your invitation"
     finder:
-      fetching_contacts: "Diaspora is populating your %{service} friends please check back in a few minutes."
+      fetching_contacts: "Diaspora is populating your %{service} friends, please check back in a few minutes."
       service_friends: "%{service} Friends"
       no_friends: "No Facebook friends found."
     remote_friend:
@@ -804,9 +775,6 @@ en:
       toggle:
         zero: "Add contact"
         one: "In %{count} aspect"
-        two: "In %{count} aspects"
-        few: "In %{count} aspects"
-        many: "In %{count} aspects"
         other: "In %{count} aspects"
     publisher:
       posting: "Posting..."
@@ -841,6 +809,7 @@ en:
       invite_your_friends: "Invite your friends"
       from_facebook: "From Facebook"
       by_email: "By email"
+      share_this: "Share this link via email, blog, or favorite social network!"
     reshare:
       reshare: "Reshare"
     public_explain:
@@ -887,18 +856,12 @@ en:
     too_long:
       zero: "please make your status messages less than %{count} characters"
       one: "please make your status messages less than %{count} character"
-      two: "please make your status messages less than %{count} characters"
-      few: "please make your status messages less than %{count} characters"
-      many: "please make your status messages less than %{count} characters"
       other: "please make your status messages less than %{count} characters"
 
   stream_helper:
     show_comments:
       zero: "No more comments"
       one: "Show one more comment"
-      two: "Show two more comments"
-      few: "Show %{count} more comments"
-      many: "Show %{count} more comments"
       other: "Show %{count} more comments"
     hide_comments: "Hide all comments"
 
@@ -986,13 +949,6 @@ en:
     activity:
       title: "My Activity"
   users:
-    logged_out:
-      signed_out: "You've signed out of Diaspora*"
-      go_mobile: "Now go mobile."
-      simply_visit: "Simply visit"
-      on_your_mobile_device: "on your mobile device to access Diaspora* mobile."
-      works_on_modern: "Works on all modern smartphones"
-
     edit:
       export_data: "Export Data"
       photo_export_unavailable: "Photo exporting currently unavailable"

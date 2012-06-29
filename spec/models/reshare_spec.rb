@@ -53,6 +53,20 @@ describe Reshare do
     end
   end
 
+  describe '#nsfw' do
+    before do
+      sfw  = Factory(:status_message, :author => alice.person, :public => true)
+      nsfw = Factory(:status_message, :author => alice.person, :public => true, :text => "This is #nsfw")
+      @sfw_reshare = Factory(:reshare, :root => sfw)
+      @nsfw_reshare = Factory(:reshare, :root => nsfw)
+    end
+
+    it 'deletates #nsfw to the root post' do
+      @sfw_reshare.nsfw.should_not be_true
+      @nsfw_reshare.nsfw.should be_true
+    end
+  end
+
   describe '#notification_type' do
     before do
       sm = Factory(:status_message, :author => alice.person, :public => true)
@@ -64,6 +78,19 @@ describe Reshare do
 
     it 'returns "Reshared" for the original post author' do
       @reshare.notification_type(alice, @reshare.author).should == Notifications::Reshared
+    end
+  end
+
+  describe '#absolute_root' do
+    before do
+      @sm = Factory(:status_message, :author => alice.person, :public => true)
+      rs1 = Factory(:reshare, :root=>@sm)
+      rs2 = Factory(:reshare, :root=>rs1)
+      @rs3 = Factory(:reshare, :root=>rs2)
+    end
+
+    it 'resolves root posts to the top level' do
+      @rs3.absolute_root.should == @sm
     end
   end
 

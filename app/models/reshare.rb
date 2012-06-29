@@ -42,7 +42,11 @@ class Reshare < Post
   end
 
   def photos
-    self.root ? root.photos : nil
+    self.root ? root.photos : []
+  end
+
+  def frame_name
+    self.root ? root.frame_name : nil
   end
 
   def receive(recipient, sender)
@@ -59,6 +63,19 @@ class Reshare < Post
 
   def notification_type(user, person)
     Notifications::Reshared if root.author == user.person
+  end
+
+  def nsfw
+    root.try(:nsfw)
+  end
+
+  def absolute_root
+    current = self
+    while( current.is_a?(Reshare) )
+      current = current.root
+    end
+
+    current
   end
 
   private

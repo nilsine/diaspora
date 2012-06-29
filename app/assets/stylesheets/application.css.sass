@@ -1,5 +1,6 @@
 @import 'ui.css.sass'
 @import '_mixins.css.scss'
+@import 'new_styles/_spinner'
 
 /* ====== media ====== */
 .media
@@ -557,7 +558,7 @@ ul.as-selections
     :right 4px
 
 
-.stream_element .reshare
+.stream_element .post-content .reshare
   :border-left 2px solid #ddd
 
 form.new_comment
@@ -596,18 +597,6 @@ form.new_comment
       h4
         :font-weight bold
 
-#paginate, #infscr-loading
-  :display block
-
-  :margin
-    :top 10px
-
-  :padding 8px 0
-  :text-align center
-  :width 100%
-  img
-    :border none
-
 #photo_container
   :text
     :align center
@@ -637,6 +626,8 @@ form.new_comment
 input:not([type='submit']):not([type='reset']):not([type='hidden']):not(.as-input),
 textarea
   @include border-radius(2px)
+  :background-color #fff
+  :color #000
   :margin-top 1px
   :font
     :family "Arial", "Helvetica", sans-serif
@@ -1828,6 +1819,10 @@ ul#press_logos
   .collapsible
     :overflow hidden
     :position relative
+    p
+      :margin 0 0 0.8em
+    p:last-of-type
+      :margin 0
 
     .expander
       :position absolute
@@ -1848,20 +1843,17 @@ ul#press_logos
 
     .oembed
       :background image-url('ajax-loader2.gif') no-repeat center center
-      :display inline-block
-      :max-width 100%
+      :float left
+      :width 100%
 
       .thumb
         :position relative
         :cursor pointer
+        @include video-overlay()
 
-        .video-overlay
-          :background image-url('video-overlay.png') no-repeat center center
-          :position absolute
-          :top 0
-          :left 0
-          :right 0
-          :bottom 0
+      iframe, .thumb img
+        :width 100%
+
 
 .conversation_participants
   :z-index 3
@@ -2863,7 +2855,7 @@ a.toggle_selector
   :background-color #aaa
   &:hover
     :opacity 0.85 !important
-  &:visible
+  &.visible
     :opacity 0.5
 
 .float-right

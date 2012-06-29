@@ -10,9 +10,9 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => citie
 
-require File.join(File.dirname(__FILE__), "..", "config", "environment")
+require Rails.root.join('config', 'environment')
 require 'factory_girl_rails'
-require File.join(File.dirname(__FILE__), "..", "spec", "helper_methods")
+require Rails.root.join('spec', 'helper_methods')
 include HelperMethods
 
 alice = Factory(:user_with_aspect, :username => "alice", :password => 'evankorth')
@@ -41,22 +41,14 @@ connect_users(bob, bob.aspects.first, alice, alice.aspects.first)
 connect_users(bob, bob.aspects.first, eve, eve.aspects.first)
 puts "done!"
 
-print "Adding Facebook contacts... "
-bob_facebook = Factory(:service, :type => 'Services::Facebook', :user_id => bob.id, :uid => bob.username)
-ServiceUser.import((1..40).map{|n| Factory.build(:service_user, :service => bob_facebook)} +
-                   [Factory.build(:service_user, :service => bob_facebook, :uid => eve.username, :person => eve.person,
-                                 :contact => bob.contact_for(eve.person))])
-
-eve_facebook = Factory(:service, :type => 'Services::Facebook', :user_id => eve.id, :uid => eve.username)
-ServiceUser.import((1..40).map{|n| Factory.build(:service_user, :service => eve_facebook) } +
-                   [Factory.build(:service_user, :service => eve_facebook, :uid => bob.username, :person => bob.person,
-                                  :contact => eve.contact_for(bob.person))])
-
-
+print "making Bob an admin and beta... "
+Role.add_beta(bob.person)
+Role.add_admin(bob.person)
 puts "done!"
 
-require File.join(File.dirname(__FILE__), '..', 'spec', 'support', 'fake_resque')
-require File.join(File.dirname(__FILE__), '..', 'spec', 'support', 'user_methods')
+
+require Rails.root.join('spec', 'support', 'fake_resque')
+require Rails.root.join('spec', 'support', 'user_methods')
 
 print "Seeding post data..."
 time_interval = 1000

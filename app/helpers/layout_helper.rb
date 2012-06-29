@@ -7,6 +7,8 @@
 # to do so you may need to add this line to your ApplicationController
 #   helper :layout
 module LayoutHelper
+  include ApplicationHelper
+
   def title(page_title, show_title = true)
     content_for(:title) { page_title.to_s }
     @show_title = show_title
@@ -14,7 +16,7 @@ module LayoutHelper
 
   def page_title(text=nil)
     return text unless text.blank?
-    current_user ? current_user.name : t("application.helper.diaspora_alpha")
+    pod_name
   end
 
   def set_asset_host
@@ -46,6 +48,8 @@ module LayoutHelper
   end
 
   def current_user_atom_tag
+    return #temp hax
+
     return unless @person.present?
     content_tag(:link, '', :rel => 'alternate', :href => "#{@person.public_url}.atom", :type => "application/atom+xml", :title => t('.public_feed', :name => @person.name))
   end
@@ -61,7 +65,7 @@ module LayoutHelper
   end
 
   def include_base_css_framework(use_bootstrap=false)
-    if use_bootstrap || @aspect == :getting_started || @page == :logged_out
+    if use_bootstrap || @aspect == :getting_started || @page == :experimental
       stylesheet_link_tag 'bootstrap-complete'
     else
       stylesheet_link_tag 'blueprint', :media => 'screen'
@@ -84,8 +88,6 @@ module LayoutHelper
   end
 
   def flash_messages
-    return if @page == :logged_out
-
     flash.map do |name, msg|
       content_tag(:div, :id => "flash_#{name}") do
         content_tag(:div, msg, :class => 'message')

@@ -38,6 +38,7 @@ pl:
       preparing_your_stream: "Przygotowanie spersonalizowanego strumienia..."
     header:
       admin: "Administrator"
+      close: "zamknij"
       contacts: "Kontakty"
       home: "Strona główna"
       log_out: "Wyloguj"
@@ -64,6 +65,8 @@ pl:
       public: "Publiczny - wpis będzie widoczny dla wszystkich i można go znaleźć przez wyszukiwarki"
     reshares:
       duplicate: "Już przekaza@{m:łeś|f:łaś|n:no} dalej ten wpis!"
+      post: "Przesłać dalej wpis użytkownika <%= name %>?"
+      successful: "Wpis został pomyślnie przesłany dalej!"
     search_for: "Znajdź: <%= name %>"
     show_more: "wyświetl więcej"
     stream:
@@ -112,7 +115,7 @@ pl:
       minutes: "%d minut"
       month: "około miesiąca"
       months: "%d miesięcy"
-      prefixAgo: ""
+      prefixAgo: " "
       prefixFromNow: "javascripts:timeago:prefixFromNow"
       seconds: "mniej niż minutę"
       suffixAgo: "temu"
@@ -125,6 +128,7 @@ pl:
     viewer:
       comment: "Skomentuj"
       follow_post: "Obserwuj wpis"
+      home: "GŁÓWNA"
       like: "Lubię to!"
       reshare: "Przekaż dalej"
       reshared: "Przekazano dalej"

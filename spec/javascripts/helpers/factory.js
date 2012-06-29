@@ -57,21 +57,50 @@ factory = {
       "provider_display_name" : null,
       "created_at" : "2012-01-03T19:53:13Z",
       "interacted_at" : '2012-01-03T19:53:13Z',
-      "last_three_comments" : null,
       "public" : false,
       "guid" : this.guid(),
       "image_url" : null,
       "o_embed_cache" : null,
       "photos" : [],
       "text" : "jasmine is bomb",
-      "reshares_count" : 0,
       "id" : this.id.next(),
       "object_url" : null,
       "root" : null,
       "post_type" : "StatusMessage",
-      "likes_count" : 0,
-      "comments_count" : 0
+      "interactions" : {
+        "reshares_count" : 0,
+        "likes_count" : 0,
+        "comments_count" : 0,
+        "comments" : [],
+        "likes" : [],
+        "reshares" : []
+      }
     }
+  },
+
+  profile : function(overrides) {
+    var id = overrides && overrides.id || factory.id.next()
+    var defaults = {
+      "bio": "I am a cat lover and I love to run",
+      "birthday": "2012-04-17",
+      "created_at": "2012-04-17T23:48:35Z",
+      "diaspora_handle": "bob@localhost:3000",
+      "first_name": "Bob",
+      "full_name": "bob grimm",
+      "gender": "robot",
+      "id": id,
+      "image_url": "http:\/\/localhost:3000\/assets\/user\/wolf.jpg",
+      "image_url_medium": "http:\/\/localhost:3000\/assets\/user\/wolf.jpg",
+      "image_url_small": "http:\/\/localhost:3000\/assets\/user\/wolf.jpg",
+      "last_name": "Grimm",
+      "location": "Earth",
+      "nsfw": false,
+      "person_id": "person" + id,
+      "searchable": true,
+      "updated_at": "2012-04-17T23:48:36Z"
+    }
+
+    return new app.models.Profile(_.extend(defaults, overrides))
   },
 
   photoAttrs : function(overrides){

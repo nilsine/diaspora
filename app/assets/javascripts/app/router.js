@@ -1,59 +1,93 @@
 app.Router = Backbone.Router.extend({
   routes: {
+    //new hotness
+    "stream?ex=true:params": 'newStream',
+    "stream?ex=true": 'newStream',
+    "people/:id?ex=true": "newProfile",
+    "posts/new" : "composer",
+    "posts/:id": "singlePost",
+    "posts/:id/next": "siblingPost",
+    "posts/:id/previous": "siblingPost",
+    "p/:id": "singlePost",
+    "framer": "framer",
+
+    //oldness
     "activity": "stream",
     "stream": "stream",
-
     "participate": "stream",
     "explore": "stream",
-
     "aspects": "stream",
     "aspects:query": "stream",
-
     "commented": "stream",
     "liked": "stream",
     "mentions": "stream",
-    "people/:id": "stream",
-    "people/:id/photos": "photos",
-    "u/:name": "stream",
     "followed_tags": "stream",
     "tags/:name": "stream",
+    "people/:id/photos": "photos",
 
-    "posts/new" : "composer",
-    "posts/:id": "singlePost",
-    "p/:id": "singlePost",
-    "framer": "framer"
+    "people/:id": "profile",
+    "u/:name": "profile"
   },
 
-  stream : function() {
-    app.stream = new app.models.Stream();
-    app.page = new app.views.Stream({model : app.stream});
-    app.publisher = app.publisher || new app.views.Publisher({collection : app.stream.posts});
+  newStream : function() {
+    this.renderPage(function(){ return new app.pages.Stream()});
+  },
 
-    var streamFacesView = new app.views.StreamFaces({collection : app.stream.posts});
+  newProfile : function(personId) {
+    this.renderPage(function(){ return new app.pages.Profile({ personId : personId })});
+  },
+
+  composer : function(){
+    this.renderPage(function(){ return new app.pages.Composer()});
+  },
+
+  framer : function(){
+    this.renderPage(function(){ return new app.pages.Framer()});
+  },
+
+  singlePost : function(id) {
+    this.renderPage(function(){ return new app.pages.PostViewer({ id: id })});
+  },
+
+  siblingPost : function(){ //next or previous
+    var post = new app.models.Post();
+    post.bind("change", setPreloadAttributesAndNavigate)
+    post.fetch({url : window.location})
+
+    function setPreloadAttributesAndNavigate(){
+      window.preloads.post = post.attributes
+      app.router.navigate(post.url(), {trigger:true, replace: true})
+    }
+  },
+
+  renderPage : function(pageConstructor){
+    app.page && app.page.unbind && app.page.unbind() //old page might mutate global events $(document).keypress, so unbind before creating
+    app.page = pageConstructor() //create new page after the world is clean (like that will ever happen)
+    $("#container").html(app.page.render().el)
+  },
+
+  //below here is oldness
+
+  stream : function(page) {
+    app.stream = new app.models.Stream();
+    app.stream.fetch();
+    app.page = new app.views.Stream({model : app.stream});
+    app.publisher = app.publisher || new app.views.Publisher({collection : app.stream.items});
+
+    var streamFacesView = new app.views.StreamFaces({collection : app.stream.items});
 
     $("#main_stream").html(app.page.render().el);
     $('#selected_aspect_contacts .content').html(streamFacesView.render().el);
   },
 
+  profile : function(page) {
+    this.stream()
+  },
+
   photos : function() {
-    app.photos = new app.models.Photos();
+    app.photos = new app.models.Stream([], {collection: app.collections.Photos});
     app.page = new app.views.Photos({model : app.photos});
     $("#main_stream").html(app.page.render().el);
-  },
-
-  composer : function(){
-    var page = new app.pages.Composer();
-    $("#container").html(page.render().el)
-  },
-
-  framer : function(){
-    var page = new app.pages.Framer();
-    $("#container").html(page.render().el)
-  },
-
-  singlePost : function(id) {
-    var page = new app.pages.PostViewer({ id: id });
-    $("#container").html(page.el);
-   }
+  }
 });
 

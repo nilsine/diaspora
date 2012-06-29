@@ -1,80 +1,25 @@
-@import "_new_mixins";
+html,
+body {
+  /* hack to ensure fixed elements at height: 100%; are in relation to the window */
+  max-height : 100%;
+}
+
+body {
+  background-image : image_url("texture/light-bg.png");
+  padding : none;
+
+  &.lock {
+    overflow: hidden;
+  }
+}
+
+/* new link color */
+$link-blue : rgb(42,156,235);
+a { color : $link-blue  }
 
 /* bootstrap extentions */
 .icon-red   { background-image: image_url("img/glyphicons-halflings-red.png");   }
-.icon-green { background-image: image_url("img/glyphicons-halflings-green.png"); }
 .icon-blue  { background-image: image_url("img/glyphicons-halflings-blue.png");  }
-
-.photoset {
-  @include center(horizontal);
-  width: 100%;
-}
-
-.rich-media {
-  //z-index : -5000; //so the framer controls don't get lost
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-
-  text-align: center;
-  background-color: $night-background-color;
-
-  p {
-    @include media-text();
-    color: #999;
-
-    a {
-      font-weight: normal;
-      font-size: smaller;
-    }
-  }
-
-  iframe {
-    @include box-shadow(0, 3px, 15px, #000);
-
-    width: 857px;
-    height: 480px;
-    max-width: 100%;
-    max-height: 100%;
-  }
-}
-
-.rich-media-container {
-  display: table;
-  height: 100%;
-  width: 100%;
-}
-
-.rich-media-container2 {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.header {
-  position: fixed;
-
-  /* position absolute for mobile */
-  @media (max-width: 480px) {
-    position: absolute !important;
-  }
-
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-#header-container {
-  padding: 1.2%;
-
-  /* don't pad the header if we're mobile */
-  @media (max-width: 480px) {
-    padding: 0 !important;
-  }
-}
 
 .avatar {
   &.micro {
@@ -89,46 +34,47 @@
 }
 
 .author-name {
+  font-family : Roboto;
   color: inherit;
-  font-weight: bold;
 }
 
-#post-author {
-  @include border-radius();
+#author-info {
+  position : absolute;
+  z-index : 300;
 
-  border: 1px solid rgba(255,255,255,0.2);
-  border-top: 1px solid rgba(255,255,255,0.5);
-
-  float: left;
-  margin: 0;
-
-  padding: 5px;
-  padding-right: 10px;
-
-  background-color: rgba(255,255,255,0.6);
-
-/* don't pad the header if we're mobile */
-  @media (max-width: 480px) {
-    @include border-radius(0);
-    background-color: rgba(255,255,255,0.4);
-    width: 100% !important;
-    border: none !important;
-    padding: none !important;
+  .author-name {
+    color: #555;
   }
 
-  max-height: 35px;
-
-  .avatar {
-    @include border-radius();
+  .bd {
+    margin-top : 5px;
+    display: inline-block;
   }
 
   .post-time,
   .icon-retweet {
-    color: #000;
+    color: #555;
     @include opacity(0.5);
   }
 }
 
+#post-author {
+  margin : 0;
+  padding : 10px;
+
+  &.status-with-photo-backdrop,
+  &.Wallpaper {
+    .author-name {
+      color : #fff;
+    }
+
+    .post-time,
+    .icon-retweet {
+      color: #fff;
+      @include opacity(0.5);
+    }
+  }
+}
 
 .post-view {
   display: table;
@@ -143,36 +89,59 @@
   height: 100%;
   width: 100%;
 
-  img {
+  img,
+  iframe {
     @include photo-shadow();
+  }
+
+  iframe {
+    width: 857px;
+    height: 480px;
+    max-width: 100%;
   }
 }
 
 article { //mood posts
   //default frame show styles
-  $big-text-size : 3em;
-  $medium-text-size : 2em;
-  $small-text-size: 1.5em;
+  $big-text-size : 2.5em;
+  $medium-text-size : 1.5em;
+  $small-text-size: 1em;
   width: 960px;
   margin: 0 auto;
+
+  img {
+    max-height: 70%;
+    border : 10px solid #fff;
+  }
+
+  .photo_viewer {
+    margin-bottom : 20px;
+  }
 
   @include centered-frame();
   .container {
     padding: 70px 0;
+    max-width: 85%;
+  }
+
+  header {
+    padding : 0 100px;
   }
 
   header, header p{
   //big text
-  @include media-text();
+    @include media-text();
     font-size: $big-text-size;
+    line-height: 1.5em;
   }
 
   section.body{
-    p { font-size: $small-text-size;}
+    p { font-size: $small-text-size; }
 
     &.short_body{
       p{
         font-size: $medium-text-size;
+        margin-top: .5em;
       }
     }
   }
@@ -180,6 +149,10 @@ article { //mood posts
   &.night{
     background-color : $night-background-color;
     color : $night-text-color;
+
+    #author-info {
+      color : $night-text-color;
+    }
   }
 
   &.newspaper {
@@ -188,7 +161,7 @@ article { //mood posts
     text-align: left;
 
     .container {
-      width: 600px;
+      max-width: 600px;
     }
 
     .photo_viewer {
@@ -199,7 +172,7 @@ article { //mood posts
 
     header {
       margin-bottom: 1em;
-      line-height: 1em;
+      line-height: 1.2em;
     }
 
     .body p {
@@ -214,26 +187,15 @@ article { //mood posts
     color : #fff;
   }
 
-  &.multi-photo {
-    p {
-      @include media-text();
-    }
+  .img-bounding-box {
+    margin : 10px;
+    display : inline-block;
+    text-align : left;
+  }
 
-    .img-bounding-box {
-      display: table-cell;
-      text-align: center;
-      vertical-align: middle;
-
-      padding: 20px;
-      height: 400px;
-      width: 300px;
-    }
-
-    img {
-      @include photo-shadow();
-      max-width: 100%;
-      max-height: 100%;
-    }
+  img {
+    max-height: 400px;
+    max-width: 400px;
   }
 }
 
@@ -277,7 +239,6 @@ article { //mood posts
 
 .photo-fill {
   @include background-cover();
-  z-index : -5000; //so the framer controls don't get lost
   position: absolute;
   top: 0;
   left: 0;
@@ -302,101 +263,65 @@ article { //mood posts
 
 $bring-dark-accent-forward-color: #DDD;
 
-
-
-div[data-template=flow] {
-  display : table;
-  width : 100%;
-  height : 100%;
+#top-right-nav {
+  z-index: 10;
   position : absolute;
-}
+  right : 10px;
+  top : 10px;
 
-.flow-content {
-  display : table;
-  width : 100%;
-  height : 100%;
-}
+  & > a {
+    @include transition(opacity);
+    @include opacity(0.4);
 
-.post-form {
-  display : table-cell;
-  vertical-align : middle;
-}
-
-.flow-controls {
-  @include info-container-base();
-  z-index: 999;
-
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-
-  padding: 20px 0;
-  max-height: 68px;
-
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-
-  .controls {
-    margin: 0 auto;
-    max-width: 960px;
-
-    text-align: center;
-
-    button {
-      float : right;
-    }
-  }
-
-  .aspect-selector {
-    float: left;
-
-    i {
-      display: none;
-    }
-
-    .selected i {
-      display: inline-block;
-      position: absolute;
-      left : 3px;
-      margin-top : 1px;
-    }
-
-    a {
-      display : block;
-
-      span {
-        padding-left: 5px;
-      }
-    }
-  }
-
-  .service-selector {
-    float: left;
-    margin-left: 100px;
-
-  }
-
-  .dropdown-menu {
-    bottom : 0;
-    top: auto;
-    text-align: left;
-  }
-
-  a.mood {
-    @include border-radius();
-    margin-right: 20px;
-    padding: 5px;
-    color: #999;
-    font-size: 20px;
-
-    &#selected_mood {
-      background-color: #222;
-    }
+    margin-left : 5px;
 
     &:hover {
-      background-color: #222;
-      text-decoration: none;
+      @include opacity(0.75);
+      text-decoration : none;
     }
   }
 }
 
+#header {
+  position : fixed;
+  top : 0;
+  width : 100%;
+  padding : 15px;
+  z-index : 30;
+
+  -webkit-box-shadow : inset 0 -10px 10px -8px rgba(0,0,0,0.8);
+  -moz-box-shadow : inset 0 -10px 10px -8px rgba(0,0,0,0.8);
+
+  border-bottom : 1px solid #333;
+
+  color : #fff;
+  background : {
+    color : #333;
+    size : cover;
+    attachment : fixed;
+  }
+
+  h1 {
+    @include opacity(0.4);
+  }
+}
+
+/* bootstrap label fixes for Roboto */
+.label {
+  padding : 2px 5px;
+  padding-bottom : 3px;
+
+  span {
+    display : inline-block;
+    position : relative;
+    top : 1px;
+    font-family : Roboto-Bold;
+  }
+}
+
+/* responsive */
+@media (max-width: 767px) {
+  body {
+    padding : 0;
+ }
+}

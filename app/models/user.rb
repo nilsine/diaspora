@@ -2,8 +2,8 @@
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-require File.join(Rails.root, 'lib/salmon/salmon')
-require File.join(Rails.root, 'lib/postzord/dispatcher')
+require Rails.root.join('lib', 'salmon', 'salmon')
+require Rails.root.join('lib', 'postzord', 'dispatcher')
 
 class User < ActiveRecord::Base
   include Encryptor::Private
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   serialize :hidden_shareables, Hash
 
   has_one :person, :foreign_key => :owner_id
-  delegate :public_key, :posts, :photos, :owns?, :diaspora_handle, :name, :public_url, :profile, :first_name, :last_name, :participations, :to => :person
+  delegate :guid, :public_key, :posts, :photos, :owns?, :diaspora_handle, :name, :public_url, :profile, :first_name, :last_name, :participations, :to => :person
 
   has_many :invitations_from_me, :class_name => 'Invitation', :foreign_key => :sender_id
   has_many :invitations_to_me, :class_name => 'Invitation', :foreign_key => :recipient_id
@@ -59,14 +59,13 @@ class User < ActiveRecord::Base
 
   has_many :notifications, :foreign_key => :recipient_id
 
-  has_many :authorizations, :class_name => 'OAuth2::Provider::Models::ActiveRecord::Authorization', :foreign_key => :resource_owner_id
-  has_many :applications, :through => :authorizations, :source => :client
 
   before_save :guard_unconfirmed_email,
               :save_person!
 
-
-  attr_accessible :getting_started,
+  attr_accessible :username,
+                  :email,
+                  :getting_started,
                   :password,
                   :password_confirmation,
                   :language,
@@ -75,7 +74,8 @@ class User < ActiveRecord::Base
                   :invitation_identifier,
                   :show_community_spotlight_in_stream,
                   :auto_follow_back,
-                  :auto_follow_back_aspect_id
+                  :auto_follow_back_aspect_id,
+                  :remember_me
 
 
   def self.all_sharing_with_person(person)
@@ -104,6 +104,10 @@ class User < ActiveRecord::Base
 
   def unread_message_count
     ConversationVisibility.sum(:unread, :conditions => "person_id = #{self.person.id}")
+  end
+
+  def beta?
+    @beta ||= Role.is_beta?(self.person)
   end
 
   #@deprecated
@@ -430,7 +434,12 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    AppConfig[:admins].present? && AppConfig[:admins].include?(self.username)
+    Role.is_admin?(self.person)
+  end
+
+  def role_name
+    role = Role.find_by_person_id_and_name(self.person.id, 'beta')
+    role ? role.name : 'user'
   end
 
   def guard_unconfirmed_email

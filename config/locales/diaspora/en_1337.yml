@@ -150,7 +150,6 @@ en_1337:
   back: "<-"
   bookmarklet:
     explanation: "5P4M FR0M 4NYWH3R3, 4NY71M3! %{link}."
-    explanation_link_text: "7H15 L1NK"
     heading: "B00KM4RKL37"
     post_something: "5P4M 50M37H1NG 2 D*"
     post_success: "5P4MM3D! CL051NG!"
@@ -230,20 +229,6 @@ en_1337:
   fill_me_out: "F1LL M3 0U7!"
   find_people: "F1ND N00B5 0R #74G5"
   hide: "PWN?"
-  home:
-    show:
-      already_account: "4LR34DY H4V3 4N 4CC0UN7?"
-      choice: "CH01C3"
-      choice_explanation: "D* L375 U 50R7 Y0UR N00B5 1N GR0UP5 C4LL3D 45P3C75! UN1QU3 70 D*, 45P3C75 3N5UR3 7H47 Y0UR 74RG375, J0K35 4ND PR0N 4R3 5H4R3D 0NLY W17H 7H3 N00B5 U W4N7 2!"
-      learn_about_host: "L34RN 4B0U7 H0W 2 H057 Y0UR 0WN D* 53RV3R!"
-      login_here: "L0G 1N H3R3!"
-      ownership: "0WN(3R5H1P)"
-      ownership_explanation: "U 0WN Y0UR PR0N, 4ND U 5H0ULDN7 H4V3 2 G1V3 7H47 UP JU57 2 5H4R3 17! U M41N741N 0WN3R5H1P 0N 3V3RY7H1NG U 5H4R3 0N D*, G1V1NG U FULL C0N7R0L 0V3R H0W 175 C0N7R1BU73D!"
-      share_what_you_want: "5P4M WH0 U W4N7, W17H WH47 U W4N7!"
-      simplicity: "51MPL1C17Y"
-      simplicity_explanation: "D* M4K35 5H4R1NG CL34N 4ND 345Y F0R N00B5 – 4ND 7H15 G035 F0R PR1V4CY 2! 1NH3R3N7LY PR1V473, D* D035N7 M4K3 U W4D3 7HR0UGH P5G35 0F 53771NG5 4ND 0P710N5 JU57 2 K33P Y0UR PR0F1L3 53CUR3!"
-      tagline_first_half: "5P4M WH0 U W4N7,"
-      tagline_second_half: "W17H WH47 U W4N7!"
   invitations:
     a_facebook_user: "4 F4C3B00K N00B!"
     check_token:
@@ -261,7 +246,6 @@ en_1337:
     new:
       already_invited: "7H3 F0LL0W1NG N00B5 F4C3P4LM3D 7H3M53LV35:"
       aspect: "45P3C7"
-      comma_seperated_plz: "U C4N 5P4M MUL71PL3 M41L5, 53P3R473 7H3M BY 4 C0MM4!"
       if_they_accept_info: "1F 7H3Y 4CC3P7, 7H3Y W1LL B3 4DD3D 2 7H3 45P3C7 U 1NV173D 7H3M!"
       invite_someone_to_join: "5P4M 50M30N3 2 J01N D*!"
       personal_message: "P3R50N4L M3554G3"
@@ -813,12 +797,6 @@ en_1337:
       community_welcome: "7H3 D* C0MMUN17Y 15 H4PPY 2 H4V3 U 4B04RD!"
       hashtag_explanation: "H45H74G5 4LL0W U 2 74LK 4B0U7 4ND F0LL0W Y0UR 1N73R3575! 7H3YR3 4L50 4 GR347 W4Y 2 F1ND N3W N00B5 0N D*!"
       what_facebook_does: "2 D*. 7H15 W1LL PULL UR N4M3 4ND P1C, 4ND 3N4BL3 CR055 P0571NG! "
-    logged_out:
-      go_mobile: "N0W G0 M0B1L3!"
-      on_your_mobile_device: "0N Y0UR M0B1L3 D3V1C3 2 4CC355 D* M0B1L3!"
-      signed_out: "U H4V3 51GN3D 0U7 0F D*!"
-      simply_visit: "51MPLY V1517"
-      works_on_modern: "W0RK5 0N 4LL M0D3RN 5M4R7PH0N35!"
     public:
       does_not_exist: "U53R %{username} D035 N07 3X157!"
     update:

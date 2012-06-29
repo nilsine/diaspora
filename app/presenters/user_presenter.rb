@@ -11,13 +11,24 @@ class UserPresenter
         :unread_messages_count => unread_messages_count,
         :admin => admin,
         :aspects => aspects,
-        :services => services
+        :services => services,
+        :following_count => self.user.contacts.receiving.count,
+        :configured_services => self.configured_services,
+        :wallpaper => self.wallpaper
       }
     ).to_json(options)
   end
 
   def services
     ServicePresenter.as_collection(user.services)
+  end
+
+  def configured_services
+    user.services.map{|service| service.provider }
+  end
+
+  def wallpaper
+    user.person.profile.wallpaper.url
   end
 
   def aspects

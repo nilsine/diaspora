@@ -1,5 +1,5 @@
 require 'spec_helper'
-require File.join(Rails.root, 'spec', 'shared_behaviors', 'stream')
+require Rails.root.join('spec', 'shared_behaviors', 'stream')
 
 describe Stream::Multi do
   before do
@@ -36,7 +36,7 @@ describe Stream::Multi do
     end
 
     it 'returns includes new user hashtag' do
-      @stream.send(:publisher_prefill).should include("#NewHere")
+      @stream.send(:publisher_prefill).should match(/#NewHere/i)
     end
 
     it 'includes followed hashtags' do

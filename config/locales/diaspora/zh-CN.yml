@@ -123,7 +123,6 @@ zh-CN:
   back: "后退"
   bookmarklet:
     explanation: "%{link} 收藏这个链接，即可随时发布新内容"
-    explanation_link_text: "这个链接"
     heading: "Diaspora Bookmarklet"
     post_something: "发布些新内容到Diaspora"
     post_success: "发布完成！关闭中！"
@@ -193,20 +192,6 @@ zh-CN:
   fill_me_out: "填写我"
   find_people: "Find people"
   hide: "隐藏"
-  home:
-    show:
-      already_account: "已经有帐号了吗？"
-      choice: "选择"
-      choice_explanation: "Diaspora 让你将您的关系分成多个视图，每个视图是您生活的不同部分。这是Diaspora首创，用来确保您的照片、经历和笑话，只与您所希望分享的人分享。"
-      learn_about_host: "学习如何架设您自己的Diaspora服务器。"
-      login_here: "从这里登录"
-      ownership: "所有权"
-      ownership_explanation: "你拥有您的图片，且不因为分享而失去该权利。在Diaspora，所有你分享的内容，你都持有所有权，你可以控制它们的发布。"
-      share_what_you_want: "分享您想分享的内容，给您想分享给的人。"
-      simplicity: "简单"
-      simplicity_explanation: "Diaspora让分享变得干净而简单，对隐私设置也是这样。以隐私为出发点，Diaspora 让你不必千辛万苦的调整设置，就能保护您的个人信息安全。"
-      tagline_first_half: "分享您想分享的内容，"
-      tagline_second_half: "给您想分享给的人。"
   invitations:
     check_token:
       not_found: "找不到该邀请码"
@@ -220,7 +205,6 @@ zh-CN:
     new:
       already_invited: "已邀请过"
       aspect: "视图"
-      comma_seperated_plz: "你可以输入多个邮箱，输入多个时以逗号分隔。"
       if_they_accept_info: "如果他们接受，就会自动被加入到您所邀请的视图中。"
       invite_someone_to_join: "邀请好友来加入到Diaspora！"
       language: "语言"
@@ -720,8 +704,6 @@ zh-CN:
       your_handle: "您的 diaspora 帐号"
     getting_started:
       what_facebook_does: "to Diaspora. This will pull your name and photo, and enable cross-positng."
-    logged_out:
-      signed_out: "您已经退出 Diaspora* 了，欢迎再度光临！"
     public:
       does_not_exist: "不存在 %{username} 这个用户！"
     update:

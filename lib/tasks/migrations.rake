@@ -6,7 +6,7 @@ namespace :migrations do
 
   desc 'copy all hidden share visibilities from share_visibilities to users. Can be run with the site still up.'
   task :copy_hidden_share_visibilities_to_users => [:environment] do
-    require File.join(Rails.root, 'lib', 'share_visibility_converter')
+    require Rails.root.join('lib', 'share_visibility_converter')
     ShareVisibilityConverter.copy_hidden_share_visibilities_to_users
   end
 
@@ -73,5 +73,40 @@ namespace :migrations do
       end
     }
 
+  end
+
+  # removes hashtags with uppercase letters and re-attaches
+  # the posts to the lowercase version
+  task :rewire_uppercase_hashtags => :environment do
+    evil_tags = ActsAsTaggableOn::Tag.where("lower(name) != name")
+    puts "found #{evil_tags.count} tags to convert..."
+
+    evil_tags.each_with_index do |tag, i|
+      good_tag = ActsAsTaggableOn::Tag.find_or_create_by_name(tag.name.downcase)
+      puts "++ '#{tag.name}' has #{tag.taggings.count} records attached"
+      deleteme = []
+
+      tag.taggings.each do |tagging|
+        deleteme << tagging
+      end
+
+      deleteme.each do |tagging|
+        #tag.taggings.delete(tagging)
+        good_tag.taggings << tagging
+      end
+
+      puts "-- converted '#{tag.name}' to '#{good_tag.name}' with #{deleteme.count} records"
+      puts "\n## #{i} tags processed\n\n" if (i % 50 == 0)
+    end
+  end
+
+  task :remove_uppercase_hashtags => :environment do
+    evil_tags = ActsAsTaggableOn::Tag.where("lower(name) != name")
+    evil_tags.each do |tag|
+      next if tag.taggings.count > 0 # non-ascii tags
+
+      puts "removing '#{tag.name}'..."
+      tag.destroy
+    end
   end
 end

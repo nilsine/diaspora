@@ -1,5 +1,5 @@
 require 'spec_helper'
-require File.join(Rails.root, 'spec', 'shared_behaviors', 'stream')
+require Rails.root.join('spec', 'shared_behaviors', 'stream')
 describe Stream::Base do
   before do
     @stream = Stream::Base.new(alice)
@@ -16,7 +16,6 @@ describe Stream::Base do
       posts = mock
       @stream.stub(:posts).and_return(posts)
       @stream.stub(:like_posts_for_stream!)
-      @stream.stub(:participation_posts_for_stream!)
 
       posts.should_receive(:for_a_stream).with(anything, anything, alice).and_return(posts)
       @stream.stream_posts

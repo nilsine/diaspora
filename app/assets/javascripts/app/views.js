@@ -21,7 +21,8 @@ app.views.Base = Backbone.View.extend({
   },
 
   defaultPresenter : function(){
-    var modelJson = this.model ? _.clone(this.model.attributes) : {}
+    var modelJson = this.model && this.model.attributes ? _.clone(this.model.attributes) : {}
+
     return _.extend(modelJson, {
       current_user : app.currentUser.attributes,
       loggedIn : app.currentUser.authenticated()
@@ -40,8 +41,11 @@ app.views.Base = Backbone.View.extend({
   renderTemplate : function(){
     var presenter = _.isFunction(this.presenter) ? this.presenter() : this.presenter
     this.template = JST[this.templateName]
-    if(!this.template) {console.log("no template for " + this.templateName) }
-    $(this.el)
+    if(!this.template) {
+      console.log(this.templateName ? ("no template for " + this.templateName) : "no templateName specified")
+    }
+
+    this.$el
       .html(this.template(presenter))
       .attr("data-template", _.last(this.templateName.split("/")));
     this.postRenderTemplate();
@@ -67,5 +71,27 @@ app.views.Base = Backbone.View.extend({
 
   removeTooltips : function() {
     $(".tooltip").remove();
+  },
+
+  setFormAttrs : function(){
+    this.model.set(_.inject(this.formAttrs, _.bind(setValueFromField, this), {}))
+
+    function setValueFromField(memo, attribute, selector){
+      if(attribute.slice("-2") === "[]") {
+        memo[attribute.slice(0, attribute.length - 2)] = _.pluck(this.$el.find(selector).serializeArray(), "value")
+      } else {
+        memo[attribute] = this.$el.find(selector).val() || this.$el.find(selector).text();
+      }
+      return memo
+    }
+  },
+
+  destroyModel: function(evt) {
+    evt && evt.preventDefault();
+    if (confirm(Diaspora.I18n.t("confirm_dialog"))) {
+      this.model.destroy();
+      this.remove();
+    }
   }
 });
+

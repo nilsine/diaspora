@@ -35,6 +35,7 @@ es-MX:
       preparing_your_stream: "Preparando tu entrada personalizada…"
     header:
       admin: "Administrador"
+      close: "cerrar"
       contacts: "Contactos"
       home: "Inicio"
       log_out: "Salir"
@@ -61,6 +62,8 @@ es-MX:
       public: "Público – tu publicación será visible para todos, y encontrada por buscadores"
     reshares:
       duplicate: "Qué bien, ¿eh? ¡Ya has compartido esa publicación!"
+      post: "¿Compartir la publicación de <%= name %>?"
+      successful: "¡La publicación se compartió exitosamente!"
     search_for: "Buscar a <%= name %>"
     show_more: "mostrar más"
     stream:
@@ -104,7 +107,7 @@ es-MX:
       prefixFromNow: "dentro de"
       seconds: "menos de un minuto"
       suffixAgo: ""
-      suffixFromNow: ""
+      suffixFromNow: "desde ahora"
       year: "un año aproximadamente"
       years: "%d años"
     videos:
@@ -113,6 +116,7 @@ es-MX:
     viewer:
       comment: "Comentar"
       follow_post: "Seguir esta publicación"
+      home: "INICIO"
       like: "Me gusta"
       reshare: "Compartir"
       reshared: "Compartido"

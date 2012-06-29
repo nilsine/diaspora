@@ -1,35 +1,31 @@
-app.models.Post = Backbone.Model.extend({
+app.models.Post = Backbone.Model.extend(_.extend({}, app.models.formatDateMixin, {
   urlRoot : "/posts",
 
   initialize : function() {
-    this.setupCollections();
-    this.bind("change", this.setupCollections, this)
+    this.interactions = new app.models.Post.Interactions(_.extend({post : this}, this.get("interactions")))
+    this.delegateToInteractions()
   },
 
-  setupCollections: function() {
-    this.comments = new app.collections.Comments(this.get("comments") || this.get("last_three_comments"), {post : this});
-    this.likes = this.likes || new app.collections.Likes([], {post : this}); // load in the user like initially
-    this.participations = this.participations || new app.collections.Participations([], {post : this}); // load in the user like initially
+  delegateToInteractions : function(){
+    this.comments = this.interactions.comments
+    this.likes = this.interactions.likes
+
+    this.comment = function(){
+      this.interactions.comment.apply(this.interactions, arguments)
+    }
   },
 
   setFrameName : function(){
-    var templatePicker = new app.models.Post.TemplatePicker(this)
-    this.set({frame_name : templatePicker.getFrameName()})
+    this.set({frame_name : new app.models.Post.TemplatePicker(this).getFrameName()})
   },
 
-  createdAt : function() {
-    return this.timeOf("created_at");
+  applicableTemplates: function() {
+    return new app.models.Post.TemplatePicker(this).applicableTemplates()
   },
 
   interactedAt : function() {
     return this.timeOf("interacted_at");
   },
-
-  timeOf: function(field) {
-    return app.helpers.dateFormatter.parse(this.get(field)) / 1000;
-  },
-
-  createReshareUrl : "/reshares",
 
   reshare : function(){
     return this._reshare = this._reshare || new app.models.Reshare({root_guid : this.get("guid")});
@@ -39,75 +35,11 @@ app.models.Post = Backbone.Model.extend({
     return this.get("author")
   },
 
-  toggleFollow : function() {
-    var userParticipation = this.get("user_participation");
-    if(userParticipation) {
-      this.unfollow();
-    } else {
-      this.follow();
-    }
-  },
+  toggleFavorite : function(options){
+    this.set({favorite : !this.get("favorite")})
 
-  follow : function() {
-    var self = this;
-    this.participations.create({}, {success : function(resp){
-      self.set(resp)
-      self.trigger('interacted', self)
-    }});
-  },
-
-  unfollow : function() {
-    var self = this;
-    var participationModel = new app.models.Participation(this.get("user_participation"));
-    participationModel.url = this.participations.url + "/" + participationModel.id;
-
-    participationModel.destroy({success : function(model, resp){
-      self.set(resp);
-      self.trigger('interacted', this)
-    }});
-  },
-
-  toggleLike : function() {
-    var userLike = this.get("user_like")
-    if(userLike) {
-      this.unlike()
-    } else {
-      this.like()
-    }
-  },
-
-  like : function() {
-    var self = this;
-    this.likes.create({}, {success : function(resp){
-      self.set(resp)
-      self.trigger('interacted', self)
-    }});
-
-  },
-
-  unlike : function() {
-    var self = this;
-    var likeModel = new app.models.Like(this.get("user_like"));
-    likeModel.url = this.likes.url + "/" + likeModel.id;
-
-    likeModel.destroy({success : function(model, resp) {
-      self.set(resp);
-      self.trigger('interacted', this)
-    }});
-  },
-
-  comment : function (text) {
-
-    var self = this
-      , postComments = this.comments;
-
-    postComments.create({"text": text}, {
-      url : postComments.url(),
-      wait:true, // added a wait for the time being.  0.5.3 was not optimistic, but 0.9.2 is.
-      error:function () {
-        alert(Diaspora.I18n.t("failed_to_post_message"));
-      }
-    });
+    /* guard against attempting to save a model that a user doesn't own */
+    if(options.save){ this.save() }
   },
 
   headline : function() {
@@ -120,24 +52,28 @@ app.models.Post = Backbone.Model.extend({
     var body = this.get("text").trim()
       , newlineIdx = body.indexOf("\n")
     return (newlineIdx > 0 ) ? body.substr(newlineIdx+1, body.length) : ""
+  },
+
+  //returns a promise
+  preloadOrFetch : function(){
+    var action = app.hasPreload("post") ? this.set(app.parsePreload("post")) : this.fetch()
+    return $.when(action)
+  },
+
+  hasPhotos : function(){
+    return this.get("photos") && this.get("photos").length > 0
+  },
+
+  hasText : function(){
+    return $.trim(this.get("text")) !== ""
   }
-}, {
+}), {
   headlineLimit : 118,
 
   frameMoods : [
-    "Day",
-    "Night",
     "Wallpaper",
-    "Newspaper"
-  ],
-
-  legacyTemplateNames : [
-    "status-with-photo-backdrop",
-    "note",
-    "rich-media",
-    "multi-photo",
-    "photo-backdrop",
-    "activity-streams-photo",
-    "status"
+    "Vanilla",
+    "Typist",
+    "Fridge"
   ]
 });

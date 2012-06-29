@@ -27,11 +27,24 @@ module NavigationHelpers
         person_path(User.find_by_email($1).person)
       when /^my account settings page$/
         edit_user_path
+      when /^my new profile page$/
+        person_path(@me.person,  :ex => true)
+      when /^the new stream$/
+        stream_path(:ex => true)
       when /^"(\/.*)"/
         $1
       else
         raise "Can't find mapping from \"#{page_name}\" to a path."
     end
+  end
+
+  def login_page
+    path_to "the new user session page"
+  end
+
+  def post_path_by_content text
+    p = Post.find_by_text(text)
+    post_path(p)
   end
 end
 

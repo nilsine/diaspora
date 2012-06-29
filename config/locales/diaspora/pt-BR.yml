@@ -50,6 +50,14 @@ pt-BR:
       weekly_user_stats: "Estatísticas Semanais"
     correlations:
       correlations_count: "Contas similares:"
+    user_search:
+      add_invites: "enviar convites"
+      email_to: "Email para convite"
+      users:
+        one: "%{count} usuários encontrados"
+        other: "%{count} usuários encontrados"
+        zero: "%{count} usuário encontrado."
+      you_currently: "você tem atualmente %{user_invitation} convites para enviar %{link}"
   ago: "%{time} atrás"
   all_aspects: "Todos os Grupos"
   application:
@@ -127,6 +135,8 @@ pt-BR:
         tag_question: "#question"
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Tutoriais produzidos pela comunidade, dicas, e notícias"
       introduce_yourself: "Este é seu fluxo. Se apresente!"
+      keep_diaspora_running: "Ajude o Diaspora no desenvolvimento com uma doação mensal!"
+      keep_pod_running: "Mantenha %{pod} rodando bem e compre o nosso café com uma doação mensal!"
       new_here:
         follow: "Siga %{link} e dê boas vindas aos novos usuários de Diaspora*!"
         learn_more: "Saiba mais"
@@ -178,6 +188,10 @@ pt-BR:
     index:
       no_applications: "Você ainda não registrou nenhum aplicativo."
       revoke_access: "Revogar Acesso"
+    new:
+      authorize: "Autorizar"
+      cubbies_will: "Cubbies será capaz de postar fotos em seu nome"
+      nope: "Não"
   back: "Voltar"
   blocks:
     create:
@@ -188,7 +202,6 @@ pt-BR:
       success: "Vamos ver o que eles têm a dizer! #sayhello"
   bookmarklet:
     explanation: "Postar para Diaspora de qualquer lugar através dos favoritos %{link}."
-    explanation_link_text: "nesse link"
     heading: "Favoritos"
     post_something: "Postar algo em Diaspora"
     post_success: "Postado! Fechado!"
@@ -279,20 +292,6 @@ pt-BR:
   fill_me_out: "Preencha"
   find_people: "Procurar pessoas"
   hide: "Ocultar"
-  home:
-    show:
-      already_account: "Já tem uma conta?"
-      choice: "Escolha"
-      choice_explanation: "Diaspora* permite que você organize seus contatos em grupos chamados aspectos. Exclusivos à Diaspora, aspectos garantem que suas fotos, histórias e piadas sejam compartilhadas apenas com quem você desejar."
-      learn_about_host: "Aprenda como hospedar seu próprio servidor Diaspora."
-      login_here: "Entre aqui"
-      ownership: "Sua propriedade"
-      ownership_explanation: "Você é dono das suas imagens, e não devia deixar de sê-lo para compartilhá-las. Na Diaspora você controla como suas coisas são distribuídas, portanto você não perde a propriedade do que compartilha."
-      share_what_you_want: "Compartilhe o que você quer, com quem você desejar."
-      simplicity: "Simplicidade"
-      simplicity_explanation: "Diaspora* torna o ato de compartilhar com privacidade simples e fácil. Inerentemente privada, Diaspora* não possui páginas de configurações e opções para percorrer a fim de manter seu perfil seguro e do jeito que você gostaria."
-      tagline_first_half: "Compartilhe o que você quer,"
-      tagline_second_half: "com quem você quer."
   invitation_codes:
     excited: "%{name} está contente em te ver aqui."
   invitations:
@@ -317,7 +316,7 @@ pt-BR:
         one: "%{count} convite restante neste código"
         other: "%{count} convites restantes neste código"
         zero: "Nenhum convite restante neste código"
-      comma_seperated_plz: "Você pode adicionar vários endereços de emails, mas todos devem estar separados por vírgulas."
+      comma_separated_plz: "Você pode digitar vários endereços separados por vírgulas."
       if_they_accept_info: "Se aceitarem, eles serão adicionados ao grupo para o qual você os convidou."
       invite_someone_to_join: "Convide os amigos para participar de Diaspora!"
       language: "Idioma"
@@ -985,12 +984,6 @@ pt-BR:
       what_are_you_in_to: "Onde você está?"
       what_facebook_does: "ao Diaspora. Isso vai importar seu nome, sua foto e permitir que você poste nesse serviço."
       who_are_you: "Quem é você?"
-    logged_out:
-      go_mobile: "Agora vá de móvel."
-      on_your_mobile_device: "em seu dispositivo móvel para acessar Diáspora* móvel."
-      signed_out: "Você saiu de Diaspora*"
-      simply_visit: "Basta visitar"
-      works_on_modern: "Funciona em todos smartphones modernos"
     privacy_settings:
       ignored_users: "Usuários Ignorados"
       stop_ignoring: "Para ignorações"

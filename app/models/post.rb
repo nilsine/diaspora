@@ -14,37 +14,7 @@ class Post < ActiveRecord::Base
 
   has_many :participations, :dependent => :delete_all, :as => :target
 
-  attr_accessor :user_like,
-                :user_participation
-
-  # NOTE API V1 to be extracted
-  acts_as_api
-  api_accessible :backbone do |t|
-    t.add :id
-    t.add :guid
-    t.add lambda { |post|
-      post.raw_message
-    }, :as => :text
-    t.add :public
-    t.add :created_at
-    t.add :interacted_at
-    t.add :comments_count
-    t.add :likes_count
-    t.add :reshares_count
-    t.add :last_three_comments
-    t.add :provider_display_name
-    t.add :author
-    t.add :post_type
-    t.add :image_url
-    t.add :object_url
-    t.add :root
-    t.add :o_embed_cache
-    t.add :user_like
-    t.add :user_participation
-    t.add :mentioned_people
-    t.add :photos
-    t.add :nsfw
-  end
+  attr_accessor :user_like
 
   xml_attr :provider_display_name
 
@@ -71,12 +41,12 @@ class Post < ActiveRecord::Base
     joins(:likes).where(:likes => {:author_id => person.id})
   }
 
-  def self.next(post)
-    where("posts.created_at > ?", post.created_at).order('posts.created_at ASC').first
+  def self.newer(post)
+    where("posts.created_at > ?", post.created_at).reorder('posts.created_at ASC').first
   end
 
-  def self.previous(post)
-    where("posts.created_at < ?", post.created_at).order('posts.created_at DESC').first
+  def self.older(post)
+    where("posts.created_at < ?", post.created_at).reorder('posts.created_at DESC').first
   end
 
   def self.visible_from_author(author, current_user=nil)
@@ -86,10 +56,12 @@ class Post < ActiveRecord::Base
       author.posts.all_public
     end
   end
+
   def post_type
     self.class.name
   end
 
+  def root; end
   def raw_message; ""; end
   def mentioned_people; []; end
   def photos; []; end
@@ -126,6 +98,21 @@ class Post < ActiveRecord::Base
     scope
   end
 
+  def reshare_for(user)
+    return unless user
+    reshares.where(:author_id => user.person.id).first
+  end
+
+  def participation_for(user)
+    return unless user
+    participations.where(:author_id => user.person.id).first
+  end
+
+  def like_for(user)
+    return unless user
+    likes.where(:author_id => user.person.id).first
+  end
+
   #############
 
   def self.diaspora_initialize(params)
@@ -156,5 +143,19 @@ class Post < ActiveRecord::Base
 
   def nsfw
     self.author.profile.nsfw?
+  end
+
+  def self.find_by_guid_or_id_with_user(id, user=nil)
+    key = id.to_s.length <= 8 ? :id : :guid
+    post = if user
+             user.find_visible_shareable_by_id(Post, id, :key => key)
+           else
+             Post.where(key => id).includes(:author, :comments => :author).first
+           end
+
+    # is that a private post?
+    raise(Diaspora::NonPublic) unless user || post.public?
+
+    post || raise(ActiveRecord::RecordNotFound.new("could not find a post with id #{id}"))
   end
 end

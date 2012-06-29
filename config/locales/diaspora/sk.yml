@@ -30,7 +30,7 @@ sk:
         reshare:
           attributes:
             root_guid:
-              taken: "To je dobré, čo? Tento príspevok ste sa už raz znova zdieľali!"
+              taken: "To je dobré, čo? Tento príspevok ste už raz znova zdieľali!"
         user:
           attributes:
             email:
@@ -44,12 +44,52 @@ sk:
     admin_bar:
       correlations: "Závislosti"
       pages: "Stránky"
-      pod_stats: "Štatistiky podu"
+      pod_stats: "Štatistiky servera"
       resque_overview: "Prehľad Resque"
       user_search: "Používateľské vyhľadávanie"
       weekly_user_stats: "Štatistiky používateľa za týždeň"
     correlations:
       correlations_count: "Závislosti s počtom prihlásených:"
+    stats:
+      2weeks: "2. týždeň"
+      50_most: "50 najpopulárnejších značiek"
+      comments:
+        few: "%{count} komentáre"
+        one: "%{count} komentár"
+        other: "%{count} komentárov"
+        zero: "%{count} komentárov"
+      current_segment: "Aktuálny segment má od <b>%{post_day}</b> v priemere <b>%{post_yest}</b> príspevkov na používateľa"
+      daily: "Denne"
+      display_results: "Sú zobrazené výsledky z(o) <b>%{segment}</b> segmentov"
+      go: "prejsť"
+      month: "Mesiac"
+      posts:
+        few: "%{count} príspevky"
+        one: "%{count} príspevok"
+        other: "%{count} príspevkov"
+        zero: "%{count} príspevkov"
+      shares:
+        few: "%{count} ľudia sa podelili"
+        one: "%{count} človek sa podelil"
+        other: "%{count} ľudí sa podelilo"
+        zero: "%{count} ľudí sa podelilo"
+      tag_name: "Názov značky: <b>%{name_tag}</b> Početnosť: <b>%{count_tag}</b>"
+      usage_statistic: "Štatistiky používania"
+      users:
+        few: "%{count} používatelia"
+        one: "%{count} používateľ"
+        other: "%{count} používateľov"
+        zero: "%{count} používateľov"
+      week: "Týždeň"
+    user_search:
+      add_invites: "pridať pozvánky"
+      email_to: "Napíšte e-mail a pozvite"
+      users:
+        few: "našli sa %{count} používatelia"
+        one: "našiel sa %{count} používateľ"
+        other: "našlo sa %{count} používateľov"
+        zero: "našlo sa %{count} používateľov"
+      you_currently: "momentálne vám ostalo %{user_invitation} pozvánok %{link}"
   ago: "%{time}"
   all_aspects: "Všetky kategórie"
   application:
@@ -77,6 +117,7 @@ sk:
       edit_aspect: "Upraviť %{name}"
       select_all: "Označiť všetky"
     aspect_stream:
+      make_something: "Urobte niečo"
       stay_updated: "Buďte v obraze"
       stay_updated_explanation: "Na svojej hlavnej nástenke nájdete všetky svoje kontakty, značky, ktoré sledujete,  a príspevky od niektorých tvorivých členov komunity."
     contacts_not_visible: "Kontakty v tejto kategórii sa nebudú môcť navzájom vidieť."
@@ -117,6 +158,7 @@ sk:
       help:
         do_you: "Povedzte:"
         email_feedback: "Ak vám to viac vyhovuje, svoje podnety nám môžete poslať na %{link}"
+        email_link: "E-mail"
         feature_suggestion: "... máte nápad na novú %{link}?"
         find_a_bug: "... našli ste %{link}?"
         have_a_question: "... máte %{link}?"
@@ -181,7 +223,7 @@ sk:
       no_applications: "Ešte ste nezaregistrovali žiadne aplikácie."
       revoke_access: "Zamedziť prístup"
     new:
-      autorize: "Povoliť"
+      authorize: "Povoliť"
       cubbies_will: "Cubbies bude môcť posielať fotky vo vašom mene"
       nope: "Nie"
   back: "Späť"
@@ -193,10 +235,9 @@ sk:
       failure: "Ignorovanie tohto používateľa sa nepodarilo zrušiť.  #evasion"
       success: "Pozrime sa, čo hovoria! #sayhello"
   bookmarklet:
-    explanation: "Píšte na Diasporu z hocikiaľ tak, že si pridáte do záložiek %{link}."
-    explanation_link_text: "tento odkaz"
+    explanation: "Píšte na Diasporu z hocikiaľ cez tento odkaz, ktorý si môžete pridať do záložiek => %{link}."
     heading: "Bookmarklet"
-    post_something: "Pošlite niečo na Diasporu"
+    post_something: "Príspevok na Diasporu"
     post_success: "Odoslané! Zatvára sa!"
   cancel: "Zrušiť"
   comments:
@@ -285,20 +326,6 @@ sk:
   fill_me_out: "Vyplňte, prosím, formulár"
   find_people: "Nájsť ľudí alebo #značky"
   hide: "Schovať"
-  home:
-    show:
-      already_account: "Máte už účet?"
-      choice: "Možnosť výberu"
-      choice_explanation: "Diaspora vám umožňuje roztriediť si všetky vaše kontakty do skupín, ktoré sa  v anglickej verzii nazývajú Aspekty. Je unikátna práve tým, že dokáže zabezpečiť, aby  k fotkám, správam  a statusom mali prístup len tí ľudia, ktorých určíte vy."
-      learn_about_host: "Dozvedieť sa viac  o tom, ako prevádzkovať vlastný server  s Diasporou."
-      login_here: "sa prihláste tu"
-      ownership: "Vlastníctvo"
-      ownership_explanation: "Vlastníte svoje fotky  a nemali by ste sa ich vzdávať len kvôli tomu, že sa  o ne chcete  s niekym podeliť. Vaše vlastnícke práva na všetko,  o čo sa na Diaspore podelíte, zostávajú nedotknuté,  a tak môžete úplne kontrolovať to, ako sa  s tým zaobchádza."
-      share_what_you_want: "Podeľte sa o čo chcete s kým chcete."
-      simplicity: "Jednoduchosť"
-      simplicity_explanation: "Zdieľanie na Diaspore je veľmi ľahké  a transparentné –  a to isté platí  aj o ochrane osobných údajov. Keďže Diaspora je súkromná sama  o sebe, nenúti vás prejsť  cez žiadne zložité stránky  s nastaveniami  a možnosťami iba kvôli tomu, aby ste zabezpečili svoj profil."
-      tagline_first_half: "Podeľte sa, o čo chcete,"
-      tagline_second_half: "s kým chcete."
   invitation_codes:
     excited: "%{name} Vás tu rád/rada vidí"
   invitations:
@@ -324,7 +351,7 @@ sk:
         one: "Pre tento kód zostala %{count} pozvánka"
         other: "Pre tento kód zostalo %{count} pozvánok"
         zero: "Pre tento kód zostalo %{count} pozvánok"
-      comma_seperated_plz: "Môžete vložiť viacero adries; oddeľte ich čiarkou."
+      comma_separated_plz: "Môžete zadať viac e-mailových adries oddelených čiarkami."
       if_they_accept_info: "Po odsúhlasení budú pozvaní používatelia pridaní  do príslušnej kategórie."
       invite_someone_to_join: "Pozvite niekoho na Diasporu*!"
       language: "Jazyk"
@@ -476,9 +503,11 @@ sk:
           %{invite_url}
           <%= invite_code_url(@invitation_code)%>
 
-          S pozdravom,
+          S pozdravom
 
           e-mailový robot Diaspory*!
+
+          [1]: %{invite_url}
     invited_you: "%{name} Vás pozval(a) na Diasporu*"
     liked:
       liked: "%{name} označil(a), že sa mu (jej) páči váš príspevok"
@@ -646,7 +675,7 @@ sk:
     other: "%{count} reakcií"
     zero: "0 reakcií"
   registrations:
-    closed: "Registrácie sú na tomto pode Diaspory pozastavené."
+    closed: "Registrácie sú na tomto serveri Diaspory pozastavené."
     create:
       success: "Pridali ste sa k Diaspore!"
     edit:
@@ -658,13 +687,20 @@ sk:
       update: "Aktualizovať"
     invalid_invite: "Odkaz na pozvánku, ktorý ste zadali, už nie je platný!"
     new:
+      continue: "Pokračovať"
       create_my_account: "Založte si účet!"
+      diaspora: "<3 Diaspora*"
+      email: "E-MAIL"
       enter_email: "Zadajte e-mail"
-      enter_password: "Zadajte heslo"
+      enter_password: "Zadajte heslo (minimálne šesť znakov)"
       enter_password_again: "Zadajte rovnaké heslo ako predtým"
       enter_username: "Zadajte používateľské meno (iba písmená, číslice  a podčiarkovníky)"
+      hey_make: "HEJ,<br/>UROB<br/>NIEČO."
       join_the_movement: "Pripojte sa k hnutiu!"
+      password: "HESLO"
+      sign_up: "ZAREGISTROVAŤ SA"
       sign_up_message: "Prepojenie cez sociálne siete s ♥"
+      username: "POUŽÍVATEĽSKÉ MENO"
   requests:
     create:
       sending: "Posiela sa"
@@ -768,7 +804,8 @@ sk:
       invite_someone: "Pozvať niekoho"
       invite_your_friends: "Pozvite svojich priateľov"
       invites: "Pozvánky"
-      invites_closed: "Pozývanie je na tomto pode Diaspory momentálne pozastavené"
+      invites_closed: "Pozývanie je na tomto serveri Diaspory momentálne pozastavené"
+      share_this: "Podeľte sa o tento odkaz cez e-mail, blog alebo obľúbenú sociálnu sieť!"
     notification:
       new: "Nový %{type} od použ. %{from}"
     public_explain:
@@ -966,12 +1003,6 @@ sk:
       what_are_you_in_to: "Čo vás baví?"
       what_facebook_does: " s Diasporou. Tak sa stiahne vaše meno  i fotka  a budete môcť posielať príspevky  z jednej siete na druhú."
       who_are_you: "Kto ste?"
-    logged_out:
-      go_mobile: "Teraz buďte mobilní."
-      on_your_mobile_device: "na mobile a dostanete sa na verziu Diaspory* pre mobily."
-      signed_out: "Odhlásili ste sa z Diaspory*"
-      simply_visit: "Jednoducho navštívte"
-      works_on_modern: "Funguje na všetkých moderných smartfónoch"
     privacy_settings:
       ignored_users: "Používatelia, ktorých ignorujete"
       stop_ignoring: "Prestať ignorovať"

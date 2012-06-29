@@ -2,13 +2,13 @@
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-require File.join(Rails.root, "lib", "stream", "aspect")
-require File.join(Rails.root, "lib", "stream", "multi")
-require File.join(Rails.root, "lib", "stream", "comments")
-require File.join(Rails.root, "lib", "stream", "likes")
-require File.join(Rails.root, "lib", "stream", "mention")
-require File.join(Rails.root, "lib", "stream", "followed_tag")
-require File.join(Rails.root, "lib", "stream", "activity")
+require Rails.root.join("lib", "stream", "aspect")
+require Rails.root.join("lib", "stream", "multi")
+require Rails.root.join("lib", "stream", "comments")
+require Rails.root.join("lib", "stream", "likes")
+require Rails.root.join("lib", "stream", "mention")
+require Rails.root.join("lib", "stream", "followed_tag")
+require Rails.root.join("lib", "stream", "activity")
 
 
 class StreamsController < ApplicationController
@@ -36,7 +36,13 @@ class StreamsController < ApplicationController
   end
 
   def multi
-    stream_responder(Stream::Multi)
+    if params[:ex] && flag.new_stream?
+      @stream = Stream::Multi.new(current_user, :max_time => max_time)
+      gon.stream = PostPresenter.collection_json(@stream.stream_posts, current_user)
+      render :nothing => true, :layout => "post"
+    else
+      stream_responder(Stream::Multi)
+    end
   end
 
   def commented
@@ -65,7 +71,7 @@ class StreamsController < ApplicationController
     respond_with do |format|
       format.html { render 'layouts/main_stream' }
       format.mobile { render 'layouts/main_stream' }
-      format.json {render_for_api :backbone, :json => @stream.stream_posts, :root => :posts }
+      format.json { render :json => @stream.stream_posts.map {|p| LastThreeCommentsDecorator.new(PostPresenter.new(p, current_user)) }}
     end
   end
 

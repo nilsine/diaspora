@@ -37,81 +37,27 @@ describe("app.models.Post", function() {
     });
   });
 
-  describe("toggleLike", function(){
-    it("calls unliked when the user_like exists", function(){
-      this.post.set({user_like : "123"});
-      spyOn(this.post, "unlike").andReturn(true);
-
-      this.post.toggleLike();
-      expect(this.post.unlike).toHaveBeenCalled();
+  describe("hasPhotos", function(){
+    it('returns true if the model has more than one photo', function(){
+      this.post.set({photos : [1,2]})
+      expect(this.post.hasPhotos()).toBeTruthy()
     })
 
-    it("calls liked when the user_like does not exist", function(){
-      this.post.set({user_like : null});
-      spyOn(this.post, "like").andReturn(true);
-
-      this.post.toggleLike();
-      expect(this.post.like).toHaveBeenCalled();
+    it('returns false if the model does not have any photos', function(){
+      this.post.set({photos : []})
+      expect(this.post.hasPhotos()).toBeFalsy()
     })
-  })
+  });
 
-  describe("like", function(){
-    it("calls create on the likes collection", function(){
-      spyOn(this.post.likes, "create");
-
-      this.post.like();
-      expect(this.post.likes.create).toHaveBeenCalled();
-    })
-  })
-
-  describe("unlike", function(){
-    it("calls destroy on the likes collection", function(){
-      var like = new app.models.Like();
-      this.post.set({user_like : like.toJSON()})
-
-      spyOn(app.models.Like.prototype, "destroy");
-
-      this.post.unlike();
-      expect(app.models.Like.prototype.destroy).toHaveBeenCalled();
-    })
-  })
-
-  describe("toggleFollow", function(){
-    it("calls unfollow when the user_participation exists", function(){
-      this.post.set({user_participation: "123"});
-      spyOn(this.post, "unfollow").andReturn(true);
-
-      this.post.toggleFollow();
-      expect(this.post.unfollow).toHaveBeenCalled();
+  describe("hasText", function(){
+    it('returns true if the model has text', function(){
+      this.post.set({text : "hella"})
+      expect(this.post.hasText()).toBeTruthy()
     })
 
-    it("calls follow when the user_participation does not exist", function(){
-      this.post.set({user_participation: null});
-      spyOn(this.post, "follow").andReturn(true);
-
-      this.post.toggleFollow();
-      expect(this.post.follow).toHaveBeenCalled();
+    it('returns false if the model does not have text', function(){
+      this.post.set({text : "    "})
+      expect(this.post.hasText()).toBeFalsy()
     })
-  })
-
-  describe("follow", function(){
-    it("calls create on the participations collection", function(){
-      spyOn(this.post.participations, "create");
-
-      this.post.follow();
-      expect(this.post.participations.create).toHaveBeenCalled();
-    })
-  })
-
-  describe("unfollow", function(){
-    it("calls destroy on the participations collection", function(){
-      var participation = new app.models.Participation();
-      this.post.set({user_participation : participation.toJSON()})
-
-      spyOn(app.models.Participation.prototype, "destroy");
-
-      this.post.unfollow();
-      expect(app.models.Participation.prototype.destroy).toHaveBeenCalled();
-    })
-  })
+  });
 });

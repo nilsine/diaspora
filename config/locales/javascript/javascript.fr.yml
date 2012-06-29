@@ -38,6 +38,7 @@ fr:
       preparing_your_stream: "Préparation de votre flux personnalisé..."
     header:
       admin: "Administration"
+      close: "fermer"
       contacts: "Contacts"
       home: "Accueil"
       log_out: "Se déconnecter"
@@ -64,6 +65,8 @@ fr:
       public: "Public - votre message sera visible de tous et trouvé par les moteurs de recherche"
     reshares:
       duplicate: "C'est si bien que ça ? Vous avez déjà repartagé ce message !"
+      post: "Repartager le message de <%= name %> ?"
+      successful: "Le message a été repartagé !"
     search_for: "Chercher <%= name %>"
     show_more: "Voir plus"
     stream:
@@ -125,6 +128,7 @@ fr:
     viewer:
       comment: "Commenter"
       follow_post: "Suivre cette discussion"
+      home: "Accueil"
       like: "J'aime"
       reshare: "Repartager"
       reshared: "Repartagé"
