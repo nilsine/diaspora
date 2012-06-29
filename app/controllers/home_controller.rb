@@ -20,7 +20,7 @@ class HomeController < ApplicationController
       end
     else
       @landing_page = true
-      render :show, :layout => 'post'
+      #render :show, :layout => 'post'
     end
   end
 
