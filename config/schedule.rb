@@ -6,11 +6,11 @@
 # set :environment, "production"
 
 # Example:
-set :output, File.join( File.dirname( __FILE__ ), '..', 'logs', 'scheduled_tasks.log' )
+#set :output, File.join( File.dirname( __FILE__ ), '..', 'logs', 'scheduled_tasks.log' )
 
-every 1.day, :at => '3:00 am' do
-  rake 'maintenance:clear_carrierwave_temp_uploads'
-end
+#every 1.day, :at => '3:00 am' do
+#  rake 'maintenance:clear_carrierwave_temp_uploads'
+#end
 
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -23,3 +23,7 @@ end
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+every :day do
+  rake "-s sitemap:refresh"
+end

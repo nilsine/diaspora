@@ -138,6 +138,7 @@ gem 'faraday'
 gem 'faraday_middleware'
 
 gem 'sitemap_generator'
+gem 'whenever', :require => false
 
 
 gem 'jasmine', :git => 'https://github.com/pivotal/jasmine-gem.git'
