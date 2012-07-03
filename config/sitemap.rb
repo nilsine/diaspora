@@ -24,7 +24,7 @@ SitemapGenerator::Sitemap.create do
   #   Article.find_each do |article|
   #     add article_path(article), :lastmod => article.updated_at
   #   end
-  User.find_each do |p|
-    add users_public_path(p.username)
+  ActsAsTaggableOn::Tag.find_each do |t|
+    add tag_path t.name
   end
 end
